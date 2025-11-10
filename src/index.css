@@ -1,1 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+:root {
+  --navbar-h: 5rem;
+}
+@font-face {
+  font-family: "Montserrat", sans-serif;
+  src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
+}
+@theme {
+  --font-montserrat: "Montserrat-Regular", sans-serif;
+}
+html,
+body {
+  width: 100%;
+  background-color: white;
+  color: black;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+@layer components {
+  header {
+    @apply w-full fixed z-30;
+    height: var(--navbar-h);
+    div:nth-of-type(1) {
+      @apply md:flex md:flex-row md:items-center md:justify-between container mx-auto;
+    }
+    img {
+      @apply w-[8rem] cursor-pointer;
+    }
+    nav {
+      @apply md:flex md:flex-row md:items-center md:justify-between md:gap-10 font-montserrat text-[1.2rem];
+      a {
+        @apply text-nowrap text-[#344554];
+      }
+      a:last-of-type {
+        @apply md:border md:px-4 md:py-1 md:rounded-md md:bg-[#15C890] text-white hover:bg-white hover:text-[#15C890] transition-all ease-in duration-200;
+      }
+    }
+  }
+  #Hero {
+    @apply md:w-full md:min-h-screen md:container md:mx-auto md:relative;
+    padding-top: var(--navbar-h);
+    div {
+      @apply md:w-screen md:h-screen flex md:justify-between md:absolute md:top-[15%];
+      div {
+        @apply md:w-[30%] flex md:flex-col md:justify-start;
+        h1 {
+          @apply text-5xl md:w-[60%] text-[#344554] font-montserrat leading-relaxed;
+          span {
+            @apply font-bold;
+          }
+        }
+        h2 {
+          @apply font-montserrat text-[#344554] text-xl;
+        }
+      }
+      div {
+        @apply md:w-[50%];
+        img {
+          @apply md:w-screen md:h-[84%] md:-translate-y-[18%] md:translate-x-[70%];
+        }
+      }
+     
+    }
+     
+  }
+}
