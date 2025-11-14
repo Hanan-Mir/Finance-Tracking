@@ -9,6 +9,7 @@
 }
 @theme {
   --font-montserrat: "Montserrat-Regular", sans-serif;
+  --shadow-box:0 10px 28px 0 hsla(210,8%,54%,.2)
 }
 html,
 body {
@@ -18,95 +19,32 @@ body {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
-/* @layer components {
-  header {
-    @apply w-full fixed z-3;
-    height: var(--navbar-h);
-    div:nth-of-type(1) {
-      @apply md:flex md:flex-row md:items-center md:justify-between container mx-auto;
-    }
-    img {
-      @apply w-[8rem] cursor-pointer;
-    }
-    nav {
-      @apply bg-red-400 md:flex md:flex-row md:items-center md:justify-between md:gap-10 font-montserrat text-[1.2rem];
-      a {
-        @apply text-nowrap text-[#344554];
-      }
-      a:last-of-type {
-        @apply md:border md:px-4 md:py-1 md:rounded-md md:bg-[#15C890] text-white hover:bg-white hover:text-[#15C890] transition-all ease-in duration-200;
-      }
-    }
-    
-  }
-
-  #Hero{
-    @apply md:w-full mt-20;
-    div{
-      @apply md:w-full md:h-screen container mx-auto flex md:justify-between;
-      div{
-        @apply flex md:flex-col md:justify-start md:w-[10%];
-        .hero-heading{
-          @apply md:text-5xl text-[#344554] md:w-full;
-          span{
-            @apply md:font-bold
-          } 
-        }
-        h2{
-          @apply text-[#344554]
-        }
-      }
-       div{
-      @apply md:w-[60%];
-      img{
-        @apply md:w-full
-      }
-    }
-
-    }
-   
-  } */
-  /* #Hero {
-    @apply md:w-full md:min-h-screen md:container md:mx-auto md:relative;
-    padding-top: var(--navbar-h);
-    div {
-      @apply md:w-full md:h-screen flex md:justify-between md:absolute md:top-[18%] border-4;
-      div {
-        @apply md:w-[30%] flex md:flex-col md:justify-start;
-        h1 {
-          @apply text-5xl md:w-[60%] text-[#344554] font-montserrat leading-relaxed;
-          span {
-            @apply font-bold;
-          }
-        }
-        h2 {
-          @apply font-montserrat text-[#344554] text-xl;
-        }
-      }
-      div {
-        @apply md:w-[50%];
-        img {
-          @apply md:w-screen md:h-[84%] md:-translate-y-[18%] md:translate-x-[70%];
-        }
-      }
-     
-    }
-    .managment{
-      @apply md:absolute w-screen md:top-[115vh];
-      div{
-        @apply w-screen md:flex md:justify-center md:items-center;
-      h1{
-        @apply md:w-[40%] text-6xl font-montserrat md:-translate-x-[10%];
-        span{
-          @apply md:translate-x-[86%]
-        }
-      }
-    }
-    
-  }
+progress{
+  width: 100%;
+  height: 1.6rem;
+  border-radius: 20px;
+  background-color:white;
+}
   
-  } */
-/* } */
+progress::-webkit-progress-bar {
+  background-color: #ECF9FE;
+  
+}
+progress::-webkit-progress-value {
+  background-color: #FF5154; 
+  border-radius: 20px;
+}
+progress[value='62']::-webkit-progress-value {
+  background-color: #FFBF53; 
+  border-radius: 20px;
+} 
+progress[value='50']::-webkit-progress-value {
+  background-color: #F963A0; 
+  border-radius: 20px;
+}  
+
+ 
+   
 @layer components{
   main{
     @apply w-full overflow-x-hidden
@@ -133,14 +71,14 @@ body {
       }
     }
   #Hero{
-    @apply w-full min-h-dvh z-20 relative container mx-auto ;
+    @apply w-full min-h-dvh z-20 relative container mx-auto px-10 ;
     .body{
       @apply  md:h-full md:w-full flex md:flex-row md:justify-between md:items-center md:absolute md:top-20 md:left-5
     }
     .left-section{
       @apply md:w-[40%] flex md:flex-col md:items-start ;
       h1{
-        @apply md:w-[76%] text-[2.4rem] font-montserrat leading-relaxed text-[#344554];
+        @apply md:w-[76%] text-[2.4rem] font-montserrat leading-relaxed text-[#344554] md:mt-2;
         span{
           @apply font-bold
         }
@@ -172,6 +110,22 @@ body {
     }
     .steps{
       @apply md:absolute w-full md:top-[200vh] md:h-screen flex md:flex-row md:justify-between md:items-center md:left-5;
+    } 
+    .financial-habits{
+      @apply  absolute md:top-[320vh] w-full h-screen md:flex md:items-center md:justify-between
     }
+    .estimates{
+      @apply  absolute md:top-[400vh] w-full h-screen md:flex  md:items-center md:justify-between
+    }
+    .features{
+       @apply  absolute md:top-[500vh] w-full md:h-[50%] md:flex md:flex-col md:items-center md:gap-10;
+       h1{
+        @apply text-4xl font-montserrat tracking-wide text-[#344554];
+        span{
+          @apply font-bold
+        }
+       }
+    }
+
   }
 }

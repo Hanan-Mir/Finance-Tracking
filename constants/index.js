@@ -37,6 +37,24 @@ const firstStep = {
     "Add your cash expenses manually.",
   ],
 };
+const secondStep = {
+  stepNumber: "Step 2",
+  stepHeading: "UnderStand your financial habits",
+  steps: [
+    "Analyze your finance with beautiful, simple and easy to understand graphic. No need for complicated Excel sheets.",
+    "See where your money goes and where they come from every month.",
+    "See whether you spend less than you earn in one place and on 1 tap.",
+  ],
+};
+const thirdStep = {
+  stepNumber: "Step 3",
+  stepHeading: "Make your spending stress–fre",
+  steps: [
+    "Set smart budgets to help you not to overspend in chosen category.",
+    "Know how much you can spend daily in order to stick to your budget.",
+    "Save money for your future dreams.",
+  ],
+};
 const firstCard={
     name:'Account',
     type:'210188945',
@@ -52,6 +70,21 @@ const thirdCard={
     type:'Cash',
     amount:'795 USD'
 }
+const highlightFeatures=[
+  {
+    imgPath:'/images/notification.png',
+    heading:'Alerts and notifications',
+    description:'will notify you regarding transactions to keep you upto date.'
+  },
+  {
+    imgPath:'/images/customer.png',
+    heading:'Customize FinTrack',
+    description:'Customize your FinTrack according to your business and add expenses and incomes.'
+  },{
+    imgPath:'/images/Manage.png',
+    heading:'Managability',
+    description:'With FinTrack you can manage you business in one with makees you step ahead of competition.'
+  }
+]
 
-
-export { navLinks,featureLists, firstStep,firstCard,secondCard,thirdCard };
+export { navLinks,featureLists, firstStep,firstCard,secondCard,thirdCard,secondStep,thirdStep,highlightFeatures };
