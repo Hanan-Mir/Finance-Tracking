@@ -86,5 +86,51 @@ const highlightFeatures=[
     description:'With FinTrack you can manage you business in one with makees you step ahead of competition.'
   }
 ]
+const pricingInfo=[
+  {
+    imgPathIcon:'/images/premium.png',
+    heading:'Fintrack Premium',
+    price:'$12.00/M',
+    description:`Start saving your money and time what's truly important in your life.`,
+    features:new Map([
+      ['Automatic categorization',true],
+      ['Backup and sync',true],
+      ['Number of budgets','unlimted'],
+      ['import/export of transaction',true],
+      ['Secured data', true],
+      ['Detailed overview',true]
+    ])
+  },
+  {
+    imgPathIcon:'/images/plus.png',
+    heading:'Fintrack Plus',
+    description:`Get a full track of your finances, stock and transactions.`,
+    price:'$8.00/M',
 
-export { navLinks,featureLists, firstStep,firstCard,secondCard,thirdCard,secondStep,thirdStep,highlightFeatures };
+    features:new Map([
+      ['Automatic categorization',false],
+      ['Backup and sync',true],
+      ['Number of budgets','unlimted'],
+      ['import/export of transaction',true],
+      ['Secured data', true],
+      ['Detailed overview',true]
+    ])
+  },
+  {
+    imgPathIcon:'/images/basic.png',
+    heading:'Fintrack Basic',
+    description:`Healthy business habits by knowing your business state and money flow`,
+    price:'Free',
+    features:new Map([
+      ['Automatic categorization',false],
+      ['Backup and sync',true],
+      ['Number of budgets','1'],
+      ['import/export of transaction',false],
+      ['Secured data', true],
+      ['Detailed overview',true]
+    ])
+  }
+
+]
+
+export { navLinks,featureLists, firstStep,firstCard,secondCard,thirdCard,secondStep,thirdStep,highlightFeatures,pricingInfo };

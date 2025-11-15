@@ -9,7 +9,8 @@
 }
 @theme {
   --font-montserrat: "Montserrat-Regular", sans-serif;
-  --shadow-box:0 10px 28px 0 hsla(210,8%,54%,.2)
+  --shadow-box:0 10px 28px 0 hsla(210,8%,54%,.2);
+  --shadow-hover:0 10px 28px 0 hsla(220,20%,70%,.8)
 }
 html,
 body {
@@ -125,6 +126,40 @@ progress[value='50']::-webkit-progress-value {
           @apply font-bold
         }
        }
+    }
+  }
+  #pricing{
+    @apply w-full min-h-dvh z-20 relative container mx-auto px-10;
+    .info-section{
+      @apply h-full w-full md:absolute md:top-20 flex md:flex-row md:justify-between md:items-center;
+      
+    }
+    .heading-content{
+      @apply w-full h-full flex md:flex-col md:items-center md:justify-start md:absolute md:top-40 font-montserrat;
+      h1{
+        @apply flex md:flex-col md:text-5xl md:gap-4 text-[#344554];
+        span:first-of-type{
+          @apply md:ml-[5.4rem]
+        }
+        span:last-of-type{
+          @apply md:font-bold
+        }
+      }
+    } 
+    .left-img{
+      @apply absolute md:-left-120 md:-bottom-40 md:w-[60%];
+    }
+    .right-img{
+      @apply absolute md:-right-60
+    }
+    .plan-section{
+      @apply md:mt-20 w-full flex md:flex-col md:items-center;
+      h1{
+        @apply text-[#344554]
+      }
+    }
+    .privacy{
+       @apply h-full w-full relative flex md:flex-row md:justify-between md:items-center;
     }
 
   }
