@@ -9,8 +9,9 @@
 }
 @theme {
   --font-montserrat: "Montserrat-Regular", sans-serif;
-  --shadow-box:0 10px 28px 0 hsla(210,8%,54%,.2);
-  --shadow-hover:0 10px 28px 0 hsla(220,20%,70%,.8)
+  --shadow-box: 0 10px 28px 0 hsla(210, 8%, 54%, 0.2);
+  --shadow-hover: 0 10px 28px 0 hsla(220, 20%, 70%, 0.8);
+  --shadow-form:0 10px 24px 0 hsla(210, 8%, 54%, .16);
 }
 html,
 body {
@@ -20,147 +21,211 @@ body {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
-progress{
+progress {
   width: 100%;
   height: 1.6rem;
   border-radius: 20px;
-  background-color:white;
+  background-color: white;
 }
-  
+
 progress::-webkit-progress-bar {
-  background-color: #ECF9FE;
-  
+  background-color: #ecf9fe;
 }
 progress::-webkit-progress-value {
-  background-color: #FF5154; 
+  background-color: #ff5154;
   border-radius: 20px;
 }
-progress[value='62']::-webkit-progress-value {
-  background-color: #FFBF53; 
+progress[value="62"]::-webkit-progress-value {
+  background-color: #ffbf53;
   border-radius: 20px;
-} 
-progress[value='50']::-webkit-progress-value {
-  background-color: #F963A0; 
+}
+progress[value="50"]::-webkit-progress-value {
+  background-color: #f963a0;
   border-radius: 20px;
-}  
+}
 
- 
-   
-@layer components{
-  main{
-    @apply w-full overflow-x-hidden
+@layer components {
+  main {
+    @apply w-full overflow-x-hidden;
   }
-  nav{
+  nav {
     @apply fixed w-full z-30;
-    div{
+    div {
       @apply flex md:flex-row md:justify-between md:items-center container mx-auto font-montserrat;
     }
-      
-        img{
-          @apply md:w-[16%]
-        }
-      
-      ul{
-        @apply flex md:justify-between md:gap-10 text-nowrap md:items-center
-      }
-      li{
-        @apply text-[#76818B] hover:border-b-1 hover:border-[#76818B] md:transition-all md:ease-in-out md:duration-100
-      }
-     
-      li:last-of-type{
-        @apply bg-[#15C890] md:px-3 md:py-2 md:rounded-lg hover:px-3 hover:py-2 md:text-white font-bold hover:border hover:border-[#76818b] hover:bg-white hover:text-[#76818B] md:transition-all md:ease-in-out md:duration-200
-      }
-    }
-  #Hero{
-    @apply w-full min-h-dvh z-20 relative container mx-auto px-10 ;
-    .body{
-      @apply  md:h-full md:w-full flex md:flex-row md:justify-between md:items-center md:absolute md:top-20 md:left-5
-    }
-    .left-section{
-      @apply md:w-[40%] flex md:flex-col md:items-start ;
-      h1{
-        @apply md:w-[76%] text-[2.4rem] font-montserrat leading-relaxed text-[#344554] md:mt-2;
-        span{
-          @apply font-bold
-        }
-      }
-      h2{
-        @apply text-[#344554] text-[1.2rem]
-      }
-    }
-    .right-section{
-      @apply md:w-[60%] flex md:justify-end;
-      img{
-        @apply md:w-[90%]
-      }
-    }
-    .feature-card{
-      @apply w-full md:h-full md:absolute md:top-[120vh] flex md:justify-between  md:left-5
-    }
-    .managment{
-      @apply w-full md:h-[40%] flex md:justify-center md:items-center md:absolute md:top-[170vh] md:left-5;
-      h1{
-        @apply md:w-[38%] font-montserrat text-[#344554] md:text-[3rem];
-        span:first-of-type{
-        @apply  md:w-full  md:leading-relaxed px-8 font-light;
-        }
-        span{
-          @apply font-bold
-        }
-      }
-    }
-    .steps{
-      @apply md:absolute w-full md:top-[200vh] md:h-screen flex md:flex-row md:justify-between md:items-center md:left-5;
-    } 
-    .financial-habits{
-      @apply  absolute md:top-[320vh] w-full h-screen md:flex md:items-center md:justify-between
-    }
-    .estimates{
-      @apply  absolute md:top-[400vh] w-full h-screen md:flex  md:items-center md:justify-between
-    }
-    .features{
-       @apply  absolute md:top-[500vh] w-full md:h-[50%] md:flex md:flex-col md:items-center md:gap-10;
-       h1{
-        @apply text-4xl font-montserrat tracking-wide text-[#344554];
-        span{
-          @apply font-bold
-        }
-       }
-    }
-  }
-  #pricing{
-    @apply w-full min-h-dvh z-20 relative container mx-auto px-10;
-    .info-section{
-      @apply h-full w-full md:absolute md:top-20 flex md:flex-row md:justify-between md:items-center;
-      
-    }
-    .heading-content{
-      @apply w-full h-full flex md:flex-col md:items-center md:justify-start md:absolute md:top-40 font-montserrat;
-      h1{
-        @apply flex md:flex-col md:text-5xl md:gap-4 text-[#344554];
-        span:first-of-type{
-          @apply md:ml-[5.4rem]
-        }
-        span:last-of-type{
-          @apply md:font-bold
-        }
-      }
-    } 
-    .left-img{
-      @apply absolute md:-left-120 md:-bottom-40 md:w-[60%];
-    }
-    .right-img{
-      @apply absolute md:-right-60
-    }
-    .plan-section{
-      @apply md:mt-20 w-full flex md:flex-col md:items-center;
-      h1{
-        @apply text-[#344554]
-      }
-    }
-    .privacy{
-       @apply h-full w-full relative flex md:flex-row md:justify-between md:items-center;
+
+    img {
+      @apply md:w-[16%];
     }
 
+    ul {
+      @apply flex md:justify-between md:gap-10 text-nowrap md:items-center;
+    }
+    li {
+      @apply text-[#76818B] hover:border-b-1 hover:border-[#76818B] md:transition-all md:ease-in-out md:duration-100;
+    }
+
+    li:last-of-type {
+      @apply bg-[#15C890] md:px-3 md:py-2 md:rounded-lg hover:px-3 hover:py-2 md:text-white font-bold hover:border hover:border-[#76818b] hover:bg-white hover:text-[#76818B] md:transition-all md:ease-in-out md:duration-200;
+    }
+  }
+  #Hero {
+    @apply w-full min-h-dvh z-20 relative container mx-auto px-10;
+    .body {
+      @apply md:h-full md:w-full flex md:flex-row md:justify-between md:items-center md:absolute md:top-20 md:left-5;
+    }
+    .left-section {
+      @apply md:w-[40%] flex md:flex-col md:items-start;
+      h1 {
+        @apply md:w-[76%] text-[2.4rem] font-montserrat leading-relaxed text-[#344554] md:mt-2;
+        span {
+          @apply font-bold;
+        }
+      }
+      h2 {
+        @apply text-[#344554] text-[1.2rem];
+      }
+    }
+    .right-section {
+      @apply md:w-[60%] flex md:justify-end;
+      img {
+        @apply md:w-[90%];
+      }
+    }
+    .feature-card {
+      @apply w-full md:h-full md:absolute md:top-[120vh] flex md:justify-between  md:left-5;
+    }
+    .managment {
+      @apply w-full md:h-[40%] flex md:justify-center md:items-center md:absolute md:top-[170vh] md:left-5;
+      h1 {
+        @apply md:w-[38%] font-montserrat text-[#344554] md:text-[3rem];
+        span:first-of-type {
+          @apply md:w-full  md:leading-relaxed px-8 font-light;
+        }
+        span {
+          @apply font-bold;
+        }
+      }
+    }
+    .steps {
+      @apply md:absolute w-full md:top-[200vh] md:h-screen flex md:flex-row md:justify-between md:items-center md:left-5;
+    }
+    .financial-habits {
+      @apply absolute md:top-[320vh] w-full h-screen md:flex md:items-center md:justify-between;
+    }
+    .estimates {
+      @apply absolute md:top-[400vh] w-full h-screen md:flex  md:items-center md:justify-between;
+    }
+    .features {
+      @apply absolute md:top-[500vh] w-full md:h-[50%] md:flex md:flex-col md:items-center md:gap-10;
+      h1 {
+        @apply text-4xl font-montserrat tracking-wide text-[#344554];
+        span {
+          @apply font-bold;
+        }
+      }
+    }
+  }
+  #pricing {
+    @apply w-full min-h-dvh z-20 relative container mx-auto px-10;
+    .info-section {
+      @apply h-full w-full md:absolute md:top-20 flex md:flex-row md:justify-between md:items-center;
+    }
+    .heading-content {
+      @apply w-full h-full flex md:flex-col md:items-center md:justify-start md:absolute md:top-40 font-montserrat;
+      h1 {
+        @apply flex md:flex-col md:text-5xl md:gap-4 text-[#344554];
+        span:first-of-type {
+          @apply md:ml-[5.4rem];
+        }
+        span:last-of-type {
+          @apply md:font-bold;
+        }
+      }
+    }
+    .left-img {
+      @apply absolute md:-left-120 md:-bottom-40 md:w-[60%];
+    }
+    .right-img {
+      @apply absolute md:-right-60;
+    }
+    .plan-section {
+      @apply md:mt-20 w-full flex md:flex-col md:items-center;
+      h1 {
+        @apply text-[#344554];
+      }
+    }
+    .privacy {
+      @apply h-full w-full relative flex md:flex-row md:justify-between md:items-center;
+    }
+  }
+  #about{
+    @apply w-full min-h-dvh z-20 relative container mx-auto px-10;
+    .content{
+      @apply  h-full w-full md:absolute md:top-50 flex md:flex-col md:items-center; 
+    }
+    .sub-content{
+      @apply w-[50%];
+      h1{
+       @apply text-4xl leading-relaxed text-[#344554];
+       span:last-of-type{
+        @apply font-bold
+       }
+      }
+    }
+    .column-layout{
+      @apply w-full h-full flex md:flex-row absolute md:top-[50vh] md:gap-10;
+    }
+    .left-column{
+      @apply w-[40%];
+      h1{
+        @apply text-3xl text-[#344554] leading-relaxed;
+        span{
+          @apply font-bold
+        }
+      } 
+    }
+    .right-column{
+      @apply w-[60%] relative;
+    }
+    .outing-section{
+      @apply w-full h-full absolute md:top-[180vh] flex gap-10
+    }
+    .left-section{
+      @apply w-[50%] 
+    }
+    .right-img{
+      @apply rotate-130 absolute md:-top-50 md:-left-100 z-20
+    }
+    .left-img{
+      @apply rotate-130 h-[90%] absolute md:-left-100 md:-top-50
+    }
+    .right-section{
+      @apply w-[50%]
+    }
+    .contact-team{
+      @apply w-full h-full absolute md:top-[250vh]
+    }
+    .contact-heading{
+      @apply w-full flex md:flex-col md:items-center;
+      h1{
+        @apply text-6xl font-bold text-[#344554];
+      }
+      p{
+        @apply text-2xl text-[#344554] mt-5;
+      }
+    }
+    .contact-card{
+      @apply w-full flex gap-5 md:justify-center mt-20
+    }
+    .contact-form{
+      @apply w-full flex md:flex-col md:items-center mt-60 absolute md:top-[300vh];
+      h1{
+        @apply text-5xl font-bold text-[#344554] 
+      }
+    }
+    .c-form{
+      @apply w-[35%]
+    }
   }
 }

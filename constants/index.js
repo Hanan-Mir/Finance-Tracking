@@ -1,5 +1,5 @@
 const navLinks=[{
-  id:'home',
+  id:'/',
   title:'Home'
 },{
   id:'pricing',
