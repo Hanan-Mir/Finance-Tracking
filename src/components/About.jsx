@@ -120,11 +120,10 @@ function About() {
                 Name
               </lable>
               <input
-              id='name'
+                id="name"
                 type="text"
                 required
                 name="name"
-                id=""
                 className="mt-2 shadow-form px-4 py-4 rounded-full text-[#344554] "
                 placeholder="Your name"
               />
@@ -134,11 +133,10 @@ function About() {
                 Email
               </lable>
               <input
-              id='email'
+                id="email"
                 type="email"
                 required
                 name="email"
-                id=""
                 className="mt-2 shadow-form px-4 py-4 rounded-full text-[#344554] "
                 placeholder="Your email address"
               />
@@ -148,26 +146,26 @@ function About() {
                 Message
               </lable>
               <textarea
-              id='message'
+                id="message"
                 rows="10"
                 cols="20"
                 type="textarea"
                 required
                 name="email"
-                id=""
                 className="mt-2 resize-none shadow-form px-4 py-4 rounded-xl text-[#344554] "
                 placeholder="Your message"
               />
             </div>
             <div className="w-full flex md:justify-center mt-3">
-            <button className="md:px-12 rounded-full md:py-4 bg-[#12C48B] text-white hover:cursor-pointer shadow-box">Send Message</button>
+              <button className="md:px-12 rounded-full md:py-4 bg-[#12C48B] text-white hover:cursor-pointer shadow-box">
+                Send Message
+              </button>
             </div>
           </form>
         </div>
       </div>
-       <div className="w-full absolute md:top-[420vh] flex md:justify-center">
+      <div className="w-full absolute md:top-[420vh] flex md:justify-center">
         <Footer />
-
       </div>
     </section>
   );

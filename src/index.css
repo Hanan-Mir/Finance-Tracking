@@ -228,4 +228,20 @@ progress[value="50"]::-webkit-progress-value {
       @apply w-[35%]
     }
   }
+  #login{
+     @apply w-full min-h-dvh z-20 relative container mx-auto px-10 flex md:flex-col md:items-center;
+  }
+  .form-element{
+      @apply  h-[60%] w-[50%] md:absolute md:top-40 flex md:flex-col md:items-center md:py-10; 
+    }
+    #signup{
+      @apply w-full min-h-dvh flex md:flex-col md:items-center
+    }
+    #forget-password{
+       @apply w-full min-h-dvh flex md:flex-col md:items-center
+    }
+    .main-section{
+      @apply flex md:flex-col md:items-center
+    }
+
 }
