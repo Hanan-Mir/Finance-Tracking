@@ -1,10 +1,54 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap/all";
 import { useRef } from "react";
 
 function AccountBalanceGraph() {
   const sectionRef = useRef();
   const pathRef = useRef();
+  const balanceRef=useRef();
+  const cashFlowRef=useRef();
+  useGSAP(()=>{
+const counter={value:0};
+const finalBalance=6489;
+
+gsap.to(counter,{
+  value:finalBalance,
+  duration:1.5,
+  ease:'power1.out',
+  scrollTrigger:{
+    trigger:balanceRef.current,
+    start:'top 85%',
+    once:true
+  },
+  onUpdate:()=>{
+    const formattedValue=Math.round(counter.value);
+    if(balanceRef.current){
+      balanceRef.current.innerText=`+ ${formattedValue} USD`
+    }
+  }
+})
+const cashflowCounter={value:0}
+const finalCashFlowBalance=1584;
+gsap.to(cashflowCounter,{
+  value:finalCashFlowBalance,
+  duration:1.5,
+  ease:'power2.inOut',
+  scrollTrigger:{
+    trigger:cashFlowRef.current,
+    start:'top 85%',
+    once:true
+  },
+  onUpdate:()=>{
+  const formattedValue=Math.round(cashflowCounter.value);
+  if(cashFlowRef.current){
+    cashFlowRef.current.innerText=`- ${formattedValue} USD`
+  }
+
+  }
+})
+  },[])
   return (
-    <section ref={sectionRef} className="py-24 w-[50%] bg-white">
+    <section ref={sectionRef} className="py-24 w-[50%] bg-white account-balance">
       <div className="max-w-4xl mx-auto px-6">
         <div className="flex md:items-center gap-2">
           <div>
@@ -71,7 +115,7 @@ function AccountBalanceGraph() {
               <h1 className="font-montserrat font-bold text-[#717A83]">
                 Current Balance
               </h1>
-              <p className="text-[#4ED3A9] text-[1.4rem]">+ 6489 USD</p>
+              <p ref={balanceRef} className="text-[#4ED3A9] text-[1.4rem]">+ 6489 USD</p>
             </div>
           </div>
           <div className="flex md:absolute md:top-60  md:right-[-10%] shadow-box rounded-lg bg-white w-[40%] h-[35%] md:items-center gap-2">
@@ -86,7 +130,7 @@ function AccountBalanceGraph() {
               <h1 className="font-montserrat font-bold text-[#717A83]">
                 Monthly Cashflow
               </h1>
-              <p className="text-[#4ED3A9] text-[1.4rem]">- 1584 USD</p>
+              <p ref={cashFlowRef} className="text-[#4ED3A9] text-[1.4rem]">- 1584 USD</p>
             </div>
           </div>
         </div>

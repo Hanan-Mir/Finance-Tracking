@@ -11,7 +11,7 @@
   --font-montserrat: "Montserrat-Regular", sans-serif;
   --shadow-box: 0 10px 28px 0 hsla(210, 8%, 54%, 0.2);
   --shadow-hover: 0 10px 28px 0 hsla(220, 20%, 70%, 0.8);
-  --shadow-form:0 10px 24px 0 hsla(210, 8%, 54%, .16);
+  --shadow-form: 0 10px 24px 0 hsla(210, 8%, 54%, 0.16);
 }
 html,
 body {
@@ -20,7 +20,9 @@ body {
   color: black;
   scroll-behavior: smooth;
   overflow-x: hidden;
+ 
 }
+
 progress {
   width: 100%;
   height: 1.6rem;
@@ -43,15 +45,32 @@ progress[value="50"]::-webkit-progress-value {
   background-color: #f963a0;
   border-radius: 20px;
 }
+progress {
+ 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+progress::-webkit-progress-value {
+  background-color: var(--bar-fill-color, red); 
+  transition: none; 
+}
+
+progress::-moz-progress-bar {
+  background-color: var(--bar-fill-color, red);
+  transition: none;
+}
 
 @layer components {
   main {
-    @apply w-full overflow-x-hidden;
+    @apply w-full ;
   }
   nav {
-    @apply fixed w-full z-30;
+    @apply w-full h-[10vh] mt-0 fixed z-30;
     div {
-      @apply flex md:flex-row md:justify-between md:items-center container mx-auto font-montserrat;
+      @apply w-full h-full flex md:flex-row md:justify-between md:items-center container mx-auto font-montserrat;
     }
 
     img {
@@ -159,89 +178,88 @@ progress[value="50"]::-webkit-progress-value {
       @apply h-full w-full relative flex md:flex-row md:justify-between md:items-center;
     }
   }
-  #about{
+  #about {
     @apply w-full min-h-dvh z-20 relative container mx-auto px-10;
-    .content{
-      @apply  h-full w-full md:absolute md:top-50 flex md:flex-col md:items-center; 
+    .content {
+      @apply h-full w-full md:absolute md:top-50 flex md:flex-col md:items-center;
     }
-    .sub-content{
+    .sub-content {
       @apply w-[50%];
-      h1{
-       @apply text-4xl leading-relaxed text-[#344554];
-       span:last-of-type{
-        @apply font-bold
-       }
+      h1 {
+        @apply text-4xl leading-relaxed text-[#344554];
+        span:last-of-type {
+          @apply font-bold;
+        }
       }
     }
-    .column-layout{
+    .column-layout {
       @apply w-full h-full flex md:flex-row absolute md:top-[50vh] md:gap-10;
     }
-    .left-column{
+    .left-column {
       @apply w-[40%];
-      h1{
+      h1 {
         @apply text-3xl text-[#344554] leading-relaxed;
-        span{
-          @apply font-bold
+        span {
+          @apply font-bold;
         }
-      } 
+      }
     }
-    .right-column{
+    .right-column {
       @apply w-[60%] relative;
     }
-    .outing-section{
-      @apply w-full h-full absolute md:top-[180vh] flex gap-10
+    .outing-section {
+      @apply w-full h-full absolute md:top-[180vh] flex gap-10;
     }
-    .left-section{
-      @apply w-[50%] 
+    .left-section {
+      @apply w-[50%];
     }
-    .right-img{
-      @apply rotate-130 absolute md:-top-50 md:-left-100 z-20
+    .right-img {
+      @apply rotate-130 absolute md:-top-50 md:-left-100 z-20;
     }
-    .left-img{
-      @apply rotate-130 h-[90%] absolute md:-left-100 md:-top-50
+    .left-img {
+      @apply rotate-130 h-[90%] absolute md:-left-100 md:-top-50;
     }
-    .right-section{
-      @apply w-[50%]
+    .right-section {
+      @apply w-[50%];
     }
-    .contact-team{
-      @apply w-full h-full absolute md:top-[250vh]
+    .contact-team {
+      @apply w-full h-full absolute md:top-[250vh];
     }
-    .contact-heading{
+    .contact-heading {
       @apply w-full flex md:flex-col md:items-center;
-      h1{
+      h1 {
         @apply text-6xl font-bold text-[#344554];
       }
-      p{
+      p {
         @apply text-2xl text-[#344554] mt-5;
       }
     }
-    .contact-card{
-      @apply w-full flex gap-5 md:justify-center mt-20
+    .contact-card {
+      @apply w-full flex gap-5 md:justify-center mt-20;
     }
-    .contact-form{
+    .contact-form {
       @apply w-full flex md:flex-col md:items-center mt-60 absolute md:top-[300vh];
-      h1{
-        @apply text-5xl font-bold text-[#344554] 
+      h1 {
+        @apply text-5xl font-bold text-[#344554];
       }
     }
-    .c-form{
-      @apply w-[35%]
+    .c-form {
+      @apply w-[35%];
     }
   }
-  #login{
-     @apply w-full min-h-dvh z-20 relative container mx-auto px-10 flex md:flex-col md:items-center;
+  #login {
+    @apply w-full min-h-dvh z-20 relative container mx-auto px-10 flex md:flex-col md:items-center;
   }
-  .form-element{
-      @apply  h-[60%] w-[50%] md:absolute md:top-40 flex md:flex-col md:items-center md:py-10; 
-    }
-    #signup{
-      @apply w-full min-h-dvh flex md:flex-col md:items-center
-    }
-    #forget-password{
-       @apply w-full min-h-dvh flex md:flex-col md:items-center
-    }
-    .main-section{
-      @apply flex md:flex-col md:items-center
-    }
-
+  .form-element {
+    @apply h-[60%] w-[50%] md:absolute md:top-40 flex md:flex-col md:items-center md:py-10;
+  }
+  #signup {
+    @apply w-full min-h-dvh flex md:flex-col md:items-center;
+  }
+  #forget-password {
+    @apply w-full min-h-dvh flex md:flex-col md:items-center;
+  }
+  .main-section {
+    @apply flex md:flex-col md:items-center;
+  }
 }

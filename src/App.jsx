@@ -8,10 +8,13 @@ import NotFound from "./components/NotFound"
 import Login from "./components/Login"
 import SignUp from "./components/SignUp"
 import ForgetPassword from "./components/ForgetPassword"
+import gsap from "gsap"
+import { ScrollTrigger, SplitText } from "gsap/all"
 
 
 
 function App() {
+    gsap.registerPlugin(ScrollTrigger,SplitText)
     const routes=createBrowserRouter([
         {
            element:<MainLayout />,

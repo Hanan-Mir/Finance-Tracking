@@ -1,6 +1,6 @@
 function ManageSteps({ stepNumber, stepHeading, steps }) {
   return (
-    <div className="md:w-full flex md:flex-col md:items-start ">
+    <div className="md:w-full flex md:flex-col md:items-start steps-card ">
       <p className="text-[#6C767F] font-bold text-2xl">{stepNumber}</p>
       <h1 className="font-montserrat font-bold text-4xl md:mt-5">{stepHeading}</h1>
       <ul className="md:mt-4">

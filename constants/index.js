@@ -39,7 +39,7 @@ const firstStep = {
 };
 const secondStep = {
   stepNumber: "Step 2",
-  stepHeading: "UnderStand your financial habits",
+  stepHeading: "Understand your financial habits",
   steps: [
     "Analyze your finance with beautiful, simple and easy to understand graphic. No need for complicated Excel sheets.",
     "See where your money goes and where they come from every month.",
