@@ -1,7 +1,144 @@
+import { useGSAP } from "@gsap/react";
 import ContactCard from "./Cards/ContactCard";
 import Footer from "./Cards/Footer";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { enableKeyboardScrollSupport } from "../../HelperFunctions/gsapAnimations";
 
 function About() {
+  useGSAP(()=>{
+      gsap.registerPlugin(ScrollTrigger, SplitText);
+      const cleanup=enableKeyboardScrollSupport();
+    const paragraphSplit = new SplitText(".sub-content > h1 span", { type: "lines" });
+    gsap.from(paragraphSplit.lines,{
+      opacity:0,
+      yPercent:100,
+      duration:1,
+      ease:'power1.inOut',
+      stagger:0.1
+    })
+     gsap.from('.heading > img',{
+      opacity:0,
+      xPercent:100,
+      duration:1,
+      ease:'power1.inOut',
+      
+    })
+    gsap.from('.business-heading',{
+      opacity:0,
+      yPercent:100,
+      duration:1,
+      ease:'power1.inOut',
+      
+    })
+    gsap.from('.business-description p:first-of-type',{
+      opacity:0,
+      yPercent:100,
+      duration:1,
+      ease:'power1.inOut',
+      scrollTrigger:{
+        trigger:'.heading',
+        start:'bottom 90%'
+      }
+      
+    })
+     gsap.from('.right-column img',{
+      opacity:0,
+      yPercent:100,
+      duration:1,
+      stagger:0.4,
+      ease:'power1.inOut',
+      
+      
+    })
+     gsap.from('.business-description p:nth-of-type(2)',{
+      opacity:0,
+      yPercent:100,
+      duration:1,
+      ease:'power1.inOut',
+      scrollTrigger:{
+        trigger:'.business-description > p',
+        start:'bottom 80%'
+      }
+      
+    })
+     gsap.from('.right-section h1:first-of-type',{
+      opacity:0,
+      yPercent:100,
+      duration:1,
+      ease:'power1.inOut',
+      scrollTrigger:{
+        trigger:'.outing-section',
+        start:'top 80%'
+      }
+      
+    })
+
+    gsap.from('.right-section p',{
+      opacity:0,
+      yPercent:100,
+      duration:1,
+      ease:'power1.inOut',
+      stagger:0.3,
+      scrollTrigger:{
+        trigger:'.outing-section',
+        start:'top 70%'
+      }
+      
+    })
+     gsap.from('.outing-section img:last-of-type',{
+      opacity:0,
+      yPercent:100,
+      duration:1,
+      ease:'power1.inOut',
+      
+      scrollTrigger:{
+        trigger:'.outing-section',
+        start:'top 70%'
+      }
+      
+    })
+     gsap.from('.contact-heading h1',{
+      opacity:0,
+      yPercent:100,
+      duration:1,
+      ease:'power1.inOut',
+      
+      scrollTrigger:{
+        trigger:'.contact-team',
+        start:'top 70%'
+      }
+      
+    })
+     gsap.from('.contact-heading p',{
+      opacity:0,
+      yPercent:100,
+      duration:1,
+      ease:'power1.inOut',
+      
+      scrollTrigger:{
+        trigger:'.contact-team',
+        start:'top 73%'
+      }
+      
+    })
+    gsap.from('.contact-card',{
+      opacity:0,
+      xPercent:-100,
+      duration:1,
+      ease:'power1.inOut',
+      stagger:0.5,
+      
+      scrollTrigger:{
+        trigger:'.contact-team',
+        start:'top 73%'
+      }
+      
+    })
+    return cleanup
+
+  },[])
   return (
     <section id="about">
       <div className="content">
@@ -18,9 +155,9 @@ function About() {
               <img
                 src="/images/bg-right.svg"
                 alt=""
-                className="absolute md:-top-130 md:-right-20 z-5"
+                className="absolute md:-top-130 md:-right-20 z-5 about-right-img "
               />
-              <h1>
+              <h1 className="business-heading">
                 In FinTrack, we all come to work every day{" "}
                 <span>
                   {" "}
@@ -30,7 +167,7 @@ function About() {
                 .
               </h1>
 
-              <div className="mt-5">
+              <div className="mt-5 business-description">
                 <p className="text-[#344554] leading-relaxed text-[1.2rem]">
                   We believe that managing business should be as effortless as
                   shopping online. It should be done anytime, anywhere and in

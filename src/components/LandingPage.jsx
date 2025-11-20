@@ -22,7 +22,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
-import { animationsOnArrowKeys } from "../../HelperFunctions/gsapAnimations";
+import { animationsOnArrowKeys, enableKeyboardScrollSupport } from "../../HelperFunctions/gsapAnimations";
 
 function LandingPage() {
   
@@ -33,7 +33,7 @@ function LandingPage() {
       type: "lines",
     });
     // Lets the scroll event work as we move using arrow keys
-animationsOnArrowKeys();
+const cleanup=enableKeyboardScrollSupport();
     gsap.from(paragraphSplit.lines, {
       opacity: 0,
       xPercent: -100,
@@ -215,6 +215,7 @@ animationsOnArrowKeys();
         start: "top 90%",
       },
     });
+    return cleanup;
   }, []);
 
   return (

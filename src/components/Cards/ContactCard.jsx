@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 function ContactCard({imgPath,name,position,gitLink,xLink}) {
     return (
-        <div className="shadow-box rounded-xl w-[20%] flex md:flex-col md:items-center bg-white md:py-10">
+        <div className="contactCard shadow-box rounded-xl w-[20%] flex md:flex-col md:items-center bg-white md:py-10">
             <div className="card-heading w-full flex md:flex-col md:items-center">
                 <img src={imgPath} alt="" className="w-20 rounded-full" />
                 <h1 className="text-[#344554] font-bold text-2xl mt-5">{name}</h1>
