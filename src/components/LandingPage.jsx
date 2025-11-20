@@ -16,12 +16,24 @@ import Highlights from "./Cards/Highlights";
 import ManageSteps from "./Cards/ManageSteps";
 import SpendingsCard from "./Cards/SpendingsCard";
 import AccountBalanceGraph from "./Graphs/AccountBalanceGraph";
-import gsap, { SplitText } from "gsap/all";
+import { SplitText } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { useEffect } from "react";
+import Lenis from "@studio-freight/lenis";
+import gsap from "gsap";
+import { animationsOnArrowKeys } from "../../HelperFunctions/gsapAnimations";
 
 function LandingPage() {
+  
   useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger, SplitText, ScrollToPlugin);
     const paragraphSplit = new SplitText(".hero-heading", { type: "lines" });
-    const managmentSectionSplit=new SplitText('.managment h1',{type:'lines'});
+    const managmentSectionSplit = new SplitText(".managment h1", {
+      type: "lines",
+    });
+    // Lets the scroll event work as we move using arrow keys
+animationsOnArrowKeys();
     gsap.from(paragraphSplit.lines, {
       opacity: 0,
       xPercent: -100,
@@ -42,180 +54,167 @@ function LandingPage() {
       ease: "expo.out",
       delay: 0.1,
     });
-    gsap.from(managmentSectionSplit.lines,{
-      opacity:0,
-      yPercent:70,
-      duration:1.5,
-      delay:0.2,
-      ease:'expo.out',
-      scrollTrigger:{
-        trigger:'.managment',
-        start:'top 50%',
-        scrub:false
-      }
-    })
-    gsap.from('.feature-card .features-card', {
+    gsap.from(managmentSectionSplit.lines, {
+      opacity: 0,
+      yPercent: 70,
+      duration: 1.5,
+      delay: 0.2,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: ".managment",
+        start: "top 50%",
+
+        scrub: false,
+      },
+    });
+    gsap.from(".feature-card .features-card", {
       yPercent: 50,
       opacity: 0,
-      duration: 1, 
-      ease: 'power1.out',
-      stagger: 0.2, 
+      duration: 1,
+      ease: "power1.out",
+      stagger: 0.2,
       scrollTrigger: {
-        trigger: '.feature-card', 
-        start: 'top 80%',
-      
+        trigger: ".feature-card",
+        start: "top 80%",
+
         scrub: false,
-      }
+      },
     });
-    gsap.from('.steps-container > .steps-card p',{
-      yPercent:50,
-      opacity:0,
-      duration:1,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.feature-card',
-        start:'bottom 40%'
-      }
-    
-    })
-    gsap.from('.steps-container > .steps-card h1',{
-      yPercent:50,
-      opacity:0,
-      duration:1,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.feature-card',
-        start:'bottom 50%'
-      }
-    
-    })
-    gsap.from('.steps-container > .steps-card ul',{
-      yPercent:50,
-      opacity:0,
-      duration:1,
-      stagger:0.2,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.steps-container',
-        start:'top 90%'
-      }
-    
-    })
-    gsap.from('.card-section .account-card:nth-of-type(1)',{
-      translateY:'50%',
-   
-      duration:2,
-      ease:'power2.inOut',
-      scrollTrigger:{
-        trigger:'.steps',
-        start:'top 40%'
-      }
-  
-    })
-     gsap.from('.card-section .account-card:nth-of-type(3)',{
-      translateY:'-60%',
-      
-      duration:2,
-      ease:'power2.inOut',
-      scrollTrigger:{
-        trigger:'.steps',
-        start:'top 40%'
-      }
-  
-    })
-    
-    gsap.from('.financial-habits .steps-card p',{
-      yPercent:50,
-      opacity:0,
-      duration:1,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.financial-habits',
-        start:'top 40%'
-      }
-    
-    })
-    gsap.from('.financial-habits .steps-card h1',{
-      yPercent:50,
-      opacity:0,
-      duration:1,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.financial-habits',
-        start:'top 50%'
-      }
-    
-    })
-    gsap.from('.financial-habits .steps-card ul',{
-      yPercent:50,
-      opacity:0,
-      duration:1,
-      stagger:0.2,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.financial-habits',
-        start:'top 70%'
-      }
-    
-    })
-    gsap.from('.estimates .steps-card p',{
-      yPercent:50,
-      opacity:0,
-      duration:1,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.estimates',
-        start:'top 40%'
-      }
-    
-    })
-    gsap.from('.estimates .steps-card h1',{
-      yPercent:50,
-      opacity:0,
-      duration:1,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.estimates',
-        start:'top 50%'
-      }
-    
-    })
-    gsap.from('.estimates .steps-card ul',{
-      yPercent:50,
-      opacity:0,
-      duration:1,
-      stagger:0.2,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.estimates',
-        start:'top 70%'
-      }
-    
-    })
-    gsap.from('.features h1:first-of-type',{
-      yPercent:100,
-      opacity:0,
-      duration:1.2,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.features',
-        start:'top 80%'
-      }
-    })
-     gsap.from('.highlights',{
-            yPercent:50,
-            opacity:0,
-            duration:1,
-            stagger:0.5,
-            ease:'power2.inOut',
-            scrollTrigger:{
-                trigger:'.features',
-                start:'top 90%',
-              
-            }
-        })
-    
-    
+    gsap.from(".steps-container > .steps-card p", {
+      yPercent: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".feature-card",
+        start: "bottom 40%",
+      },
+    });
+    gsap.from(".steps-container > .steps-card h1", {
+      yPercent: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".feature-card",
+        start: "bottom 50%",
+      },
+    });
+    gsap.from(".steps-container > .steps-card ul", {
+      yPercent: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".steps-container",
+        start: "top 90%",
+      },
+    });
+    gsap.from(".card-section .account-card:nth-of-type(1)", {
+      translateY: "50%",
+
+      duration: 2,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".steps",
+        start: "top 40%",
+      },
+    });
+    gsap.from(".card-section .account-card:nth-of-type(3)", {
+      translateY: "-60%",
+
+      duration: 2,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".steps",
+        start: "top 40%",
+      },
+    });
+
+    gsap.from(".financial-habits .steps-card p", {
+      yPercent: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".financial-habits",
+        start: "top 40%",
+      },
+    });
+    gsap.from(".financial-habits .steps-card h1", {
+      yPercent: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".financial-habits",
+        start: "top 50%",
+      },
+    });
+    gsap.from(".financial-habits .steps-card ul", {
+      yPercent: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".financial-habits",
+        start: "top 70%",
+      },
+    });
+    gsap.from(".estimates .steps-card p", {
+      yPercent: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".estimates",
+        start: "top 40%",
+      },
+    });
+    gsap.from(".estimates .steps-card h1", {
+      yPercent: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".estimates",
+        start: "top 50%",
+      },
+    });
+    gsap.from(".estimates .steps-card ul", {
+      yPercent: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".estimates",
+        start: "top 70%",
+      },
+    });
+    gsap.from(".features h1:first-of-type", {
+      yPercent: 100,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".features",
+        start: "top 80%",
+      },
+    });
+    gsap.from(".highlights", {
+      yPercent: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.5,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".features",
+        start: "top 90%",
+      },
+    });
   }, []);
 
   return (

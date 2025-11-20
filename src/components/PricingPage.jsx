@@ -1,8 +1,68 @@
+import { useGSAP } from "@gsap/react"
 import Footer from "./Cards/Footer"
 import PrivacyCard from "./Cards/PrivacyCard"
 import PricingSection from "./Sections/PricingSection"
+import { enableKeyboardScrollSupport } from "../../HelperFunctions/gsapAnimations"
+import gsap from "gsap"
+import { SplitText } from "gsap/SplitText"
 
 function PricingPage() {
+    useGSAP(()=>{
+        gsap.registerPlugin(SplitText);
+        const headingSplit=new SplitText('.heading-content > h1',{type:'words'});
+
+        const cleanup=enableKeyboardScrollSupport();
+        
+        const bgImgTimeline=gsap.timeline({
+            scrollTrigger:{
+                trigger:'#pricing',
+                start:'top top',
+                end:'bottom top',
+                scrub:true
+            }
+        })
+        
+        bgImgTimeline.to('.left-img',{y:250},0)
+        bgImgTimeline.to('.right-img',{y:-250},0)
+        gsap.from(headingSplit.words,{
+            opacity:0,
+            yPercent:50,
+            duration:1.5,
+            ease:'expo.out',
+            stagger:0.2
+        })
+        gsap.from('.plan-section > h1',{
+            opacity:0,
+            yPercent:100,
+            duration:2,
+            ease:'expo.out'
+        })
+          gsap.from('.left-img',{
+            opacity:0,
+            xPercent:-50,
+            duration:1.5,
+            ease:'expo.out',
+            
+        })
+        gsap.from('.right-img',{
+            opacity:0,
+            xPercent:50,
+            duration:1.5,
+            ease:'expo.out',
+            
+        })
+        gsap.from(".privacy-card", {
+      opacity: 0,
+      yPercent: -100,
+      duration: 0.5,
+      ease: "power1.inOut",
+      scrollTrigger:{
+        trigger:'.privacy-card',
+        start:'top 90%'
+        
+      }})
+        return cleanup
+    },[])
     return (
        <section id="pricing">
         <div className="info-section">

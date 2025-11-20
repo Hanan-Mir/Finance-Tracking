@@ -1,8 +1,20 @@
+import { useGSAP } from "@gsap/react";
 import { pricingInfo } from "../../../constants";
 import FeatureLists from "../Cards/FeatureLists";
 import PricingCard from "../Cards/PricingCard";
+import gsap from "gsap";
 
 function PricingSection() {
+    useGSAP(() => {
+    gsap.from(".plan-info", {
+      opacity: 0,
+      xPercent: 100,
+      duration: 0.5,
+      ease: "power1.inOut",
+      stagger: 0.4,
+    });
+  }, []);
+
   return (
     <div className="w-full h-full flex md:flex-col md:items-center md:mt-20">
       <div className=" w-[30%] flex md:justify-center">

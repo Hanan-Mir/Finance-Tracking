@@ -1,8 +1,11 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+
 function PricingCard({ plan }) {
   const planArray = Array.from(plan.features);
-  console.log(planArray);
+
   return (
-    <div className="md:w-[25%] md:h-full shadow-box md:px-5 md:py-4 relative bg-white">
+    <div className=" md:w-[25%] md:h-full shadow-box md:px-5 md:py-4 relative bg-white plan-info">
       <img
         src={plan.imgPathIcon}
         className="w-15 absolute md:-top-8 left-30 rounded-full px-2 py-2 bg-white shadow-box"
@@ -19,14 +22,12 @@ function PricingCard({ plan }) {
         {planArray.map(([_, value]) =>
           !value ? (
             <img src="/images/cross.png" alt="" className="w-10" />
-          ) : value === "unlimted" ||value==='1' ? (
+          ) : value === "unlimted" || value === "1" ? (
             <p className="text-[#12C48B] font-semibold">{value}</p>
           ) : (
             <img src="/images/present.png" alt="" className="w-10" />
           )
         )}
-
-     
       </div>
     </div>
   );
