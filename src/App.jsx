@@ -10,6 +10,7 @@ import SignUp from "./components/SignUp"
 import ForgetPassword from "./components/ForgetPassword"
 import gsap from "gsap"
 import { ScrollTrigger, SplitText } from "gsap/all"
+import { handleEmailService } from "./services/emailJsService"
 
 
 
@@ -30,7 +31,8 @@ function App() {
             },
             {
                 path:'/about',
-                element:<About />
+                element:<About />,
+                action:handleEmailService
             },{
                 path:'/login',
                 element:<Login />

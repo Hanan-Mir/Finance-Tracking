@@ -90,7 +90,8 @@ const pricingInfo=[
   {
     imgPathIcon:'/images/premium.png',
     heading:'Fintrack Premium',
-    price:'$12.00/M',
+    monthlyPrice:`$12.00/M`,
+    yearlyPrice:'$144.00/Y',
     description:`Start saving your money and time what's truly important in your life.`,
     features:new Map([
       ['Automatic categorization',true],
@@ -105,7 +106,9 @@ const pricingInfo=[
     imgPathIcon:'/images/plus.png',
     heading:'Fintrack Plus',
     description:`Get a full track of your finances, stock and transactions.`,
-    price:'$8.00/M',
+    monthlyPrice:'$8.00/M',
+    yearlyPrice:'96.00/Y',
+
 
     features:new Map([
       ['Automatic categorization',false],
@@ -120,7 +123,8 @@ const pricingInfo=[
     imgPathIcon:'/images/basic.png',
     heading:'Fintrack Basic',
     description:`Healthy business habits by knowing your business state and money flow`,
-    price:'Free',
+    monthlyPrice:'Free',
+    yearlyPrice:'Free',
     features:new Map([
       ['Automatic categorization',false],
       ['Backup and sync',true],

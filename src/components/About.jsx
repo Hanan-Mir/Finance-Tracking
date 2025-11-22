@@ -5,142 +5,175 @@ import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { enableKeyboardScrollSupport } from "../../HelperFunctions/gsapAnimations";
+import { useEffect, useState } from "react";
+import { Form, useActionData, useNavigation } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import SubmittingCard from "./Cards/SubmittingCard";
 
 function About() {
-  useGSAP(()=>{
-      gsap.registerPlugin(ScrollTrigger, SplitText);
-      const cleanup=enableKeyboardScrollSupport();
-    const paragraphSplit = new SplitText(".sub-content > h1 span", { type: "lines" });
-    gsap.from(paragraphSplit.lines,{
-      opacity:0,
-      yPercent:100,
-      duration:1,
-      ease:'power1.inOut',
-      stagger:0.1
-    })
-     gsap.from('.heading > img',{
-      opacity:0,
-      xPercent:100,
-      duration:1,
-      ease:'power1.inOut',
-      
-    })
-    gsap.from('.business-heading',{
-      opacity:0,
-      yPercent:100,
-      duration:1,
-      ease:'power1.inOut',
-      
-    })
-    gsap.from('.business-description p:first-of-type',{
-      opacity:0,
-      yPercent:100,
-      duration:1,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.heading',
-        start:'bottom 90%'
-      }
-      
-    })
-     gsap.from('.right-column img',{
-      opacity:0,
-      yPercent:100,
-      duration:1,
-      stagger:0.4,
-      ease:'power1.inOut',
-      
-      
-    })
-     gsap.from('.business-description p:nth-of-type(2)',{
-      opacity:0,
-      yPercent:100,
-      duration:1,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.business-description > p',
-        start:'bottom 80%'
-      }
-      
-    })
-     gsap.from('.right-section h1:first-of-type',{
-      opacity:0,
-      yPercent:100,
-      duration:1,
-      ease:'power1.inOut',
-      scrollTrigger:{
-        trigger:'.outing-section',
-        start:'top 80%'
-      }
-      
-    })
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    const cleanup = enableKeyboardScrollSupport();
+    const paragraphSplit = new SplitText(".sub-content > h1 span", {
+      type: "lines",
+    });
+    gsap.from(paragraphSplit.lines, {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1,
+      ease: "power1.inOut",
+      stagger: 0.1,
+    });
+    gsap.from(".heading > img", {
+      opacity: 0,
+      xPercent: 100,
+      duration: 1,
+      ease: "power1.inOut",
+    });
+    gsap.from(".business-heading", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1,
+      ease: "power1.inOut",
+    });
+    gsap.from(".business-description p:first-of-type", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".heading",
+        start: "bottom 90%",
+      },
+    });
+    gsap.from(".right-column img", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1,
+      stagger: 0.4,
+      ease: "power1.inOut",
+    });
+    gsap.from(".business-description p:nth-of-type(2)", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".business-description > p",
+        start: "bottom 80%",
+      },
+    });
+    gsap.from(".right-section h1:first-of-type", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".outing-section",
+        start: "top 80%",
+      },
+    });
 
-    gsap.from('.right-section p',{
-      opacity:0,
-      yPercent:100,
-      duration:1,
-      ease:'power1.inOut',
-      stagger:0.3,
-      scrollTrigger:{
-        trigger:'.outing-section',
-        start:'top 70%'
-      }
-      
-    })
-     gsap.from('.outing-section img:last-of-type',{
-      opacity:0,
-      yPercent:100,
-      duration:1,
-      ease:'power1.inOut',
-      
-      scrollTrigger:{
-        trigger:'.outing-section',
-        start:'top 70%'
-      }
-      
-    })
-     gsap.from('.contact-heading h1',{
-      opacity:0,
-      yPercent:100,
-      duration:1,
-      ease:'power1.inOut',
-      
-      scrollTrigger:{
-        trigger:'.contact-team',
-        start:'top 70%'
-      }
-      
-    })
-     gsap.from('.contact-heading p',{
-      opacity:0,
-      yPercent:100,
-      duration:1,
-      ease:'power1.inOut',
-      
-      scrollTrigger:{
-        trigger:'.contact-team',
-        start:'top 73%'
-      }
-      
-    })
-    gsap.from('.contact-card',{
-      opacity:0,
-      xPercent:-100,
-      duration:1,
-      ease:'power1.inOut',
-      stagger:0.5,
-      
-      scrollTrigger:{
-        trigger:'.contact-team',
-        start:'top 73%'
-      }
-      
-    })
-    return cleanup
+    gsap.from(".right-section p", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1,
+      ease: "power1.inOut",
+      stagger: 0.3,
+      scrollTrigger: {
+        trigger: ".outing-section",
+        start: "top 70%",
+      },
+    });
+    gsap.from(".outing-section img:last-of-type", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1,
+      ease: "power1.inOut",
 
-  },[])
+      scrollTrigger: {
+        trigger: ".outing-section",
+        start: "top 70%",
+      },
+    });
+    gsap.from(".contact-heading h1", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1,
+      ease: "power1.inOut",
+
+      scrollTrigger: {
+        trigger: ".contact-team",
+        start: "top 70%",
+      },
+    });
+    gsap.from(".contact-heading p", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1,
+      ease: "power1.inOut",
+
+      scrollTrigger: {
+        trigger: ".contact-team",
+        start: "top 73%",
+      },
+    });
+    gsap.from(".contact-card", {
+      opacity: 0,
+      xPercent: -100,
+      duration: 1,
+      ease: "power1.inOut",
+      stagger: 0.5,
+
+      scrollTrigger: {
+        trigger: ".contact-team",
+        start: "top 73%",
+      },
+    });
+    return cleanup;
+  }, []);
+  //setting up emailjs for the form
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    user_message: "",
+  });
+  const navigation=useNavigation();
+  const actionData=useActionData();
+  
+  const handleChange=(e)=>{
+    setFormData({...formData,[e.target.name]:e.target.value})
+  }
+  useEffect(()=>{
+if(actionData?.success ){
+ toast.success(`${actionData.message}`, {
+position: "top-center",
+autoClose: 2000,
+hideProgressBar: true,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "colored",
+});
+setFormData({user_email:'',user_name:'',user_message:""})
+}else if(actionData?.success===false){
+ toast.error(`${actionData.message}`, {
+position: "top-center",
+autoClose: 2000,
+hideProgressBar: true,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "colored",
+});
+}
+  },[actionData])
+  
   return (
     <section id="about">
+      <ToastContainer />
       <div className="content">
         <div className="sub-content">
           <h1>
@@ -249,57 +282,67 @@ function About() {
         </div>
       </div>
       <div className="contact-form">
-        <h1 className="text-[#344554] mb-4">Get in touch with us</h1>
+      
+      <h1 className="text-[#344554] mb-4">Get in touch with us</h1>
         <div className="c-form">
-          <form action="POST">
+          {/* <SubmittingCard /> */}
+       {navigation.state==='submitting'?<SubmittingCard />   :<Form method="post">
             <div className="flex md:flex-col mt-3 text-[#344554] ">
-              <lable for="name" className="ml-4 text-[#344554] ">
+              <label for="name" className="ml-4 text-[#344554] ">
                 Name
-              </lable>
+              </label>
               <input
                 id="name"
                 type="text"
                 required
-                name="name"
+                name="user_name"
+                value={formData.user_name}
+                onChange={handleChange}
                 className="mt-2 shadow-form px-4 py-4 rounded-full text-[#344554] "
                 placeholder="Your name"
               />
             </div>
             <div className="flex md:flex-col mt-3 text-[#344554] ">
-              <lable for="email" className="ml-4 text-[#344554] ">
+              <label for="email" className="ml-4 text-[#344554] ">
                 Email
-              </lable>
+              </label>
               <input
                 id="email"
                 type="email"
                 required
-                name="email"
+                name="user_email"
+                value={formData.user_email}
+                onChange={handleChange}
                 className="mt-2 shadow-form px-4 py-4 rounded-full text-[#344554] "
                 placeholder="Your email address"
               />
             </div>
             <div className="flex md:flex-col mt-3">
-              <lable for="message" className="ml-4 text-[#344554] ">
+              <label for="message" className="ml-4 text-[#344554] ">
                 Message
-              </lable>
+              </label>
               <textarea
                 id="message"
                 rows="10"
                 cols="20"
                 type="textarea"
                 required
-                name="email"
+                name="user_message"
+                value={formData.user_message}
+                onChange={handleChange}
                 className="mt-2 resize-none shadow-form px-4 py-4 rounded-xl text-[#344554] "
                 placeholder="Your message"
               />
             </div>
             <div className="w-full flex md:justify-center mt-3">
-              <button className="md:px-12 rounded-full md:py-4 bg-[#12C48B] text-white hover:cursor-pointer shadow-box">
+              <button type="submit" className="md:px-12 rounded-full md:py-4 bg-[#12C48B] text-white hover:cursor-pointer shadow-box">
                 Send Message
               </button>
             </div>
-          </form>
+          </Form>}
         </div>
+      
+        
       </div>
       <div className="w-full absolute md:top-[420vh] flex md:justify-center">
         <Footer />

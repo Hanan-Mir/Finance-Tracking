@@ -1,7 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-function PricingCard({ plan }) {
+function PricingCard({ plan,selectedPlan }) {
   const planArray = Array.from(plan.features);
 
   return (
@@ -16,7 +16,7 @@ function PricingCard({ plan }) {
           {plan.heading}
         </h2>
         <p className="w-[75%] text-[#6C767F]">{plan.description}</p>
-        <p className="font-bold text-2xl text-[#344554]">{plan.price}</p>
+        <p className="font-bold text-2xl text-[#344554]">{selectedPlan==='monthly'?plan.monthlyPrice:plan.yearlyPrice}</p>
       </div>
       <div className="w-full flex md:flex-col md:items-center md:gap-5 mt-5">
         {planArray.map(([_, value]) =>
