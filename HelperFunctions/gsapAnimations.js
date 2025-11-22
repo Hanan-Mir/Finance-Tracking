@@ -4,6 +4,7 @@ function animationsOnArrowKeys(){
     const keys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
 
 window.addEventListener('keydown', (e) => {
+  e.preventDefault();
   if (keys.includes(e.key)) {
  
     setTimeout(() => {
@@ -12,29 +13,28 @@ window.addEventListener('keydown', (e) => {
   }
 });
 }
-
+// src/HelperFunctions/gsapAnimations.js (Your File)
 
 export function enableKeyboardScrollSupport() {
   const scrollKeys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
   
-  const updateTriggers = () => {
-    ScrollTrigger.refresh();
-    ScrollTrigger.update();
-  };
-
   const handleKeydown = (e) => {
     if (scrollKeys.includes(e.key)) {
-      requestAnimationFrame(updateTriggers);
-      setTimeout(updateTriggers, 50);
-      setTimeout(updateTriggers, 150);
+      // Allow native scroll to happen, then refresh ScrollTrigger shortly after.
+      // We only need one clear refresh call.
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100); 
     }
   };
 
   window.addEventListener('keydown', handleKeydown);
   
-  // Return cleanup function
   return () => {
     window.removeEventListener('keydown', handleKeydown);
   };
 }
+
+
+
 export {animationsOnArrowKeys}

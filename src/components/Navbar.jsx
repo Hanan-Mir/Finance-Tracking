@@ -13,7 +13,7 @@ function Navbar() {
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
-     const cleanup=enableKeyboardScrollSupport();
+     
    gsap.fromTo(
       navRef.current,
       {
@@ -31,14 +31,12 @@ function Navbar() {
           trigger: navRef.current,
           start: "top -2%",
           end: "+=100",
-          scrub: 1,
-          onUpdate: (self) => {
-            console.log("Scroll progress:", self.progress);
-          }
+          scrub:true
+         
         },
       }
     );
-   return cleanup;
+ 
   }, []);
 
   return (

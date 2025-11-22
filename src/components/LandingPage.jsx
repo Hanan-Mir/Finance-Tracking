@@ -32,8 +32,8 @@ function LandingPage() {
     const managmentSectionSplit = new SplitText(".managment h1", {
       type: "lines",
     });
-    // Lets the scroll event work as we move using arrow keys
-const cleanup=enableKeyboardScrollSupport();
+ 
+// const cleanup=enableKeyboardScrollSupport();
     gsap.from(paragraphSplit.lines, {
       opacity: 0,
       xPercent: -100,
@@ -215,7 +215,7 @@ const cleanup=enableKeyboardScrollSupport();
         start: "top 90%",
       },
     });
-    return cleanup;
+   
   }, []);
 
   return (

@@ -13,7 +13,7 @@ import SubmittingCard from "./Cards/SubmittingCard";
 function About() {
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
-    const cleanup = enableKeyboardScrollSupport();
+   
     const paragraphSplit = new SplitText(".sub-content > h1 span", {
       type: "lines",
     });
@@ -130,7 +130,7 @@ function About() {
         start: "top 73%",
       },
     });
-    return cleanup;
+ 
   }, []);
   //setting up emailjs for the form
   const [formData, setFormData] = useState({

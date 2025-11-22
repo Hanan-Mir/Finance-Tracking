@@ -11,8 +11,7 @@ function PricingPage() {
         gsap.registerPlugin(SplitText);
         const headingSplit=new SplitText('.heading-content > h1',{type:'words'});
 
-        const cleanup=enableKeyboardScrollSupport();
-        
+      
         const bgImgTimeline=gsap.timeline({
             scrollTrigger:{
                 trigger:'#pricing',
@@ -61,7 +60,7 @@ function PricingPage() {
         start:'top 90%'
         
       }})
-        return cleanup
+    
     },[])
     return (
        <section id="pricing">
