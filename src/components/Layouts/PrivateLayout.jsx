@@ -8,5 +8,4 @@ function PrivateLayout() {
     )
 }
 
-export default PrivateLaymain
-<Outlet />
+export default PrivateLayout

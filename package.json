@@ -13,6 +13,7 @@
     "@emailjs/browser": "^4.4.1",
     "@gsap/react": "^2.1.2",
     "@studio-freight/lenis": "^1.0.42",
+    "@supabase/supabase-js": "^2.84.0",
     "@tailwindcss/vite": "^4.1.17",
     "gsap": "^3.13.0",
     "react": "^19.1.1",

@@ -11,9 +11,11 @@ import ForgetPassword from "./components/ForgetPassword"
 import gsap from "gsap"
 import { ScrollTrigger, SplitText } from "gsap/all"
 import { handleEmailService } from "./services/emailJsService"
-
-
-
+import PrivateLayout from "./components/Layouts/PrivateLayout"
+import Dashboard from "./components/PrivateComponents/Dashboard"
+import { AuthContextProvider } from "./context/AuthContext"
+import ConfirmMail from "./components/ConfirmMail"
+import ProtectedRoute from "../ProtectedRoute"
 function App() {
     gsap.registerPlugin(ScrollTrigger,SplitText)
     const routes=createBrowserRouter([
@@ -42,15 +44,30 @@ function App() {
             },{
                 path:'forget-password',
                 element:<ForgetPassword />
+            },{
+                path:'/confirm-email',
+                element:<ConfirmMail />
             }
            ],
+         
            errorElement:<NotFound />
+        },{
+            path:'/dashboard',
+            element:<ProtectedRoute />,
+            children:[
+                {
+                    path:'',
+                    element:<Dashboard />
+                }
+            ]
         }
     ])
     
     return (
         <div className="w-full">
+         
        <RouterProvider router={routes} />
+  
         </div>
     )
 }
