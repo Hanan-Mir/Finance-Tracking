@@ -10,10 +10,11 @@ function Login() {
     const [password,setPassword]=useState();
   const {session,signIn,signInWithGoogle}=useAuth();
  
-  console.log(session);
+//function to sign in with google
   async function handleGoogleSignIn(){
     await signInWithGoogle();
   }
+//function to sign in with email and password
   async function handleSignIn(e){
     try{
       e.preventDefault();
@@ -109,11 +110,12 @@ theme: "dark",
               {" "}
               <button className="bg-[#E5EBEE] md:px-20 md:py-2 text-[#7BA2CA]">Login to FinTrack</button>
               </div>
-              <div className="flex md:justify-center md:mt-4">
-              {" "}
-              <button onClick={handleGoogleSignIn} className="bg-[#E5EBEE] md:px-20 md:py-2 text-[#7BA2CA]">Sign In Google</button>
-            </div>
+             
           </form>
+           <div className="flex md:justify-center md:mt-4">
+              {" "}
+              <button onClick={handleGoogleSignIn} className="bg-black font-bold transition-all duration-300 ease-in-out md:px-20 md:py-2 text-white hover:cursor-pointer hover:bg-white hover:border hover:shadow-box hover:text-black">Continue with Google</button>
+            </div>
         </div>
       </div>
     </section>

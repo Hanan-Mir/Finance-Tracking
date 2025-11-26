@@ -1,4 +1,10 @@
+import { Navigate, useLocation } from "react-router-dom"
+
 function ConfirmMail() {
+    const location=useLocation();
+     if(!location.state?.fromConfirmEmail){
+        return <Navigate to='/login' replace />
+    }
     return (
         <div className="w-full container mx-auto h-screen flex md:items-center md:justify-center text-[#545657]  ">
             <div className="flex w-[50vw] h-[34vh] bg-[#EEEDE8] md:flex-col md:justify-between items-center shadow-box py-4">

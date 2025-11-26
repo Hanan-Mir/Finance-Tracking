@@ -1,18 +1,30 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 function SignUp() {
   const [email,setEmail]=useState();
   const [password,setPassword]=useState();
   const [confirmPassword,setConfirmPassword]=useState()
-  const {session,signUpNewUser}=useAuth();
+  const {signUpNewUser}=useAuth();
   const navigate=useNavigate();
+
+  //This function is for handling the signup
  async function handleSignUp(e){
 e.preventDefault();
 try{
   if(password!==confirmPassword){
-    console.log('mismatch in password')
+  toast('Password mismatch', {
+position: "top-center",
+autoClose: 3000,
+hideProgressBar: false,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+});
     return
   }
   const result=await signUpNewUser({email,password});
@@ -27,6 +39,7 @@ try{
     return (
         <section id="signup">
             <div className="signupform text-[#324F65]">
+              <ToastContainer />
              <Link href="/">   <img src="/images/logo.png" alt="" className="w-40 ml-[25%]" /> </Link>
                 <h1 className="text-[2.5rem]"><span className="font-bold">Sign up</span>  to FinTrack</h1>
                 <p className="ml-10 text-xl">Have an account? <a href="/login" className="text-[#9AEEAF]">Login here!</a></p>

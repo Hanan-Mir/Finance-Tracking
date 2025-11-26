@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [session, setSession] = useState();
+  const [passwordResetSession,setPasswordResetSession]=useState(false);
 
   //function for SignUp
   const signUpNewUser = async ({ email, password }) => {
@@ -36,7 +37,7 @@ export const AuthContextProvider = ({ children }) => {
         error: { message: error.message, type: errorType },
       };
     }
-    return { success: true, data };
+    return { success: true, data,state:{fromConfirmEmail:true} };
   };
   //Login with google
   const signInWithGoogle=async()=>{
@@ -62,18 +63,46 @@ if(error){
       console.error("There was an error:", error);
     }
   };
-
+  //function for reset password
+  const resetPasswordForEmail=async (email)=>{
+    const {data,error}=await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`, // Where user goes after clicking email link
+    });
+    if(error){
+      return {success:false,error}
+    }
+      setPasswordResetSession(true)
+    return {success:true,data}
+  
+  }
+//function to update password
+const updatePassword=async (updatedPassword)=>{
+  const { data, error } = await supabase.auth.updateUser({
+      password: updatedPassword,
+    });
+     if(error){
+      return {success:false,error}
+    }
+    return {success:true,data}
+}
+//This useEffect is to sync app with the supabase
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
+  // Get initial session
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    setSession(session);
+  });
+
+  // Listen for auth changes (including OAuth redirects)
+  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    setSession(session);
+  });
+
+  // Cleanup function to unsubscribe when component unmounts
+  return () => subscription.unsubscribe();
+}, []);
 
   return (
-    <AuthContext.Provider value={{ session, signUpNewUser, signOut, signIn,signInWithGoogle }}>
+    <AuthContext.Provider value={{ session, signUpNewUser, signOut, signIn,signInWithGoogle,resetPasswordForEmail,updatePassword,passwordResetSession,setPasswordResetSession }}>
       {children}
     </AuthContext.Provider>
   );
