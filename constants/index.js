@@ -136,5 +136,39 @@ const pricingInfo=[
   }
 
 ]
+//user links when the user logs in sucessfully
+const sideBarLinks=[
+  {
+    linkTo:'/dashboard',
+    imgAddress:'/images/dashboard-interface.png',
+    linkLabel:'Dashboard'
+  },
+  {
+    linkTo:'/transactions',
+    imgAddress:'/images/transaction.png',
+    linkLabel:'Transactions'
+  },
+  
+  {
+    linkTo:'/inventory',
+    imgAddress:'/images/stock.png',
+    linkLabel:'Inventory'
+  },
+  {
+    linkTo:'/sales',
+    imgAddress:'/images/sales.png',
+    linkLabel:'Sales'
+  },
+  {
+    linkTo:'/managment',
+    imgAddress:'/images/account.png',
+    linkLabel:'Managment'
+  },
+  {
+    linkTo:'/settings',
+    imgAddress:'/images/settings.png',
+    linkLabel:'Settings'
+  },
+]
 
-export { navLinks,featureLists, firstStep,firstCard,secondCard,thirdCard,secondStep,thirdStep,highlightFeatures,pricingInfo };
+export { navLinks,featureLists, firstStep,firstCard,secondCard,thirdCard,secondStep,thirdStep,highlightFeatures,pricingInfo,sideBarLinks };

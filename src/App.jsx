@@ -11,7 +11,6 @@ import ForgetPassword from "./components/ForgetPassword";
 import gsap from "gsap";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import { handleEmailService } from "./services/emailJsService";
-import PrivateLayout from "./components/Layouts/PrivateLayout";
 import Dashboard from "./components/PrivateComponents/Dashboard";
 import { AuthContextProvider } from "./context/AuthContext";
 import ConfirmMail from "./components/ConfirmMail";
@@ -19,6 +18,14 @@ import ProtectedRoute from "../ProtectedRoute";
 import ResetPassword from "./components/Reset-Password";
 import PasswordResetMessage from "./components/PasswordResetMessage";
 import ProtectedResetRoute from "./components/ProtectedResetRoute";
+import Transactions from "./components/PrivateComponents/Transactions";
+import Sales from "./components/PrivateComponents/Sales";
+import Inventory from "./components/PrivateComponents/Inventory";
+import Settings from "./components/PrivateComponents/Settings";
+
+import Managment from "./components/PrivateComponents/Managment";
+import { addProductAction } from "./Business-Logic/Managment/addProductAction";
+import { loadProductsData } from "./Business-Logic/Managment/productLoder";
 //import ProtectedResetRoute from "./components/ProtectedResetRoute";
 
 function App() {
@@ -69,15 +76,28 @@ function App() {
       errorElement: <NotFound />,
     },
     {
-      path: "/dashboard",
-      element: <ProtectedRoute />,
-      children: [
-        {
-          path: "",
-          element: <Dashboard />,
-        },
-      ],
+      path:'/dashboard',
+      element:<ProtectedRoute><Dashboard /></ProtectedRoute>
     },
+    {
+      path:'/transactions',
+      element:<ProtectedRoute><Transactions /></ProtectedRoute>
+    },{
+      path:'/sales',
+      element:<ProtectedRoute><Sales/></ProtectedRoute>
+    },{
+      path:'/inventory',
+      element:<ProtectedRoute><Inventory /></ProtectedRoute>
+    },{
+      path:'/settings',
+      element:<ProtectedRoute><Settings /></ProtectedRoute>
+    },{
+      path:'/managment',
+      element:<ProtectedRoute><Managment /></ProtectedRoute>,
+      action:addProductAction,
+      loader:loadProductsData
+    },
+    
   ]);
 
   return (

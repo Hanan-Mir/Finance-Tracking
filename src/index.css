@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 :root {
   --navbar-h: 5rem;
 }
@@ -263,4 +264,12 @@ progress::-moz-progress-bar {
   .main-section {
     @apply flex md:flex-col md:items-center;
   }
+  .active-NavLink{
+    background-color: #E7E7E8;
+  }
+  .managment{
+    @apply w-full h-screen relative;
+    
+  }
+  
 }

@@ -4,7 +4,7 @@ function Dashboard() {
     const {session}=useAuth();
     console.log(session);
     return (
-        <div>
+        <div className="h-full dark:bg-slate-950">
             THis is Dashboard
         </div>
     )
