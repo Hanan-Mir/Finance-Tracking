@@ -7,7 +7,6 @@ export async function addProductAction({request}){
     const id=parseInt(idString,10)
     
     const kind=formrequest.get('_action');
-    console.log(kind)
     
 //get the authenticated user
 

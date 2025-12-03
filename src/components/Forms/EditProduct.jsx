@@ -3,8 +3,9 @@ import { Form, useActionData, useNavigation } from "react-router-dom";
 import { getRowData } from "../../Business-Logic/Managment/editProduct";
 import { useEffect, useState } from "react";
 import { supabase } from "../../../supabaseClient";
+import { useManagmentContext } from "../../context/ManagmentContext";
 
-function EditForm({ formStatus,id,formData }) {
+function EditForm({ formStatus,id }) {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
@@ -14,7 +15,7 @@ function EditForm({ formStatus,id,formData }) {
     transition:'all 0.3s ease-in-out',
     color:'white'
   }
-  
+  const {formData}=useManagmentContext();
 
  
  
