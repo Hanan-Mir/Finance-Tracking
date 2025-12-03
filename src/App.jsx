@@ -26,6 +26,7 @@ import Settings from "./components/PrivateComponents/Settings";
 import Managment from "./components/PrivateComponents/Managment";
 import { addProductAction } from "./Business-Logic/Managment/addProductAction";
 import { loadProductsData } from "./Business-Logic/Managment/productLoder";
+import EditForm from "./components/Forms/EditProduct";
 //import ProtectedResetRoute from "./components/ProtectedResetRoute";
 
 function App() {
@@ -97,6 +98,10 @@ function App() {
       action:addProductAction,
       loader:loadProductsData
     },
+    {
+      path:'/managment/:id/edit',
+      element:<ProtectedRoute><EditForm /></ProtectedRoute>
+    }
     
   ]);
 
