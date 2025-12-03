@@ -22,7 +22,9 @@ function ManagmentTable({productData,deleteAndRevalidate}) {
                   Contact Number
                 </TableCell>
                 <TableCell sx={{ fontWeight: "bold" }}>Email Address</TableCell>
-                <TableCell sx={{ fontWeight: "bold" }}>Manfacturing</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Cost Price</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Selling Price</TableCell>
+                 <TableCell sx={{ fontWeight: "bold" }}>Initial Quantity</TableCell>
                 <TableCell sx={{ fontWeight: "bold" }}>Unit</TableCell>
                 <TableCell sx={{ fontWeight: "bold" }}>Operation</TableCell>
               </TableRow>
@@ -34,12 +36,14 @@ function ManagmentTable({productData,deleteAndRevalidate}) {
                   <TableCell>{row.vendor_name}</TableCell>
                   <TableCell>{row.phone_number}</TableCell>
                   <TableCell>{row.email_address}</TableCell>
-                  <TableCell>{row.manfacturing_type}</TableCell>
+                  <TableCell>{row.cost_price}</TableCell>
+                  <TableCell>{row.selling_price}</TableCell>
+                  <TableCell>{row.initial_quantity}</TableCell>
                   <TableCell>{row.unit}</TableCell>
-                  <TableCell align='center' sx={{display:'flex',gap:2}}>
+                  <TableCell align='center' sx={{display:'flex',justifyContent:'justify-start'}}>
                   
-                    <img onClick={()=>{deleteAndRevalidate(row.id)}} src="/images/bin.png" alt="" className="w-5 hover:cursor-pointer" />
-            <img onClick={()=>handleEditForm(row.id)} src="/images/edit.png" alt="" className="w-5 hover:cursor-pointer" />      
+                    <img onClick={()=>{deleteAndRevalidate(row.id)}} src="/images/bin.png" alt="" className="w-10 px-2 py-2 hover:cursor-pointer hover:bg-gray-300" />
+            <img onClick={()=>handleEditForm(row.id)} src="/images/edit.png" alt="" className="w-10 px-2 py-2  hover:cursor-pointer hover:bg-gray-300 " />      
                   </TableCell>
                 </TableRow>
               ))}

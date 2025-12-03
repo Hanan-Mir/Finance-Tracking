@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import ManagmentForm from "../Forms/ManagmentForm";
 import { useEffect, useState } from "react";
+
 import {
   useActionData,
   useLoaderData,
@@ -75,17 +76,18 @@ function Managment() {
   return (
     <section className="managment">
       <ToastContainer />
-      {productData.length > 0 && (
+      {productData?.length > 0 && (
         <div className="w-full h-[95vh] flex md:flex-col gap-2">
           <ManagmentTable productData={productData} deleteAndRevalidate={deleteAndRevalidate} />
           <div className="flex justify-end">
             <button
               onClick={() => handleAddProduct(setIsFormVisible)}
-              className="mr-2 shadow-box hover:cursor-pointer rounded-xl md:py-2 md:px-10 text-[1.2rem] bg-[#6F4FED] text-white"
+              className="mr-2 shadow-box hover:cursor-pointer rounded-xl md:py-2 md:px-10 text-[1.2rem] bg-[#6F4FED] text-white hover:text-[#6F4FED] hover:bg-gray-100 transition-all ease-in duration-100"
             >
               Add Product
             </button>
           </div>
+          
         </div>
       )}
 
@@ -97,8 +99,8 @@ function Managment() {
           formData={formData}
         />
       )}
-      {productData.length == 0 && (
-        <div className="w-full h-full flex justify-center">
+      {productData?.length == 0 && (
+        <div className="w-full h-full flex justify-center" >
           <div className="w-[50%] h-full flex md:flex-col md:justify-center md:items-center gap-5">
             <h1 className="text-[2.5rem] font-bold text-[#565758] ">
               Manage your business here.

@@ -8,6 +8,9 @@
   font-family: "Montserrat", sans-serif;
   src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
 }
+.debug-grid-lines > * {
+  @apply border border-dashed border-red-500;
+}
 @theme {
   --font-montserrat: "Montserrat-Regular", sans-serif;
   --shadow-box: 0 10px 28px 0 hsla(210, 8%, 54%, 0.2);
@@ -270,6 +273,31 @@ progress::-moz-progress-bar {
   .managment{
     @apply w-full h-screen relative;
     
+  }
+  .inventory{
+    @apply max-w-screen ml-[1%] box-border h-[90vh] grid grid-cols-8 grid-rows-8 mt-7 container gap-5 overflow-y-hidden;
+
+    .card:nth-of-type(1){
+      @apply border-l-2 border-l-blue-600 shadow-box row-start-1 row-end-3 col-start-1 col-end-4  px-2 py-2 rounded-xl;
+      h1{
+        @apply font-bold text-2xl
+      }
+    }
+    .card:nth-of-type(2){
+      @apply shadow-box border-l-2 border-l-blue-600  row-start-1 row-end-3 col-start-4 col-end-6  px-2 py-2 rounded-xl;
+      h1{
+        @apply font-bold text-2xl
+      }
+    }
+    .card:nth-of-type(3){
+      @apply shadow-box border-l-2 border-l-blue-600 row-start-1 row-end-3 col-start-6 col-end-8  px-2 py-2 rounded-xl;
+      h1{
+        @apply font-bold text-2xl
+      }
+    }
+    .table{
+      @apply row-start-3 row-span-5 col-start-1 col-span-5
+    }
   }
   
 }

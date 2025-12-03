@@ -59,6 +59,33 @@ function ManagmentForm({ formStatus }) {
             className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
           />
         </div>
+         <div className="flex w-[90%] justify-between items-center">
+          <label htmlFor="costPrice">Cost Price:</label>
+          <input
+            type="text"
+            name="costPrice"
+            id="costPrice"
+            className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+          />
+        </div>
+        <div className="flex w-[90%] justify-between items-center">
+          <label htmlFor="sellingPrice">Selling Price:</label>
+          <input
+            type="text"
+            name="sellingPrice"
+            id="sellingPrice"
+            className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+          />
+        </div>
+        <div className="flex w-[90%] justify-between items-center">
+          <label htmlFor="initialQuantity"> Initial quantity:</label>
+          <input
+            type="text"
+            name="initialQuantity"
+            id="initialQuantity"
+            className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+          />
+        </div>
         <div className="flex w-[90%] justify-between items-center">
           <label htmlFor="unit">Measuring Unit:</label>
           <input
@@ -68,19 +95,7 @@ function ManagmentForm({ formStatus }) {
             className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
           />
         </div>
-        <div className="flex w-[90%] justify-between items-center">
-          <label htmlFor="type">Manfacturing :</label>
-          <div className="w-[50%] relative flex md:justify-center gap-4 ">
-            <div>
-              <input type="radio" name="type" id="raw" value="raw-material" />
-              <label className="ml-2" htmlFor="type">Raw-Material</label>
-            </div>
-            <div>
-              <input type="radio" name="type" id="raw" value="finished" />
-              <label className="ml-2"  htmlFor="type">Finished-Good</label>
-            </div>
-          </div>
-        </div>
+        
         <div className="w-full flex justify-center mt-5">
             <ButtonGroup>
                 <Button sx={{"&:hover":hoverStyles}}  type="submit" loading={isSubmitting} loadingPosition="start" name='_action' value='create' >Add Details</Button>
