@@ -89,6 +89,7 @@ function EditForm({ formStatus,id }) {
             type="text"
             name="costPrice"
             id="costPrice"
+            defaultValue={formData[0]?.cost_price}
             className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
           />
         </div>
@@ -98,6 +99,7 @@ function EditForm({ formStatus,id }) {
             type="text"
             name="sellingPrice"
             id="sellingPrice"
+            defaultValue={formData[0]?.selling_price}
             className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
           />
         </div>
@@ -108,6 +110,7 @@ function EditForm({ formStatus,id }) {
             name="currentQuantity"
             id="currentQuantity"
             className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+            defaultValue={formData[0]?.current_quantity}
           />
         </div>
         <div className="w-full flex justify-center mt-5">

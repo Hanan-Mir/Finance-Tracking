@@ -327,5 +327,26 @@ progress::-moz-progress-bar {
     
    
   }
+  #transaction{
+    @apply w-[100vw] h-screen mt-0 grid grid-cols-8 grid-rows-8 bg-[#FAFAFA];
+    .content{
+      @apply w-[100vw] h-screen mt-4 ml-4 grid grid-cols-8 grid-rows-8 gap-4
+    }
+  .card:first-of-type{
+    @apply shadow-box row-start-1 row-end-3 col-start-1 col-end-3 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+
+  }
+  .card:nth-of-type(2){
+    @apply shadow-box row-start-1 row-end-3 col-start-3 col-end-5 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+
+  }
+  .card:nth-of-type(3){
+    @apply shadow-box row-start-1 row-end-3 col-start-5 col-end-7 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+
+  }
+  .transaction-container{
+    @apply row-start-3 row-end-8 col-start-1 col-end-7
+  }      
+  }
   
 }

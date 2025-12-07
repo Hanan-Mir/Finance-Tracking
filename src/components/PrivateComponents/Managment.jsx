@@ -17,7 +17,7 @@ import {
   useRevalidator,
 } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import EditForm from "../Forms/EditProduct";
+import EditForm from "../Forms/Edit";
 import ManagmentTable from "../Tables/ManagmentTable";
 
 import { useManagmentContext } from "../../context/ManagmentContext";

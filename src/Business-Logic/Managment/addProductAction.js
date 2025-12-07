@@ -22,12 +22,14 @@ export async function addProductAction({ request }) {
       vendor_name: formData.vendorName,
       phone_number: formData.phoneNumber,
       current_quantity: formData.currentQuantity,
+      initial_quantity:formData.initialQuantity,
 
       unit: formData.unit,
       email_address: formData.emailAddress,
       cost_price: formData.costPrice,
       selling_price: formData.sellingPrice,
     };
+    
     const productToInsert = {
       ...productData,
       user_id: user.id,
@@ -38,7 +40,7 @@ export async function addProductAction({ request }) {
       .select();
 
     if (error) {
-      console.log(error);
+      
       return { success: false, error: "Data insertion failed!!" };
     }
     if (data) {
@@ -53,6 +55,7 @@ export async function addProductAction({ request }) {
       vendor_name: formData.vendorName,
       phone_number: formData.phoneNumber,
       current_quantity: formData.currentQuantity,
+      initial_quantity: formData.initialQuantity,
       unit: formData.unit,
       email_address: formData.emailAddress,
       cost_price: formData.costPrice,

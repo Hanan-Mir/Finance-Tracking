@@ -86,6 +86,15 @@ function ManagmentForm({ formStatus }) {
             className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
           />
         </div>
+         <div className="flex w-[90%] justify-between items-center">
+          <label htmlFor="initialQuantity"> Initial quantity:</label>
+          <input
+            type="text"
+            name="initialQuantity"
+            id="initialQuantity"
+            className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+          />
+        </div>
         <div className="flex w-[90%] justify-between items-center">
           <label htmlFor="unit">Measuring Unit:</label>
           <input
