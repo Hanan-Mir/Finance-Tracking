@@ -78,11 +78,11 @@ function ManagmentForm({ formStatus }) {
           />
         </div>
         <div className="flex w-[90%] justify-between items-center">
-          <label htmlFor="initialQuantity"> Initial quantity:</label>
+          <label htmlFor="currentQuantity"> Current quantity:</label>
           <input
             type="text"
-            name="initialQuantity"
-            id="initialQuantity"
+            name="currentQuantity"
+            id="currentQuantity"
             className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
           />
         </div>

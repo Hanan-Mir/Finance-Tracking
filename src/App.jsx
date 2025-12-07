@@ -27,6 +27,7 @@ import Managment from "./components/PrivateComponents/Managment";
 import { addProductAction } from "./Business-Logic/Managment/addProductAction";
 import { loadProductsData } from "./Business-Logic/Managment/productLoder";
 import EditForm from "./components/Forms/EditProduct";
+import { loadData } from "./Business-Logic/Inventory/supabaseFunctions";
 //import ProtectedResetRoute from "./components/ProtectedResetRoute";
 
 function App() {
@@ -88,7 +89,8 @@ function App() {
       element:<ProtectedRoute><Sales/></ProtectedRoute>
     },{
       path:'/inventory',
-      element:<ProtectedRoute><Inventory /></ProtectedRoute>
+      element:<ProtectedRoute><Inventory /></ProtectedRoute>,
+      loader:loadData
     },{
       path:'/settings',
       element:<ProtectedRoute><Settings /></ProtectedRoute>
@@ -100,7 +102,8 @@ function App() {
     },
     {
       path:'/managment/:id/edit',
-      element:<ProtectedRoute><EditForm /></ProtectedRoute>
+      element:<ProtectedRoute><EditForm /></ProtectedRoute>,
+      
     }
     
   ]);

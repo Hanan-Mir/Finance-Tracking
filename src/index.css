@@ -67,6 +67,17 @@ progress::-moz-progress-bar {
   background-color: var(--bar-fill-color, red);
   transition: none;
 }
+.kpi::-webkit-scrollbar{
+  width: 1px;
+
+}
+.kpi ul::-webkit-scrollbar-thumb {
+  background-color:blue; 
+  border-radius: 20px; /* Makes the thumb rounded */
+}
+.kpi ul::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
 
 @layer components {
   main {
@@ -275,7 +286,10 @@ progress::-moz-progress-bar {
     
   }
   .inventory{
-    @apply max-w-screen ml-[1%] box-border h-[90vh] grid grid-cols-8 grid-rows-8 mt-7 container gap-5 overflow-y-hidden;
+    @apply max-w-screen ml-[1%] box-border h-[92vh] grid grid-cols-8 grid-rows-8 mt-7 container gap-5 overflow-y-hidden;
+    .card{
+      @apply hover:scale-98 hover:cursor-pointer  w-full flex md:flex-col md:justify-between bg-[#7F52FA] hover:bg-[#1A8CD8]
+    }
 
     .card:nth-of-type(1){
       @apply border-l-2 border-l-blue-600 shadow-box row-start-1 row-end-3 col-start-1 col-end-4  px-2 py-2 rounded-xl;
@@ -296,8 +310,22 @@ progress::-moz-progress-bar {
       }
     }
     .table{
-      @apply row-start-3 row-span-5 col-start-1 col-span-5
+      @apply row-start-3 row-end-7 col-start-1 col-span-5
     }
+     .health{
+      @apply  row-start-6 row-end-8 col-start-6 col-end-8 px-2 py-2;
+      h1{
+        @apply font-bold text-2xl
+      }
+    }
+    .kpi{
+      @apply row-start-3 row-end-6 col-start-6 col-end-8 md:shadow-box overflow-hidden bg-[#7F52FA] rounded-2xl
+    }
+    .kpi ul{
+      @apply overflow-y-auto
+    }
+    
+   
   }
   
 }

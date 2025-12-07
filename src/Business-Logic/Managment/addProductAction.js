@@ -21,7 +21,7 @@ export async function addProductAction({ request }) {
       product_name: formData.productName,
       vendor_name: formData.vendorName,
       phone_number: formData.phoneNumber,
-      initial_quantity: formData.initialQuantity,
+      current_quantity: formData.currentQuantity,
 
       unit: formData.unit,
       email_address: formData.emailAddress,
@@ -52,7 +52,7 @@ export async function addProductAction({ request }) {
       product_name: formData.productName,
       vendor_name: formData.vendorName,
       phone_number: formData.phoneNumber,
-      initial_quantity: formData.initialQuantity,
+      current_quantity: formData.currentQuantity,
       unit: formData.unit,
       email_address: formData.emailAddress,
       cost_price: formData.costPrice,
