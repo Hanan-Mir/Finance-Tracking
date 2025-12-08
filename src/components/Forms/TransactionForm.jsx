@@ -9,7 +9,9 @@ function TransactionForm({formStatus}) {
     const [productName,setProductName]=useState()
     const [searchData,setSearchData]=useState();
     const [productsData,setProductsData]=useState();
-    const skipNextSearch=useRef(false)
+    const [totalPayment,setTotalPayment]=useState();
+    const skipNextSearch=useRef(false);
+    const [id,setId]=useState()
     
     useEffect(()=>{
         const timeOutId=setTimeout(async()=>{
@@ -45,6 +47,8 @@ function TransactionForm({formStatus}) {
     function handeSupabaseItemSearch(curEl){
          
         setProductName(curEl.product_name);
+        setTotalPayment(curEl.total_payment);
+        setId(curEl.id)
          setProductsData([])
          skipNextSearch.current=true;
       
@@ -132,16 +136,8 @@ function TransactionForm({formStatus}) {
                       }
                     </div>
                     </div>
-                    <div className="flex w-[90%] justify-between items-center">
-                      <label htmlFor="quantity">Quantity:</label>
-                      <input
-                        required
-                        type="text"
-                        name="quantity"
-                        id="quantity"
-                        className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
-                      />
-                    </div>
+                    <input type="text" name="id" id="id" hidden value={id} />
+                    
                      <div className="flex w-[90%] justify-between items-center">
                       <label htmlFor="payment">Payment:</label>
                       <input
@@ -149,7 +145,12 @@ function TransactionForm({formStatus}) {
                         name="payment"
                         id="payment"
                         className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+                        disabled={true}
+                        value={totalPayment}
+                        readOnly
                       />
+                      <input type="text" hidden value={totalPayment} name="payment" />
+                  
                     </div>
                     <div className="flex w-[90%] justify-between items-center">
                       <label htmlFor="paid">Amount Paid:</label>

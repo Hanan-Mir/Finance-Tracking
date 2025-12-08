@@ -27,7 +27,7 @@ import Managment from "./components/PrivateComponents/Managment";
 import { addProductAction } from "./Business-Logic/Managment/addProductAction";
 import { loadProductsData } from "./Business-Logic/Managment/productLoder";
 import { loadData } from "./Business-Logic/Inventory/supabaseFunctions";
-import { addTransaction } from "./Business-Logic/Transactions/supabaseActions";
+import { addTransactionAction, getTransactionDataLoader } from "./Business-Logic/Transactions/supabaseActions";
 //import ProtectedResetRoute from "./components/ProtectedResetRoute";
 
 function App() {
@@ -84,7 +84,8 @@ function App() {
     {
       path:'/transactions',
       element:<ProtectedRoute><Transactions /></ProtectedRoute>,
-      action:addTransaction
+      action:addTransactionAction,
+      loader:getTransactionDataLoader
       
     },{
       path:'/sales',

@@ -1,9 +1,16 @@
-import { Paper, Table, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material"
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material"
 import { useState } from "react"
 import TransactionForm from "../Forms/TransactionForm";
+import { useActionData, useLoaderData } from "react-router-dom";
 
 function Transactions() {
     const [formStatus,setFormStatus]=useState(false);
+    const formAction=useActionData();
+    const loaderData=useLoaderData();
+    const transactionData=loaderData?loaderData.transaction_data:[]
+    console.log(transactionData)
+    
+   
  
     //function to open transaction form
     function handleTransactionForm(){
@@ -90,6 +97,20 @@ function Transactions() {
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
+                                <TableBody>
+                                    {transactionData?.map((transactionData)=>(
+                                        <TableRow >
+                  <TableCell>{transactionData.name}</TableCell>
+                  <TableCell>{transactionData.item_name}</TableCell>
+                  <TableCell><span className={`${transactionData.payment}`}>{transactionData.payment_mode}</span></TableCell>
+                  <TableCell>{transactionData.payment}</TableCell>
+                  <TableCell>{transactionData.amount_paid}</TableCell>
+                  <TableCell > <span className="bg-yellow-300 px-2 py-2 rounded-2xl"> {transactionData.balance} </span></TableCell>
+                  <TableCell>{transactionData.created_at}</TableCell>
+                  
+                  </TableRow>
+                                    ))}
+                                </TableBody>
 
                             </Table>
                         </TableContainer>

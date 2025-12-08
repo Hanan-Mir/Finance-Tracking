@@ -23,11 +23,11 @@ export async function addProductAction({ request }) {
       phone_number: formData.phoneNumber,
       current_quantity: formData.currentQuantity,
       initial_quantity:formData.initialQuantity,
-
       unit: formData.unit,
       email_address: formData.emailAddress,
       cost_price: formData.costPrice,
       selling_price: formData.sellingPrice,
+      total_payment:formData.initialQuantity*formData.costPrice
     };
     
     const productToInsert = {
