@@ -1,5 +1,5 @@
 import { Button, ButtonGroup } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Form, useNavigation, useSubmit } from "react-router-dom";
 import { getProducts, searchVendors } from "../../Business-Logic/Transactions/supabaseActions";
 
@@ -9,9 +9,14 @@ function TransactionForm({formStatus}) {
     const [productName,setProductName]=useState()
     const [searchData,setSearchData]=useState();
     const [productsData,setProductsData]=useState();
+    const skipNextSearch=useRef(false)
     
     useEffect(()=>{
         const timeOutId=setTimeout(async()=>{
+          if(skipNextSearch.current){
+            skipNextSearch.current=false;
+            return
+          }
             if(vendorName && !productName){
                 const results=await searchVendors(vendorName);
                 console.log(results)
@@ -32,15 +37,16 @@ function TransactionForm({formStatus}) {
     }
     //function to set the vendor name from the data base
     function handeSupabaseSearch(curEl){
-        
         setVendorName(curEl.vendor_name);
-         setSearchData([])
+         setSearchData([]);
+          skipNextSearch.current=true;
        
     }
     function handeSupabaseItemSearch(curEl){
          
         setProductName(curEl.product_name);
          setProductsData([])
+         skipNextSearch.current=true;
       
     }
 
