@@ -117,10 +117,20 @@ export async function getProducts(productName, vendorName) {
   }
 }
 //loader for the transactions form
-export async function getTransactionDataLoader({request,params}){
-  let { data: transaction_data, error } = await supabase
+export async function getTransactionDataLoader({request}){
+ const url=new URL(request.url);
+ const typeFilter=url.searchParams.get('transaction_type')
+ const modeFilter=url.searchParams.get('payment_mode')
+ console.log(typeFilter)
+  let query = supabase
   .from('transactions_table')
   .select('*')
-
+  if(typeFilter){
+    query=query.eq('transaction_type',typeFilter)
+  }
+  if(modeFilter){
+    query=query.eq('payment_mode',modeFilter)
+  }
+const {data:transaction_data,error}=await query
   return {transaction_data}
 }
