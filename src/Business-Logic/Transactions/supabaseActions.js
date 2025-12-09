@@ -18,7 +18,8 @@ export async function addTransactionAction({ request }) {
     payment_mode: formData.paymentMethod,
     balance:formData.payment-formData.paid,
     item_name: formData.itemName,
-    quantity:null
+    quantity:null,
+    transaction_type:formData.transactionType
   };
   const transactionToInsert={
     ...productData,
@@ -51,6 +52,7 @@ export async function addTransactionAction({ request }) {
     payment_mode: formData.paymentMethod,
     payment:formData.payment,
     transaction_number:saleInfo[0].id,
+     transaction_type:formData.transactionType,
 
     balance:formData.payment-formData.paid,
     item_name: formData.itemPurchased,

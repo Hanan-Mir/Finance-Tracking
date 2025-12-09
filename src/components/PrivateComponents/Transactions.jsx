@@ -2,13 +2,15 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePag
 import { useState } from "react"
 import TransactionForm from "../Forms/TransactionForm";
 import { useActionData, useLoaderData } from "react-router-dom";
+import { formatDate, } from "../../Helper-Functions/helperFunctions";
+import { ToastContainer } from "react-toastify";
+import { handleGenerateCSV } from "../../Helper-Functions/utilityFunctions";
 
 function Transactions() {
     const [formStatus,setFormStatus]=useState(false);
     const formAction=useActionData();
     const loaderData=useLoaderData();
     const transactionData=loaderData?loaderData.transaction_data:[]
-    console.log(transactionData)
     
    
  
@@ -18,7 +20,9 @@ function Transactions() {
     }
     return (
         <section id="transaction">
+           
            <div className="content">
+             <ToastContainer />
             {formStatus && <TransactionForm formStatus={setFormStatus} />} 
             <div className="card">
 
@@ -65,8 +69,33 @@ function Transactions() {
             <div className="transaction-container">
                 
                 <h1 className="text-[1.8rem] text-[#969696] font-bold">Transactions</h1>
-                <div className="flex md:justify-end">
+                <div className="flex md:justify-between md:items-center">
+                    <input type="text" name="" id="" className="border rounded-md py-2 px-3" placeholder="Search by name" />
+                    <div className="flex md:items-center">
+                        <div className="mt-0 bg-[#0252CF] relative">
+                            <div className="px-4 py-2 flex gap-2 text-white rounded-2xl hover:cursor-pointer">
+                                <span className="font-medium">Filter</span>
+                                <span className="ml-2">&#9660;</span>
+                            </div>
+                            <ul className="text-white hidden w-full border px-2 py-4 absolute z-20 top-11 bg-[#0252CF] ">
+                                <li className="mb-2 px-2 py-1 rounded-lg font-bold hover:bg-gray-300">Sale</li>
+                                <li className="mb-2 px-2 py-1 rounded-lg font-bold hover:bg-gray-300">Expense</li>
+                                <li className="mb-2 px-2 py-1 rounded-lg font-bold hover:bg-gray-300">cash</li>
+                                <li className="mb-2 px-2 py-1 rounded-lg font-bold hover:bg-gray-300">online</li>
+                            </ul>
+
+                        </div>
+
+
+
+<div className="flex md:items-center">
+                    <button onClick={()=>handleGenerateCSV('transactions_table','report',transactionData)}  className="border px-2 py-2 bg-[#1A87D0] text-white font-bold hover:cursor-pointer flex md:items-center gap-2">
+                        <img src="/images/csv.png" alt="" className="w-5 h-5" />
+                        <span>Export CSV</span>
+                    </button>
                     <button onClick={()=>handleTransactionForm()} className="border px-2 py-2 bg-[#0252CF] text-white font-bold hover:cursor-pointer">Add Transaction</button>
+                </div>
+                </div>
                 </div>
                 <div className="mt-3">
                     <Paper sx={{width:'100%',overflow:'hidden'}} >
@@ -74,17 +103,20 @@ function Transactions() {
                             <Table stickyHeader>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell sx={{fontWeight:'bold',fontSize:'1.2rem'}}>
+                                        <TableCell sx={{fontWeight:'bold',fontSize:'1rem'}}>
                                             Name
                                         </TableCell>
-                                        <TableCell sx={{fontWeight:'bold',fontSize:'1.2rem'}}>
+                                        <TableCell sx={{fontWeight:'bold',fontSize:'1rem'}}>
                                           Item
                                         </TableCell>
-                                        <TableCell sx={{fontWeight:'bold',fontSize:'1.2rem'}}>
-                                          Transaction  Type
+                                        <TableCell sx={{fontWeight:'bold',fontSize:'1rem'}}>
+                                          Mode
                                         </TableCell>
                                         <TableCell sx={{fontWeight:'bold',fontSize:'1.2rem'}}>
-                                            Total Payment
+                                          Type
+                                        </TableCell>
+                                        <TableCell sx={{fontWeight:'bold',fontSize:'1.2rem'}}>
+                                            Payment
                                         </TableCell>
                                         <TableCell sx={{fontWeight:'bold',fontSize:'1.2rem'}}>
                                             Paid
@@ -102,11 +134,12 @@ function Transactions() {
                                         <TableRow >
                   <TableCell>{transactionData.name}</TableCell>
                   <TableCell>{transactionData.item_name}</TableCell>
-                  <TableCell><span className={`${transactionData.payment}`}>{transactionData.payment_mode}</span></TableCell>
+                  <TableCell>{transactionData.payment_mode}</TableCell>
+                  <TableCell><span className={`${transactionData.transaction_type==='sale'?'bg-green-700':'bg-blue-600'} px-2 py-2 rounded-2xl`}>{transactionData.transaction_type}</span></TableCell>
                   <TableCell>{transactionData.payment}</TableCell>
                   <TableCell>{transactionData.amount_paid}</TableCell>
                   <TableCell > <span className="bg-yellow-300 px-2 py-2 rounded-2xl"> {transactionData.balance} </span></TableCell>
-                  <TableCell>{transactionData.created_at}</TableCell>
+                  <TableCell>{formatDate(transactionData.created_at)}</TableCell>
                   
                   </TableRow>
                                     ))}
