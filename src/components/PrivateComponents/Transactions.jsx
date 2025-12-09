@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import TransactionForm from "../Forms/TransactionForm";
 import {
+    Form,
   useActionData,
   useLoaderData,
   useSearchParams,
@@ -18,10 +19,13 @@ import {
 import { formatDate } from "../../Helper-Functions/helperFunctions";
 import { ToastContainer } from "react-toastify";
 import { handleGenerateCSV } from "../../Helper-Functions/utilityFunctions";
+import { useManagmentContext } from "../../context/ManagmentContext";
+import { getProducts, getTransactionDataLoader } from "../../Business-Logic/Transactions/supabaseActions";
 
 function Transactions() {
   const [formStatus, setFormStatus] = useState(false);
   const [dropDownView, setDropDownView] = useState(false);
+  const {getManagmentData}=useManagmentContext();
   const formAction = useActionData();
   const loaderData = useLoaderData();
   const [searchparams, setSearchparams] = useSearchParams();
@@ -33,22 +37,35 @@ function Transactions() {
   ];
   const transactionData = loaderData ? loaderData.transaction_data : [];
   //function to handle the filter
-  function handleFilter(filterType,filterValue){
-    const newSearchParams=new URLSearchParams(searchparams)
-    if(filterValue){
-        newSearchParams.set(filterType,filterValue)
-        setSearchparams(newSearchParams)
-    }else{
-        console.log('else part')
-        setSearchparams(new URLSearchParams())
+  function handleFilter(filterType, filterValue) {
+    if(getManagmentData.length===0){
+      return
     }
-    
+    const newSearchParams = new URLSearchParams(searchparams);
+    if (filterValue) {
+      newSearchParams.set(filterType, filterValue);
+      setSearchparams(newSearchParams);
+    } else {
+      console.log("else part");
+      setSearchparams(new URLSearchParams());
+    }
+    handleDropDownView();
+  }
+
+  //function to handle the search results
+  function handleSearchTransaction(event){
+    const query=event.target.value;
+    const newSearchParams=new URLSearchParams(searchparams);
+    if(query){
+      newSearchParams.set('q',query)
+      setSearchparams(newSearchParams)
+    }else{
+      setSearchparams(new URLSearchParams())
+    }
   }
 
   //function to change the dropDown veiw
   function handleDropDownView() {
-    console.log("helo");
-    console.log(dropDownView);
     setDropDownView((curStatus) => !curStatus);
   }
 
@@ -105,13 +122,17 @@ function Transactions() {
             Transactions
           </h1>
           <div className="flex md:justify-between md:items-center">
+            <Form id="search-form" role="search">
             <input
-              type="text"
-              name=""
-              id=""
+            disabled={transactionData.length===0}
+              type="search"
+              name="q"
+              id="q"
               className="border rounded-md py-2 px-3"
               placeholder="Search by name"
+              onChange={handleSearchTransaction}
             />
+            </Form>
             <div className="flex md:items-center">
               <div className="mt-0 bg-[#0252CF] relative">
                 <div
@@ -119,32 +140,37 @@ function Transactions() {
                   className="px-4 py-2 flex gap-2 text-white rounded-2xl hover:cursor-pointer"
                 >
                   <span className="font-medium">Filter</span>
-                  {dropDownView ? (
+                  {!dropDownView ? (
                     <span className="ml-2">&#9660;</span>
                   ) : (
                     <span className="ml-2">&#9650;</span>
                   )}
                 </div>
-                {!dropDownView && (
-                  <ul className="text-white w-full border px-2 py-4 absolute z-20 top-11 bg-[#0252CF] ">
-                   {
-                    filterOptions.map((filterEl)=>(
-                         <li onClick={()=>handleFilter(filterEl.type,filterEl.value)} className="mb-2 px-2 py-1 rounded-lg font-bold hover:bg-gray-300">
-                      {filterEl.label}
+                {dropDownView && (
+                  <ul className="text-white w-[150%] border px-2 py-4 absolute z-20 top-11 bg-[#0252CF] ">
+                    {filterOptions.map((filterEl) => (
+                      <li
+                        onClick={() =>
+                          handleFilter(filterEl.type, filterEl.value)
+                        }
+                        className="mb-2 px-2 py-1 rounded-lg font-bold hover:bg-gray-300"
+                      >
+                        {filterEl.label}
+                      </li>
+                    ))}
+                    <li
+                      onClick={() => handleFilter()}
+                      className="mb-2 text-red-800 px-2 py-1 rounded-lg font-bold hover:bg-gray-300"
+                    >
+                      Clear Filter
                     </li>
-
-                    ))
-                   }
-                   <li onClick={()=>handleFilter()} className="mb-2 px-2 py-1 rounded-lg font-bold hover:bg-gray-300">
-                     clear Filter
-                    </li>
-                   
                   </ul>
                 )}
               </div>
 
               <div className="flex md:items-center">
                 <button
+                disabled={transactionData.length===0}
                   onClick={() =>
                     handleGenerateCSV(
                       "transactions_table",
@@ -159,6 +185,7 @@ function Transactions() {
                 </button>
                 <button
                   onClick={() => handleTransactionForm()}
+                  disabled={getManagmentData.length===0}
                   className="border px-2 py-2 bg-[#0252CF] text-white font-bold hover:cursor-pointer"
                 >
                   Add Transaction
@@ -220,7 +247,7 @@ function Transactions() {
                               transactionData.transaction_type === "sale"
                                 ? "bg-green-700"
                                 : "bg-blue-600"
-                            } px-2 py-2 rounded-2xl`}
+                            } px-2 py-2 rounded-2xl text-white font-bold`}
                           >
                             {transactionData.transaction_type}
                           </span>

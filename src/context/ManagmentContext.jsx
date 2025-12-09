@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { getRowData } from "../Business-Logic/Managment/editProduct";
 import { deleteRecord } from "../Business-Logic/Managment/deleteEntry";
+import { supabase } from "../../supabaseClient";
 
 const ManagmentContext = createContext();
 export function ManagmentContextProvider({ children }) {
@@ -30,6 +31,14 @@ export function ManagmentContextProvider({ children }) {
       console.log(error);
     }
   };
+  //function to check weather we are having data added to the supabase
+async function getManagmentData(){
+
+let { data: user_products, error } = await supabase
+  .from('user_products')
+  .select('*')
+  return user_products;
+}
 
   return (
     <ManagmentContext.Provider
@@ -41,6 +50,7 @@ export function ManagmentContextProvider({ children }) {
         curRowId,
         enableEditForm,
         setEnableEditForm,
+        getManagmentData
       }}
     >
       {children}

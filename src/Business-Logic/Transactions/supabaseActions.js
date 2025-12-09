@@ -121,7 +121,7 @@ export async function getTransactionDataLoader({request}){
  const url=new URL(request.url);
  const typeFilter=url.searchParams.get('transaction_type')
  const modeFilter=url.searchParams.get('payment_mode')
- console.log(typeFilter)
+ const searchFilter=url.searchParams.get('q')
   let query = supabase
   .from('transactions_table')
   .select('*')
@@ -130,6 +130,9 @@ export async function getTransactionDataLoader({request}){
   }
   if(modeFilter){
     query=query.eq('payment_mode',modeFilter)
+  }
+  if(searchFilter){
+    query=query.ilike('name',`%${searchFilter}%`).limit('10')
   }
 const {data:transaction_data,error}=await query
   return {transaction_data}
