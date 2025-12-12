@@ -20,7 +20,8 @@ import { formatDate } from "../../Helper-Functions/helperFunctions";
 import { ToastContainer } from "react-toastify";
 import { handleGenerateCSV } from "../../Helper-Functions/utilityFunctions";
 import { useManagmentContext } from "../../context/ManagmentContext";
-import { getProducts, getTransactionDataLoader } from "../../Business-Logic/Transactions/supabaseActions";
+import { useTransactionContext } from "../../context/TransactionContext";
+import SummaryPieChart from "../Graphs/SummaryPieChart";
 
 function Transactions() {
   const [formStatus, setFormStatus] = useState(false);
@@ -29,6 +30,7 @@ function Transactions() {
   const formAction = useActionData();
   const loaderData = useLoaderData();
   const [searchparams, setSearchparams] = useSearchParams();
+  const {salesValue,expensesValue}=useTransactionContext();
   const filterOptions = [
     { label: "Sale", type: "transaction_type", value: "sale" },
     { label: "Expense", type: "transaction_type", value: "expense" },
@@ -36,6 +38,7 @@ function Transactions() {
     { label: "Online", type: "payment_mode", value: "online" },
   ];
   const transactionData = loaderData ? loaderData.transaction_data : [];
+  
   //function to handle the filter
   function handleFilter(filterType, filterValue) {
     if(getManagmentData.length===0){
@@ -51,7 +54,6 @@ function Transactions() {
     }
     handleDropDownView();
   }
-
   //function to handle the search results
   function handleSearchTransaction(event){
     const query=event.target.value;
@@ -82,7 +84,7 @@ function Transactions() {
           <h1 className="font-bold text-[2rem]">Sales</h1>
           <div className="flex md:justify-between md:items-center">
             <div className="py-2">
-              <p className="text-[1.5rem] font-bold">12000 ₹</p>
+              <p className="text-[1.5rem] font-bold">{salesValue} ₹</p>
               <p className="text-[#969696]">vs last month</p>
             </div>
             <div className="h-[50%] flex gap-1 items-center justify-center border border-red-600  rounded-[10px] px-2">
@@ -95,7 +97,7 @@ function Transactions() {
           <h1 className="font-bold text-[2rem]">Expenses</h1>
           <div className="flex md:justify-between md:items-center">
             <div className="py-2">
-              <p className="text-[1.5rem] font-bold">12000 ₹</p>
+              <p className="text-[1.5rem] font-bold">{expensesValue} ₹</p>
               <p className="text-[#969696]">vs last month</p>
             </div>
             <div className="h-[50%] flex gap-1 items-center justify-center border border-red-600  rounded-[10px] px-2">
@@ -104,18 +106,10 @@ function Transactions() {
             </div>
           </div>
         </div>
-        <div className="card">
-          <h1 className="font-bold text-[2rem]">Profit</h1>
-          <div className="flex md:justify-between md:items-center">
-            <div className="py-2">
-              <p className="text-[1.5rem] font-bold">12000 ₹</p>
-              <p className="text-[#969696]">vs last month</p>
-            </div>
-            <div className="h-[50%] flex gap-1 items-center justify-center border border-red-600  rounded-[10px] px-2">
-              <img src="/images/up.png" alt="" className="w-4 h-4 p-0" />
-              <p className="p-0 text-[15px] text-red-600">15%</p>
-            </div>
-          </div>
+        <div className="summary">
+          <div className="summary-wrapper">
+          <SummaryPieChart isAnimationActive={true} />
+        </div>
         </div>
         <div className="transaction-container">
           <h1 className="text-[1.8rem] text-[#969696] font-bold">
@@ -185,7 +179,7 @@ function Transactions() {
                 </button>
                 <button
                   onClick={() => handleTransactionForm()}
-                  disabled={getManagmentData.length===0}
+                  disabled={getManagmentData().length===0}
                   className="border px-2 py-2 bg-[#0252CF] text-white font-bold hover:cursor-pointer"
                 >
                   Add Transaction

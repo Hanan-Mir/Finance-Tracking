@@ -340,12 +340,15 @@ progress::-moz-progress-bar {
     @apply shadow-box row-start-1 row-end-3 col-start-3 col-end-5 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
 
   }
-  .card:nth-of-type(3){
-    @apply shadow-box row-start-1 row-end-3 col-start-5 col-end-7 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+  .summary{
+    @apply relative shadow-box w-full h-full row-start-1 row-end-3 col-start-5 col-end-7 rounded-2xl bg-white  
 
   }
   .transaction-container{
     @apply row-start-3 row-end-8 col-start-1 col-end-7
+  }
+  .summary-wrapper{
+    @apply w-[100%] h-[100%] absolute -top-2 left-0 z-25
   }      
   }
   

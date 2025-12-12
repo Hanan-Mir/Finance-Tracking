@@ -1,7 +1,8 @@
 import { Button, ButtonGroup } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { Form, useNavigation, useSubmit } from "react-router-dom";
+import { Form, useActionData, useNavigation, useSubmit } from "react-router-dom";
 import { getProducts, searchVendors } from "../../Business-Logic/Transactions/supabaseActions";
+import { useTransactionContext } from "../../context/TransactionContext";
 
 function TransactionForm({formStatus}) {
     const [transactionType,setTransactionType]=useState('sale');
@@ -12,8 +13,16 @@ function TransactionForm({formStatus}) {
     const [totalPayment,setTotalPayment]=useState();
     const skipNextSearch=useRef(false);
     const [id,setId]=useState()
+    const actionData=useActionData();
+    const {refetchSales,refetchExpenses}=useTransactionContext()
+
     
     useEffect(()=>{
+      if(actionData?.success===true){
+        refetchSales()
+        refetchExpenses()
+
+      }
         const timeOutId=setTimeout(async()=>{
           if(skipNextSearch.current){
             skipNextSearch.current=false;
@@ -32,7 +41,7 @@ function TransactionForm({formStatus}) {
             }
         },500)
         return ()=>clearTimeout(timeOutId)
-    },[vendorName,productName])
+    },[vendorName,productName,refetchSales,actionData,refetchExpenses])
     //get the transaction type form the radio buttons
     function getTransactionType(event){
         setTransactionType(event.target.value)

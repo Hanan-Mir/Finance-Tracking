@@ -62,3 +62,17 @@ theme: "dark",
     console.log('csv report generated');
 
 }
+//function to add payments elements
+export function addArray(arr){
+    let sum=arr.reduce((acc,el)=>{
+return acc+el.payment
+  } ,0);
+  return sum
+}
+//function to add Balances elements
+export function addBalance(arr){
+    let sum=arr.reduce((acc,el)=>{
+return acc+el.balance
+  } ,0);
+  return sum
+}
