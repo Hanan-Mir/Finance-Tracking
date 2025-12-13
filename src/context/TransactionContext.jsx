@@ -100,6 +100,9 @@ export default function TransactionContextProvider({ children }) {
         onlineTransactions,
         cashSales,
         expenseBalance,
+        refetchTotalOnlineTransactions:getTotalOnlineTransaction,
+        refetchSalesBalance:getSalesBalance,
+        refetchExpensesBalance:getExpensesBalance
       }}
     >
       {children}

@@ -1,8 +1,8 @@
+import { toast } from "react-toastify";
 import { supabase } from "../../../supabaseClient";
 
 //This is the action for the transaction page
 export async function addTransactionAction({ request }) {
-  console.log("hello");
   const formrequest = await request.formData();
   const formData = Object.fromEntries(formrequest);
   
@@ -21,6 +21,48 @@ export async function addTransactionAction({ request }) {
     quantity:null,
     transaction_type:formData.transactionType
   };
+  //get the totalAmount that is payable to the merchant and subtract the payment done 
+let { data: paymentData, error:paymentError } = await supabase
+  .from('user_products')
+  .select('total_payment').eq('id',formData.id)
+
+//condition for if user made the whole payment and now stoping the payment from the user
+if(paymentData[0].total_payment===0){
+  return toast.warn('Payments cannot be done', {
+position: "top-center",
+autoClose: 3000,
+hideProgressBar: true,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+});
+}
+
+if(formData.paid<=paymentData[0].total_payment){
+//calculate the updated payments
+const updatedPayment=paymentData[0].total_payment-formData.paid
+//Get the row were the updated payment has to be inserted
+const { data:updatedRow, error:updateError } = await supabase
+  .from('user_products')
+  .update({total_payment :updatedPayment})
+  .eq('id', formData.id)
+  .select()
+}else{
+    return toast.warn('Payments should be less than the balance', {
+position: "top-center",
+autoClose: 3000,
+hideProgressBar: true,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+});
+
+} 
+ 
   const transactionToInsert={
     ...productData,
     user_id:user.id
@@ -114,6 +156,35 @@ export async function getProducts(productName, vendorName) {
     return data;
   } catch (error) {
     console.log(error);
+  }
+}
+//get the current available stock of the vendor
+export async function getCurrentStock(itemName){
+  if(!itemName) return;
+  try{
+     const { data, error } = await supabase
+      .from("transactions_talbe")
+      .select("current_quantity")
+      .ilike("vendor_name", `%${itemName}`)
+      .limit(10);
+     
+      if(error){
+        return []
+      }
+       return data;
+
+  }catch(error){
+    return toast.warn(`${error}`, {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+});
+
   }
 }
 //loader for the transactions form

@@ -1,7 +1,7 @@
 import { Button, ButtonGroup } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Form, useActionData, useNavigation, useSubmit } from "react-router-dom";
-import { getProducts, searchVendors } from "../../Business-Logic/Transactions/supabaseActions";
+import { getCurrentStock, getProducts, searchVendors } from "../../Business-Logic/Transactions/supabaseActions";
 import { useTransactionContext } from "../../context/TransactionContext";
 
 function TransactionForm({formStatus}) {
@@ -11,16 +11,23 @@ function TransactionForm({formStatus}) {
     const [searchData,setSearchData]=useState();
     const [productsData,setProductsData]=useState();
     const [totalPayment,setTotalPayment]=useState();
+    const [salesItem,setSalesItem]=useState();
+    const [customerName,setCustomerName]=useState()
+    const [totalStock,setTotalStock]=useState();
     const skipNextSearch=useRef(false);
     const [id,setId]=useState()
     const actionData=useActionData();
-    const {refetchSales,refetchExpenses}=useTransactionContext()
+    const {refetchSales,refetchExpenses,refetchCashTransactions,refetchTotalOnlineTransactions,refetchSalesBalance,refetchExpensesBalance}=useTransactionContext()
 
-    
+    //This useeffect will run whenever any new entry is made to the transactions table through cash or sales
     useEffect(()=>{
       if(actionData?.success===true){
         refetchSales()
         refetchExpenses()
+        refetchCashTransactions()
+        refetchTotalOnlineTransactions()
+        refetchSalesBalance()
+        refetchExpensesBalance()
 
       }
         const timeOutId=setTimeout(async()=>{
@@ -39,9 +46,19 @@ function TransactionForm({formStatus}) {
                 console.log(results)
                 setProductsData(results)
             }
+            if(salesItem && customerName){
+              const results=await getCurrentStock(salesItem);
+              setTotalStock(results)
+
+            }
         },500)
         return ()=>clearTimeout(timeOutId)
     },[vendorName,productName,refetchSales,actionData,refetchExpenses])
+    
+    //function to set the total stock
+    function getTotalAvailableStock(){
+      
+    }
     //get the transaction type form the radio buttons
     function getTransactionType(event){
         setTransactionType(event.target.value)
@@ -54,7 +71,7 @@ function TransactionForm({formStatus}) {
        
     }
     function handeSupabaseItemSearch(curEl){
-         
+         console.log(curEl)
         setProductName(curEl.product_name);
         setTotalPayment(curEl.total_payment);
         setId(curEl.id)
@@ -189,6 +206,7 @@ function TransactionForm({formStatus}) {
                         name="name"
                         id="name"
                         className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+                        onChange={(e)=>setCustomerName(e.target.value)}
                       />
                     </div>
                     <div className="flex w-[90%] justify-between items-center">
@@ -199,8 +217,40 @@ function TransactionForm({formStatus}) {
                         name="itemPurchased"
                         id="itemPurchased"
                         className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+                        onChange={(e)=>setSalesItem(e.target.value)}
                       />
                     </div>
+                    <input
+                    hidden
+                        required
+                        type="text"
+                        name="id"
+                        id="id"
+                        className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+                      />
+                    <div className="flex w-[90%] justify-between items-center">
+                      <label htmlFor="quantity">Available Stock:</label>
+                      <input
+                        required
+                        type="text"
+                        name="stock"
+                        id="stock"
+                        value={totalStock}
+                        readOnly
+
+                        className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+                      />
+                    </div>
+                    <input
+                        required
+                        type="text"
+                        name="stock"
+                        id="stock"
+                        value={totalStock}
+                        hidden
+
+                        className="shadow-box px-4 py-2 ml-2 rounded-[10px]"
+                      />
                     <div className="flex w-[90%] justify-between items-center">
                       <label htmlFor="quantity">Quantity:</label>
                       <input

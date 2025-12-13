@@ -348,7 +348,7 @@ progress::-moz-progress-bar {
     @apply row-start-3 row-end-8 col-start-1 col-end-7
   }
   .summary-wrapper{
-    @apply w-[100%] h-[100%] absolute -top-2 left-0 z-25
+    @apply w-full h-full absolute -top-2 left-0
   }      
   }
   
