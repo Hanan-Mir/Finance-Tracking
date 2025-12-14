@@ -244,6 +244,11 @@ function Transactions() {
                       >
                         Date
                       </TableCell>
+                       <TableCell
+                        sx={{ fontWeight: "bold", fontSize: "1.2rem" }}
+                      >
+                        Actions
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -274,6 +279,12 @@ function Transactions() {
                         </TableCell>
                         <TableCell>
                           {formatDate(transactionData.created_at)}
+                        </TableCell>
+                        <TableCell sx={{display:'flex',justifyContent:'center'}} >
+                          
+                        <img src="images/reciept.png" alt="" className="w-5 hover:cursor-pointer mr-2"  />
+                        <img src="images/edit.png" alt="" className="w-5 hover:cursor-pointer" />
+                       
                         </TableCell>
                       </TableRow>
                     ))}

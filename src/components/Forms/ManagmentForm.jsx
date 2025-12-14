@@ -114,7 +114,7 @@ function ManagmentForm({ formStatus }) {
       </Form>
        <div
         onClick={() => formStatus((cur) => !cur)}
-        className="absolute inset-0 bg-black/30 backdrop-blur-[6px] z-20 h-[120vh] w-full"
+        className="absolute -left-70 inset-0 bg-black/30 backdrop-blur-[6px] z-20 h-[100vh] w-[150%]"
       ></div>
     </div>
   );
