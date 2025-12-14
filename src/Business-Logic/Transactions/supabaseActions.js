@@ -9,7 +9,7 @@ export async function addTransactionAction({ request }) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if(formData.transactionType==='expense'){
+  if(formData?.transactionType==='expense'){
       const productData = {
     name: formData.name,
     transaction_number: formData.id,
@@ -27,7 +27,7 @@ let { data: paymentData, error:paymentError } = await supabase
   .select('total_payment').eq('id',formData.id)
 
 //condition for if user made the whole payment and now stoping the payment from the user
-if(paymentData[0].total_payment===0){
+if(paymentData[0]?.total_payment===0){
   return toast.warn('Payments cannot be done', {
 position: "top-center",
 autoClose: 3000,
@@ -40,9 +40,9 @@ theme: "dark",
 });
 }
 
-if(formData.paid<=paymentData[0].total_payment){
+if(formData.paid<=paymentData[0]?.total_payment){
 //calculate the updated payments
-const updatedPayment=paymentData[0].total_payment-formData.paid
+const updatedPayment=paymentData[0]?.total_payment-formData.paid
 //Get the row were the updated payment has to be inserted
 const { data:updatedRow, error:updateError } = await supabase
   .from('user_products')
@@ -83,7 +83,7 @@ theme: "dark",
   if(formData.transactionType==='sale'){
     const { data:saleInfo, error:saleInfoError } = await supabase
       .from("user_products")
-      .select("product_name,selling_price,id")
+      .select("product_name,selling_price,id,current_quantity")
       .ilike("product_name", `%${formData.itemPurchased}%`)
       .limit(10);
     console.log(saleInfo)
@@ -100,10 +100,20 @@ theme: "dark",
     item_name: formData.itemPurchased,
     quantity:formData.quantity
   }
+  console.log(formData.paid,formData.payment)
     const transactionToInsert={
     ...saleData,
     user_id:user.id
   }
+  if(formData.payment>=formData.paid && saleInfo[0].current_quantity>0){
+    const updatedQuantity=saleInfo[0].current_quantity-formData.quantity
+    console.log(updatedQuantity)
+    const { data:updatedRow, error:updateError } = await supabase
+  .from('user_products')
+  .update({current_quantity :updatedQuantity})
+  .ilike('product_name', `%${formData.itemPurchased}%`)
+  .select();
+  console.log(updatedRow)
    const { data, error } = await supabase
       .from("transactions_table")
       .insert([transactionToInsert])
@@ -116,7 +126,20 @@ theme: "dark",
       return { success: true, message: "Transaction added sucessfully!!" };
     }
 
-  }
+  }else{
+  console.log('Insie2')
+  toast.warn('Amount paid should be less than the total payable amount', {
+position: "top-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+});
+}
+}
 
   
  
@@ -163,12 +186,13 @@ export async function getCurrentStock(itemName){
   if(!itemName) return;
   try{
      const { data, error } = await supabase
-      .from("transactions_talbe")
-      .select("current_quantity")
-      .ilike("vendor_name", `%${itemName}`)
+      .from("user_products")
+      .select("current_quantity,product_name,selling_price")
+      .ilike("product_name", `%${itemName}`)
       .limit(10);
      
       if(error){
+        console.log(error)
         return []
       }
        return data;

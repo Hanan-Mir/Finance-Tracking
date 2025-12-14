@@ -8,7 +8,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import TransactionForm from "../Forms/TransactionForm";
 import {
     Form,
@@ -31,6 +31,8 @@ function Transactions() {
   const loaderData = useLoaderData();
   const [searchparams, setSearchparams] = useSearchParams();
   const {salesValue,expensesValue}=useTransactionContext();
+  const [rowsPerPage,setRowsPerPage]=useState(10)
+  const [page,setPage]=useState(0)
   const filterOptions = [
     { label: "Sale", type: "transaction_type", value: "sale" },
     { label: "Expense", type: "transaction_type", value: "expense" },
@@ -40,8 +42,10 @@ function Transactions() {
   const transactionData = loaderData ? loaderData.transaction_data : [];
   
   //function to handle the filter
-  function handleFilter(filterType, filterValue) {
-    if(getManagmentData.length===0){
+  async function handleFilter(filterType, filterValue) {
+    const managmentData=await getManagmentData()
+
+    if(managmentData.length===0){
       return
     }
     const newSearchParams = new URLSearchParams(searchparams);
@@ -75,6 +79,19 @@ function Transactions() {
   function handleTransactionForm() {
     setFormStatus((curStatus) => !curStatus);
   }
+  //functions related to the pagination
+  function handleChangePage(event,newPage){
+    console.log(newPage);
+    setPage(newPage)
+
+  }
+  function handleChangeRowsPerPage(event){
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0)
+  }
+  const tableData=useMemo(()=>{
+    return transactionData.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage)
+  },[page,rowsPerPage,transactionData])
   return (
     <section id="transaction">
       <div className="content">
@@ -230,7 +247,7 @@ function Transactions() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {transactionData?.map((transactionData) => (
+                    {tableData?.map((transactionData) => (
                       <TableRow>
                         <TableCell>{transactionData.name}</TableCell>
                         <TableCell>{transactionData.item_name}</TableCell>
@@ -266,8 +283,11 @@ function Transactions() {
               <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={10}
-                rowsPerPage={10}
+                count={transactionData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
               />
             </Paper>
           </div>
