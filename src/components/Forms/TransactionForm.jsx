@@ -282,7 +282,7 @@ function TransactionForm({ formStatus }) {
               value={
                 totalStock[0]?.current_quantity > 0
                   ? totalStock[0]?.current_quantity
-                  : ''
+                  : 0
               }
             />
             {stockMessage && (
@@ -302,7 +302,7 @@ function TransactionForm({ formStatus }) {
                 value={
                   totalStock[0]?.current_quantity > 0
                     ? totalStock[0]?.current_quantity
-                    : ''
+                    : 'Out of stock'
                 }
                 readOnly
                 className="shadow-box px-4 py-2 ml-2 rounded-[10px]"

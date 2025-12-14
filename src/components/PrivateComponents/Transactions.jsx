@@ -90,7 +90,7 @@ function Transactions() {
     setPage(0)
   }
   const tableData=useMemo(()=>{
-    return transactionData.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage)
+    return transactionData?.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage)
   },[page,rowsPerPage,transactionData])
   return (
     <section id="transaction">
@@ -247,8 +247,8 @@ function Transactions() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {tableData?.map((transactionData) => (
-                      <TableRow>
+                    {tableData?.map((transactionData,index) => (
+                      <TableRow key={index}>
                         <TableCell>{transactionData.name}</TableCell>
                         <TableCell>{transactionData.item_name}</TableCell>
                         <TableCell>{transactionData.payment_mode}</TableCell>

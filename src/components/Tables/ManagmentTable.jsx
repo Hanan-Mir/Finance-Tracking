@@ -25,6 +25,7 @@ function ManagmentTable({productData,deleteAndRevalidate}) {
                 <TableCell sx={{ fontWeight: "bold" }}>Cost Price</TableCell>
                 <TableCell sx={{ fontWeight: "bold" }}>Selling Price</TableCell>
                  <TableCell sx={{ fontWeight: "bold" }}>Initial Quantity</TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }}>Current Quantity</TableCell>
                 <TableCell sx={{ fontWeight: "bold" }}>Unit</TableCell>
                 <TableCell sx={{ fontWeight: "bold" }}>Operation</TableCell>
               </TableRow>
@@ -39,6 +40,7 @@ function ManagmentTable({productData,deleteAndRevalidate}) {
                   <TableCell>{row.cost_price}</TableCell>
                   <TableCell>{row.selling_price}</TableCell>
                   <TableCell>{row.initial_quantity}</TableCell>
+                   <TableCell>{row.current_quantity}</TableCell>
                   <TableCell>{row.unit}</TableCell>
                   <TableCell align='center' sx={{display:'flex',justifyContent:'justify-start'}}>
                   

@@ -107,7 +107,18 @@ theme: "dark",
   }
   if(formData.payment>=formData.paid && saleInfo[0].current_quantity>0){
     const updatedQuantity=saleInfo[0].current_quantity-formData.quantity
-    console.log(updatedQuantity)
+    if(updatedQuantity<0){
+      return toast.warn('Please select a lower quantity', {
+position: "top-center",
+autoClose: 3000,
+hideProgressBar: true,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+});
+    }
     const { data:updatedRow, error:updateError } = await supabase
   .from('user_products')
   .update({current_quantity :updatedQuantity})
