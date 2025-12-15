@@ -8,7 +8,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import TransactionForm from "../Forms/TransactionForm";
 import {
     Form,
@@ -22,6 +22,8 @@ import { handleGenerateCSV } from "../../Helper-Functions/utilityFunctions";
 import { useManagmentContext } from "../../context/ManagmentContext";
 import { useTransactionContext } from "../../context/TransactionContext";
 import SummaryPieChart from "../Graphs/SummaryPieChart";
+import { useReactToPrint } from "react-to-print";
+import Reciept from "../Reciepts/Reciept";
 
 function Transactions() {
   const [formStatus, setFormStatus] = useState(false);
@@ -33,6 +35,8 @@ function Transactions() {
   const {salesValue,expensesValue}=useTransactionContext();
   const [rowsPerPage,setRowsPerPage]=useState(10)
   const [page,setPage]=useState(0)
+  const printRef=useRef();
+  const [selectedTransaction,setSelectedTransaction]=useState()
   const filterOptions = [
     { label: "Sale", type: "transaction_type", value: "sale" },
     { label: "Expense", type: "transaction_type", value: "expense" },
@@ -89,6 +93,19 @@ function Transactions() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0)
   }
+  //function to handle print receipt functionality
+ const handlePrint=useReactToPrint({
+  contentRef:printRef,
+  documentTitle:'Transaction Receipt'
+ })
+  function onPrintClick(curTransaction){
+    setSelectedTransaction(curTransaction)
+    setTimeout(()=>{
+handlePrint();
+
+    },200)
+    
+  } 
   const tableData=useMemo(()=>{
     return transactionData?.slice(page*rowsPerPage,page*rowsPerPage+rowsPerPage)
   },[page,rowsPerPage,transactionData])
@@ -282,7 +299,7 @@ function Transactions() {
                         </TableCell>
                         <TableCell sx={{display:'flex',justifyContent:'center'}} >
                           
-                        <img src="images/reciept.png" alt="" className="w-5 hover:cursor-pointer mr-2"  />
+                        <img src="images/reciept.png" alt="" className="w-5 hover:cursor-pointer mr-2" onClick={()=>onPrintClick(transactionData)}  />
                         <img src="images/edit.png" alt="" className="w-5 hover:cursor-pointer" />
                        
                         </TableCell>
@@ -303,6 +320,10 @@ function Transactions() {
             </Paper>
           </div>
         </div>
+      </div>
+      <div style={{ position:"absolute", top:'-100000px' }}>
+        
+        <Reciept ref={printRef} transaction={selectedTransaction} />
       </div>
     </section>
   );

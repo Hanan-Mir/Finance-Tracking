@@ -27,6 +27,7 @@
     "react-dom": "^19.1.1",
     "react-responsive": "^10.0.1",
     "react-router-dom": "^7.9.5",
+    "react-to-print": "^3.2.0",
     "react-toastify": "^11.0.5",
     "recharts": "^3.5.1",
     "tailwindcss": "^4.1.17"
