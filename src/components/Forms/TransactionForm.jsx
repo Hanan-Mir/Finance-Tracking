@@ -300,7 +300,7 @@ function TransactionForm({ formStatus }) {
                 name="stock"
                 id="stock"
                 value={
-                  totalStock[0]?.current_quantity > 0
+               totalStock[0]?.current_quantity !== 0
                     ? totalStock[0]?.current_quantity
                     : 'Out of stock'
                 }

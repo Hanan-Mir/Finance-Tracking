@@ -4,11 +4,14 @@ import { supabase } from "../../../supabaseClient";
 //This is the action for the transaction page
 export async function addTransactionAction({ request }) {
   const formrequest = await request.formData();
+  const kind=formrequest.get('_action')
   const formData = Object.fromEntries(formrequest);
+  console.log(kind)
   
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  if(kind==='create'){
   if(formData?.transactionType==='expense'){
       const productData = {
     name: formData.name,
@@ -138,7 +141,7 @@ theme: "dark",
     }
 
   }else{
-  console.log('Insie2')
+ 
   toast.warn('Amount paid should be less than the total payable amount', {
 position: "top-center",
 autoClose: 5000,
@@ -151,6 +154,56 @@ theme: "dark",
 });
 }
 }
+  }
+  if(kind==='edit'){
+//get the items that we want to update
+console.log(formData)
+
+let { data: transactions_table, error } = await supabase
+  .from('transactions_table')
+  .select('*').eq('id',formData.id)
+  console.log(transactions_table)
+const {balance:previousBalance,amount_paid:previousPayment}=transactions_table[0]
+if(previousBalance===0) {
+  return toast.warn('Payments cannot be made', {
+position: "top-center",
+autoClose: 2000,
+hideProgressBar: true,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+
+});
+}
+if(formData.paid>previousBalance){
+  return toast.warn('Payment more than the remaining balance', {
+position: "top-center",
+autoClose: 2000,
+hideProgressBar: true,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+
+});
+} 
+const updatedData={
+  amount_paid:Number(previousPayment)+Number(formData.paid),
+  balance:previousBalance-formData.paid,
+  payment_mode:formData.paymentMethod
+}
+const { data, error:userError } = await supabase
+      .from("transactions_table")
+      .update(updatedData)
+      .eq("id", formData.id)
+      .select();
+  console.log(userError)
+  console.log(data)
+  }
+
 
   
  

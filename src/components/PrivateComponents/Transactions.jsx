@@ -24,6 +24,7 @@ import { useTransactionContext } from "../../context/TransactionContext";
 import SummaryPieChart from "../Graphs/SummaryPieChart";
 import { useReactToPrint } from "react-to-print";
 import Reciept from "../Reciepts/Reciept";
+import TransactionEdit from "../Forms/TransactionEdit";
 
 function Transactions() {
   const [formStatus, setFormStatus] = useState(false);
@@ -37,6 +38,7 @@ function Transactions() {
   const [page,setPage]=useState(0)
   const printRef=useRef();
   const [selectedTransaction,setSelectedTransaction]=useState()
+  const [transactionEditView,setTransactionEditView]=useState(false)
   const filterOptions = [
     { label: "Sale", type: "transaction_type", value: "sale" },
     { label: "Expense", type: "transaction_type", value: "expense" },
@@ -44,7 +46,11 @@ function Transactions() {
     { label: "Online", type: "payment_mode", value: "online" },
   ];
   const transactionData = loaderData ? loaderData.transaction_data : [];
-  
+  //function to handle the transaction edit
+  function handleTransactionEditView(transaction){
+    setTransactionEditView(curView=>!curView)
+    setSelectedTransaction(transaction)
+  }
   //function to handle the filter
   async function handleFilter(filterType, filterValue) {
     const managmentData=await getManagmentData()
@@ -96,7 +102,6 @@ function Transactions() {
   //function to handle print receipt functionality
  const handlePrint=useReactToPrint({
   contentRef:printRef,
-  documentTitle:'Transaction Receipt'
  })
   function onPrintClick(curTransaction){
     setSelectedTransaction(curTransaction)
@@ -300,7 +305,7 @@ handlePrint();
                         <TableCell sx={{display:'flex',justifyContent:'center'}} >
                           
                         <img src="images/reciept.png" alt="" className="w-5 hover:cursor-pointer mr-2" onClick={()=>onPrintClick(transactionData)}  />
-                        <img src="images/edit.png" alt="" className="w-5 hover:cursor-pointer" />
+                        <img src="images/edit.png" alt="" className="w-5 hover:cursor-pointer" onClick={()=>handleTransactionEditView(transactionData)} />
                        
                         </TableCell>
                       </TableRow>
@@ -321,7 +326,9 @@ handlePrint();
           </div>
         </div>
       </div>
-      <div style={{ position:"absolute", top:'-100000px' }}>
+        {transactionEditView && <TransactionEdit transactionData={selectedTransaction} formStatus={setTransactionEditView}  />}
+  
+      <div style={{ display:'none' }}>
         
         <Reciept ref={printRef} transaction={selectedTransaction} />
       </div>
