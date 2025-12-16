@@ -16,6 +16,8 @@ export default function TransactionContextProvider({ children }) {
   const [onlineTransactions, setOnlineTransactions] = useState();
   const [cashSales, setCashSales] = useState();
   const [expenseBalance, setExpenseBalance] = useState();
+  const [salesCompare,setSalesCompare]=useState();
+  const [expensesCompare,setExpensesCompare]=useState();
   //function to get the total sales from the supabase
   const getTotalSales = useCallback(async () => {
     let { data: sales, error } = await supabase
@@ -78,6 +80,77 @@ export default function TransactionContextProvider({ children }) {
     console.log(sum);
     expenseBalance !== 0 ? setExpenseBalance(sum) : setExpenseBalance(0);
   }, [expenseBalance]);
+  
+  //function to compare the current month sales with the previous month sales
+  const compareSalesMonthly=useCallback(async()=>{
+ //get all the transactions from the supabase
+
+let { data: transactions, error } = await supabase
+  .from('transactions_table')
+  .select('*').ilike('transaction_type',`sale`);
+  //current date of the month
+  const now=new Date();
+  const currentMonth=now.getMonth();
+  const currentYear=now.getFullYear();
+  //previous month of the trnasnaction
+  const previousDate=new Date();
+  previousDate.setMonth(now.getMonth()-1);
+  const previousMonth=previousDate.getMonth();
+  const previousYear=previousDate.getFullYear();
+  const currentTotal=transactions.filter((transaction=>{
+    const transactionDate=new Date(transaction.created_at);
+    return transactionDate.getMonth()===currentMonth && transactionDate.getFullYear()===currentYear
+  })).reduce((sum,el)=>sum+el.payment,0);
+  const previousTotal=transactions.filter((transaction=>{
+    const transactionDate=new Date(transaction.created_at);
+    return transactionDate.getMonth()===previousMonth && transactionDate.getFullYear()===previousYear
+  })).reduce((sum,el)=>sum+el.payment,0);
+  //handling the situation when there are no previous month transactions
+  if(previousTotal===0){
+    setSalesCompare(100)
+    return
+  }
+let percentage=((currentTotal-previousTotal)/previousTotal)*100
+console.log(percentage)
+setSalesCompare(percentage)
+
+
+  },[])
+  //function to compare the current month expenses with the previous month sales
+  const compareExpensesMonthly=useCallback(async()=>{
+ //get all the transactions from the supabase
+
+let { data: transactions, error } = await supabase
+  .from('transactions_table')
+  .select('*').ilike('transaction_type',`expense`);
+  //current date of the month
+  const now=new Date();
+  const currentMonth=now.getMonth();
+  const currentYear=now.getFullYear();
+  //previous month of the trnasnaction
+  const previousDate=new Date();
+  previousDate.setMonth(now.getMonth()-1);
+  const previousMonth=previousDate.getMonth();
+  const previousYear=previousDate.getFullYear();
+  const currentTotal=transactions.filter((transaction=>{
+    const transactionDate=new Date(transaction.created_at);
+    return transactionDate.getMonth()===currentMonth && transactionDate.getFullYear()===currentYear
+  })).reduce((sum,el)=>sum+el.payment,0);
+  const previousTotal=transactions.filter((transaction=>{
+    const transactionDate=new Date(transaction.created_at);
+    return transactionDate.getMonth()===previousMonth && transactionDate.getFullYear()===previousYear
+  })).reduce((sum,el)=>sum+el.payment,0);
+  //handling the situation when there are no previous month transactions
+  if(previousTotal===0){
+    setExpensesCompare(100)
+    return
+  }
+let percentage=((currentTotal-previousTotal)/previousTotal)*100
+
+setExpensesCompare(percentage)
+
+
+  },[])
   //This useEffect will run whenever there is a transaction done
   useEffect(() => {
     getTotalSales();
@@ -86,7 +159,9 @@ export default function TransactionContextProvider({ children }) {
     getTotalOnlineTransaction();
     getSalesBalance();
     getExpensesBalance();
-  }, [getTotalSales, getTotalExpenses, getExpensesBalance]);
+    compareSalesMonthly();
+    compareExpensesMonthly();
+  }, [getTotalSales, getTotalExpenses, getExpensesBalance,compareSalesMonthly,compareExpensesMonthly]);
 
   return (
     <transactionContext.Provider
@@ -103,6 +178,10 @@ export default function TransactionContextProvider({ children }) {
         refetchTotalOnlineTransactions:getTotalOnlineTransaction,
         refetchSalesBalance:getSalesBalance,
         refetchExpensesBalance:getExpensesBalance,
+        salesCompare,
+        compareSalesMonthly,
+        compareExpensesMonthly,
+        expensesCompare
       
       }}
     >

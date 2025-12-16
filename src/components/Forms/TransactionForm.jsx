@@ -36,6 +36,8 @@ function TransactionForm({ formStatus }) {
     refetchTotalOnlineTransactions,
     refetchSalesBalance,
     refetchExpensesBalance,
+    compareSalesMonthly,
+    compareExpensesMonthly
   } = useTransactionContext();
 
   //This useeffect will run whenever any new entry is made to the transactions table through cash or sales
@@ -47,6 +49,8 @@ function TransactionForm({ formStatus }) {
       refetchTotalOnlineTransactions();
       refetchSalesBalance();
       refetchExpensesBalance();
+      compareSalesMonthly();
+      compareExpensesMonthly()
     }
     const timeOutId = setTimeout(async () => {
       if (skipNextSearch.current) {
@@ -88,7 +92,9 @@ function TransactionForm({ formStatus }) {
     refetchSalesBalance,
     refetchTotalOnlineTransactions,
     customerName,
-    totalStock
+    totalStock,
+    compareSalesMonthly,
+    compareExpensesMonthly
   ]);
 
   //function to set the total payment that is to be made by the user

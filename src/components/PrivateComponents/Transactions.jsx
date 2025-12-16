@@ -33,7 +33,7 @@ function Transactions() {
   const formActionData = useActionData();
   const loaderData = useLoaderData();
   const [searchparams, setSearchparams] = useSearchParams();
-  const {salesValue,expensesValue}=useTransactionContext();
+  const {salesValue,expensesValue,salesCompare,expensesCompare}=useTransactionContext();
   const [rowsPerPage,setRowsPerPage]=useState(10)
   const [page,setPage]=useState(0)
   const printRef=useRef();
@@ -173,8 +173,8 @@ handlePrint();
               <p className="text-[#969696]">vs last month</p>
             </div>
             <div className="h-[50%] flex gap-1 items-center justify-center border border-red-600  rounded-[10px] px-2">
-              <img src="/images/down.png" alt="" className="w-4 h-4 p-0" />
-              <p className="p-0 text-[15px] text-red-600">15%</p>
+              <img src={`${salesCompare>0?'/images/up.png':'/images/down.png'}`} alt="" className="w-4 h-4 p-0" />
+              <p className="p-0 text-[15px] text-red-600">{salesCompare}%</p>
             </div>
           </div>
         </div>
@@ -186,8 +186,8 @@ handlePrint();
               <p className="text-[#969696]">vs last month</p>
             </div>
             <div className="h-[50%] flex gap-1 items-center justify-center border border-red-600  rounded-[10px] px-2">
-              <img src="/images/up.png" alt="" className="w-4 h-4 p-0" />
-              <p className="p-0 text-[15px] text-red-600">15%</p>
+              <img src={`${expensesCompare>0?'/images/up.png':'/images/down.png'}`} alt="" className="w-4 h-4 p-0" />
+              <p className="p-0 text-[15px] text-red-600">{expensesCompare}%</p>
             </div>
           </div>
         </div>
@@ -264,7 +264,7 @@ handlePrint();
                 </button>
                 <button
                   onClick={() => handleTransactionForm()}
-                  disabled={getManagmentData().length===0}
+                  disabled={getManagmentData()?.length===0}
                   className="border px-2 py-2 bg-[#0252CF] text-white font-bold hover:cursor-pointer"
                 >
                   Add Transaction
