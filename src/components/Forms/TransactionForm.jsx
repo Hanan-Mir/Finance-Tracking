@@ -83,6 +83,12 @@ function TransactionForm({ formStatus }) {
     actionData,
     refetchExpenses,
     salesItem,
+    refetchCashTransactions,
+    refetchExpensesBalance,
+    refetchSalesBalance,
+    refetchTotalOnlineTransactions,
+    customerName,
+    totalStock
   ]);
 
   //function to set the total payment that is to be made by the user
