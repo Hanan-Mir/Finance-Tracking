@@ -328,7 +328,7 @@ progress::-moz-progress-bar {
    
   }
   #transaction{
-    @apply w-[100vw] h-screen mt-0 grid grid-cols-8 grid-rows-8 bg-[#FAFAFA];
+    @apply w-screen h-screen bg-[#FAFAFA] overflow-hidden;
     .content{
       @apply w-[100vw] h-screen mt-4 ml-4 grid grid-cols-8 grid-rows-8 gap-4
     }
@@ -351,5 +351,31 @@ progress::-moz-progress-bar {
     @apply w-full h-full absolute -top-2 left-0
   }      
   }
-  
+  #sales{
+     @apply w-screen h-screen bg-[#FAFAFA] overflow-hidden;
+      .sales-content{
+      @apply w-[100vw] h-screen mt-4 ml-4 grid grid-cols-8 grid-rows-8 gap-4
+    }
+     .card:first-of-type{
+    @apply shadow-box row-start-1 row-end-3 col-start-1 col-end-3 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+
+  }
+  .card:nth-of-type(2){
+    @apply shadow-box row-start-1 row-end-3 col-start-3 col-end-5 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+
+  }
+  .card:nth-of-type(3){
+     @apply shadow-box row-start-1 row-end-3 col-start-5 col-end-7 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+  }
+  .graph{
+    @apply row-start-3 row-end-5 col-start-1 col-end-4
+  }
+  .salesMonthly{
+    @apply row-start-3 row-end-5 col-start-4 col-end-7
+  }
+  .salesTable{
+    @apply row-start-6 row-end-8 col-start-1 col-end-5
+  }
+
+  }
 }

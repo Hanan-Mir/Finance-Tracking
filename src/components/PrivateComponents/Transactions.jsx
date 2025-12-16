@@ -25,6 +25,7 @@ import SummaryPieChart from "../Graphs/SummaryPieChart";
 import { useReactToPrint } from "react-to-print";
 import Reciept from "../Reciepts/Reciept";
 import TransactionEdit from "../Forms/TransactionEdit";
+import TransactionCard from "../Cards/TransactionCard";
 
 function Transactions() {
   const [formStatus, setFormStatus] = useState(false);
@@ -45,8 +46,11 @@ function Transactions() {
     { label: "Cash", type: "payment_mode", value: "cash" },
     { label: "Online", type: "payment_mode", value: "online" },
   ];
-  const transactionData = loaderData ? loaderData.transaction_data : [];
-  console.log(formActionData)
+  //optimization for getting data from the supabase 
+  const transactionData=useMemo(()=>{
+ return loaderData ? loaderData.transaction_data : [];
+  },[loaderData])
+  
   //using the action data that is returned from the form submission
   useEffect(()=>{
     if(!formActionData?.success) return
@@ -165,32 +169,9 @@ handlePrint();
       <div className="content">
         <ToastContainer />
         {formStatus && <TransactionForm formStatus={setFormStatus} />}
-        <div className="card">
-          <h1 className="font-bold text-[2rem]">Sales</h1>
-          <div className="flex md:justify-between md:items-center">
-            <div className="py-2">
-              <p className="text-[1.5rem] font-bold">{salesValue} ₹</p>
-              <p className="text-[#969696]">vs last month</p>
-            </div>
-            <div className="h-[50%] flex gap-1 items-center justify-center border border-red-600  rounded-[10px] px-2">
-              <img src={`${salesCompare>0?'/images/up.png':'/images/down.png'}`} alt="" className="w-4 h-4 p-0" />
-              <p className="p-0 text-[15px] text-red-600">{salesCompare}%</p>
-            </div>
-          </div>
-        </div>
-        <div className="card">
-          <h1 className="font-bold text-[2rem]">Expenses</h1>
-          <div className="flex md:justify-between md:items-center">
-            <div className="py-2">
-              <p className="text-[1.5rem] font-bold">{expensesValue} ₹</p>
-              <p className="text-[#969696]">vs last month</p>
-            </div>
-            <div className="h-[50%] flex gap-1 items-center justify-center border border-red-600  rounded-[10px] px-2">
-              <img src={`${expensesCompare>0?'/images/up.png':'/images/down.png'}`} alt="" className="w-4 h-4 p-0" />
-              <p className="p-0 text-[15px] text-red-600">{expensesCompare}%</p>
-            </div>
-          </div>
-        </div>
+        <TransactionCard name='sales' value={salesValue} comparePercentage={salesCompare} />
+        <TransactionCard name='Expenses' value={expensesValue} comparePercentage={expensesCompare} />
+        
         <div className="summary">
           <div className="summary-wrapper">
           <SummaryPieChart isAnimationActive={true} />
@@ -203,7 +184,7 @@ handlePrint();
           <div className="flex md:justify-between md:items-center">
             <Form id="search-form" role="search">
             <input
-            disabled={transactionData.length===0}
+            
               type="search"
               name="q"
               id="q"
