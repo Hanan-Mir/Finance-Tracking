@@ -6,7 +6,6 @@ export async function addTransactionAction({ request }) {
   const formrequest = await request.formData();
   const kind=formrequest.get('_action')
   const formData = Object.fromEntries(formrequest);
-  console.log(kind)
   
   const {
     data: { user },
@@ -31,16 +30,10 @@ let { data: paymentData, error:paymentError } = await supabase
 
 //condition for if user made the whole payment and now stoping the payment from the user
 if(paymentData[0]?.total_payment===0){
-  return toast.warn('Payments cannot be done', {
-position: "top-center",
-autoClose: 3000,
-hideProgressBar: true,
-closeOnClick: false,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-theme: "dark",
-});
+
+return {success:false,message:'Payment cannot be made!!!.',kind:'create'}  
+
+
 }
 
 if(formData.paid<=paymentData[0]?.total_payment){
@@ -53,16 +46,7 @@ const { data:updatedRow, error:updateError } = await supabase
   .eq('id', formData.id)
   .select()
 }else{
-    return toast.warn('Payments should be less than the balance', {
-position: "top-center",
-autoClose: 3000,
-hideProgressBar: true,
-closeOnClick: false,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-theme: "dark",
-});
+  return {success:'false',message:'Payment cannot be more than the balance!!!',kind:'create'}  
 
 } 
  
@@ -75,10 +59,10 @@ theme: "dark",
       .insert([transactionToInsert])
       .select();
        if (error) {
-      return { success: false, error: "Failed to add the transaction" };
+      return { success: false, message: "Failed to add the transaction",kind:'create' };
     }
     if (data) {
-      return { success: true, message: "Transaction added sucessfully!!" };
+      return { success: true, message: "Transaction added sucessfully!!",kind:'create' };
     }
     
 
@@ -89,7 +73,6 @@ theme: "dark",
       .select("product_name,selling_price,id,current_quantity")
       .ilike("product_name", `%${formData.itemPurchased}%`)
       .limit(10);
-    console.log(saleInfo)
    
     const saleData = {
     name: formData.name,
@@ -98,12 +81,11 @@ theme: "dark",
     payment:formData.payment,
     transaction_number:saleInfo[0].id,
      transaction_type:formData.transactionType,
-
     balance:formData.payment-formData.paid,
     item_name: formData.itemPurchased,
     quantity:formData.quantity
   }
-  console.log(formData.paid,formData.payment)
+ 
     const transactionToInsert={
     ...saleData,
     user_id:user.id
@@ -111,53 +93,33 @@ theme: "dark",
   if(formData.payment>=formData.paid && saleInfo[0].current_quantity>0){
     const updatedQuantity=saleInfo[0].current_quantity-formData.quantity
     if(updatedQuantity<0){
-      return toast.warn('Please select a lower quantity', {
-position: "top-center",
-autoClose: 3000,
-hideProgressBar: true,
-closeOnClick: true,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-theme: "dark",
-});
+      return {success:false,message:'Please select a lower quantity!!!',kind:'create'}
     }
     const { data:updatedRow, error:updateError } = await supabase
   .from('user_products')
   .update({current_quantity :updatedQuantity})
   .ilike('product_name', `%${formData.itemPurchased}%`)
   .select();
-  console.log(updatedRow)
    const { data, error } = await supabase
       .from("transactions_table")
       .insert([transactionToInsert])
       .select();
        if (error) {
         console.log(error)
-      return { success: false, error: "Failed to add the transaction" };
+      return { success: false, error: "Failed to add the transaction",kind:'create' };
     }
     if (data) {
-      return { success: true, message: "Transaction added sucessfully!!" };
+      return { success: true, message: "Transaction added sucessfully!!",kind:'create' };
     }
 
   }else{
- 
-  toast.warn('Amount paid should be less than the total payable amount', {
-position: "top-center",
-autoClose: 5000,
-hideProgressBar: false,
-closeOnClick: false,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-theme: "dark",
-});
+ return {success:'false',message:'Amount paid should be less than the available balance',kind:'create'}
+
 }
 }
   }
   if(kind==='edit'){
 //get the items that we want to update
-console.log(formData)
 
 let { data: transactions_table, error } = await supabase
   .from('transactions_table')
@@ -165,30 +127,10 @@ let { data: transactions_table, error } = await supabase
   console.log(transactions_table)
 const {balance:previousBalance,amount_paid:previousPayment}=transactions_table[0]
 if(previousBalance===0) {
-  return toast.warn('Payments cannot be made', {
-position: "top-center",
-autoClose: 2000,
-hideProgressBar: true,
-closeOnClick: false,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-theme: "dark",
-
-});
+  return {success:false,message:'No payments can be made!!!'}
 }
 if(formData.paid>previousBalance){
-  return toast.warn('Payment more than the remaining balance', {
-position: "top-center",
-autoClose: 2000,
-hideProgressBar: true,
-closeOnClick: false,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-theme: "dark",
-
-});
+  return {success:false,message:'You cannot pay more than outstanding balance!!',kind:'edit'}
 } 
 const updatedData={
   amount_paid:Number(previousPayment)+Number(formData.paid),
@@ -200,8 +142,12 @@ const { data, error:userError } = await supabase
       .update(updatedData)
       .eq("id", formData.id)
       .select();
-  console.log(userError)
-  console.log(data)
+      if(data){
+  return {success:true,message:'Data updated sucessfully.',kind:'edit'}
+}else{
+  return {success:false,message:'Data updation failed.',kind:'edit'}
+}
+ 
   }
 
 
@@ -223,8 +169,7 @@ export async function searchVendors(vendorName) {
     }
     return data;
   } catch (error) {
-    console.log(error);
-    return [];
+   return {success:false,message:'Vendor not present.'}
   }
 }
 //get the products according to the vendor
@@ -237,12 +182,11 @@ export async function getProducts(productName, vendorName) {
       .ilike("vendor_name", `%${vendorName}`)
       .limit(10);
     if (error) {
-      console.log(error);
-      return [];
+   throw error
     }
     return data;
   } catch (error) {
-    console.log(error);
+      return {sucess:false,message:'Error in fetching the products'}
   }
 }
 //get the current available stock of the vendor
@@ -256,22 +200,12 @@ export async function getCurrentStock(itemName){
       .limit(10);
      
       if(error){
-        console.log(error)
-        return []
+       throw error
       }
        return data;
 
   }catch(error){
-    return toast.warn(`${error}`, {
-position: "top-center",
-autoClose: 5000,
-hideProgressBar: false,
-closeOnClick: false,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-theme: "dark",
-});
+     return {sucess:false,message:'Error in fetching the products'}
 
   }
 }

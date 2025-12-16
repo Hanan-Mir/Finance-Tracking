@@ -8,7 +8,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import TransactionForm from "../Forms/TransactionForm";
 import {
     Form,
@@ -17,7 +17,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { formatDate } from "../../Helper-Functions/helperFunctions";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { handleGenerateCSV } from "../../Helper-Functions/utilityFunctions";
 import { useManagmentContext } from "../../context/ManagmentContext";
 import { useTransactionContext } from "../../context/TransactionContext";
@@ -30,7 +30,7 @@ function Transactions() {
   const [formStatus, setFormStatus] = useState(false);
   const [dropDownView, setDropDownView] = useState(false);
   const {getManagmentData}=useManagmentContext();
-  const formAction = useActionData();
+  const formActionData = useActionData();
   const loaderData = useLoaderData();
   const [searchparams, setSearchparams] = useSearchParams();
   const {salesValue,expensesValue}=useTransactionContext();
@@ -46,6 +46,52 @@ function Transactions() {
     { label: "Online", type: "payment_mode", value: "online" },
   ];
   const transactionData = loaderData ? loaderData.transaction_data : [];
+  console.log(formActionData)
+  //using the action data that is returned from the form submission
+  useEffect(()=>{
+    if(!formActionData?.success) return
+    console.log(formActionData)
+      if(formActionData?.success){
+    toast.success(`${formActionData?.message}`, {
+position: "top-center",
+autoClose: 3000,
+hideProgressBar: true,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme:'dark'
+});
+
+if(formActionData.kind==='create'){
+setFormStatus(curStatus=>!curStatus)
+}
+if(formActionData.kind==='edit'){
+  setTransactionEditView(curStatus=>!curStatus)
+}
+
+
+  }
+   if(!formActionData?.success){
+  toast.error(`${formActionData?.message}`, {
+position: "top-center",
+autoClose: 3000,
+hideProgressBar: true,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "dark",
+});
+if(formActionData.kind==='create'){
+handleTransactionForm()
+}else{
+  setTransactionEditView(curStatus=>!curStatus)
+}
+ } 
+  },[formActionData])
+
+
   //function to handle the transaction edit
   function handleTransactionEditView(transaction){
     setTransactionEditView(curView=>!curView)
