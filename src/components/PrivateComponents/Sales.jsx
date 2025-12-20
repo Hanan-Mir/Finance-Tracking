@@ -1,27 +1,30 @@
-import { Paper, Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import TransactionCard from "../Cards/TransactionCard";
 import SalesGraph from "../Graphs/SalesGraph";
 import SalesGraphMonthly from "../Graphs/SalesGraphMonthly";
+import { useLoaderData } from "react-router-dom";
+import { compare } from "../../Helper-Functions/utilityFunctions";
+import { formatDate } from "../../Helper-Functions/helperFunctions";
 
 function Sales() {
+  const {curMonthSales,curMonthlySalesBalance,prevMonthSales,prevMonthSalesBalance,recentSalesTransaction}=useLoaderData();
+console.log(recentSalesTransaction)
   return (
     <section id="sales">
+   
       <div className="sales-content">
+       
         <TransactionCard
-          name="Total Sales"
-          value="20000"
-          comparePercentage="80"
+          name="Monthly Sales"
+          value={curMonthSales}
+          comparePercentage={compare(curMonthSales,prevMonthSales)}
         />
         <TransactionCard
           name="Sales balance"
-          value="20000"
-          comparePercentage="80"
+          value={curMonthlySalesBalance}
+          comparePercentage={compare(curMonthlySalesBalance,prevMonthSalesBalance)}
         />
-        <TransactionCard
-          name="Total Profit"
-          value="20000"
-          comparePercentage="80"
-        />
+        
         <div className="graph">
           <SalesGraph />
         </div>
@@ -29,6 +32,7 @@ function Sales() {
           <SalesGraphMonthly />
         </div>
         <div className="salesTable">
+          <h1 className="text-2xl font-bold">Recent Sales</h1>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ maxHeight: 440 }}>
               <Table stickyHeader>
@@ -40,12 +44,8 @@ function Sales() {
                     <TableCell sx={{ fontWeight: "bold", fontSize: "1rem" }}>
                       Item
                     </TableCell>
-                    <TableCell sx={{ fontWeight: "bold", fontSize: "1rem" }}>
-                      Mode
-                    </TableCell>
-                    <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
-                      Type
-                    </TableCell>
+                    
+                    
                     <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
                       Payment
                     </TableCell>
@@ -58,11 +58,21 @@ function Sales() {
                     <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
                       Date
                     </TableCell>
-                    <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
-                      Actions
-                    </TableCell>
+                    
                   </TableRow>
                 </TableHead>
+                
+                  {recentSalesTransaction.map((data)=>(
+                    <TableBody>
+                    <TableCell>{data.name}</TableCell>
+                    <TableCell>{data.item_name}</TableCell>
+                    <TableCell>{data.payment}</TableCell>
+                    <TableCell>{data.amount_paid}</TableCell>
+                    <TableCell>{data.balance}</TableCell>
+                    <TableCell>{formatDate(data.created_at)}</TableCell>
+                    </TableBody>
+                  ))}
+                
               </Table>
             </TableContainer>
           </Paper>

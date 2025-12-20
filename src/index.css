@@ -374,7 +374,7 @@ progress::-moz-progress-bar {
     @apply row-start-3 row-end-5 col-start-4 col-end-7
   }
   .salesTable{
-    @apply row-start-6 row-end-8 col-start-1 col-end-5
+    @apply row-start-6 row-end-8 col-start-1 col-end-7 mt-15
   }
 
   }

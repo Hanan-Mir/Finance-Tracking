@@ -28,6 +28,7 @@ import { addProductAction } from "./Business-Logic/Managment/addProductAction";
 import { loadProductsData } from "./Business-Logic/Managment/productLoder";
 import { loadData } from "./Business-Logic/Inventory/supabaseFunctions";
 import { addTransactionAction, getTransactionDataLoader } from "./Business-Logic/Transactions/supabaseActions";
+import salesLoader from "./Business-Logic/Loaders/salesLoader";
 //import ProtectedResetRoute from "./components/ProtectedResetRoute";
 
 function App() {
@@ -89,7 +90,8 @@ function App() {
       
     },{
       path:'/sales',
-      element:<ProtectedRoute><Sales/></ProtectedRoute>
+      element:<ProtectedRoute><Sales/></ProtectedRoute>,
+      loader:salesLoader
     },{
       path:'/inventory',
       element:<ProtectedRoute><Inventory /></ProtectedRoute>,

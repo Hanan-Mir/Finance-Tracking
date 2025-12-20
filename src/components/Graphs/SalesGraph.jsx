@@ -1,46 +1,13 @@
+import { useLoaderData } from "react-router-dom";
 import { Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
-const data = [
-  {
-    name: 'Sun',
-    uv: 4000,
-   
-  },
-  {
-    name: 'Mon',
-    uv: 3000,
-   
-  },
-  {
-    name: 'Tue',
-    uv: 2000,
-   
-  },
-  {
-    name: 'Wed',
-    uv: 2780,
-   
-  },
-  {
-    name: 'Thu',
-    uv: 1890,
- 
-  },
-  {
-    name: 'Fr',
-    uv: 2390,
-     
-},
-  {
-    name: 'Sat',
-    uv: 3490,
-  
-  },
-];
-const SalesGraph = ({ isAnimationActive = true }) => (
-  <AreaChart
+
+
+function SalesGraph ({ isAnimationActive = true }) {
+  const {weeklySalesData}=useLoaderData();
+  return (<AreaChart
     style={{ width: '100%', maxWidth: '700px', maxHeight: '70vh', aspectRatio: 1.618 }}
     responsive
-    data={data}
+    data={weeklySalesData}
     margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
   >
     <defs>
@@ -66,7 +33,7 @@ const SalesGraph = ({ isAnimationActive = true }) => (
       isAnimationActive={isAnimationActive}
     />
     
-  </AreaChart>
-);
-
+  </AreaChart>)
+;
+}
 export default SalesGraph;
