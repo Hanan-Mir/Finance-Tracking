@@ -164,11 +164,7 @@ const sideBarLinks=[
     imgAddress:'/images/account.png',
     linkLabel:'Managment'
   },
-  {
-    linkTo:'/settings',
-    imgAddress:'/images/settings.png',
-    linkLabel:'Settings'
-  },
+  
 ]
 
 export { navLinks,featureLists, firstStep,firstCard,secondCard,thirdCard,secondStep,thirdStep,highlightFeatures,pricingInfo,sideBarLinks };
