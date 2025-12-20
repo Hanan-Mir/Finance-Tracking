@@ -8,9 +8,9 @@ import { formatDate } from "../../Helper-Functions/helperFunctions";
 
 function Sales() {
   const {curMonthSales,curMonthlySalesBalance,prevMonthSales,prevMonthSalesBalance,recentSalesTransaction}=useLoaderData();
-console.log(recentSalesTransaction)
   return (
     <section id="sales">
+
    
       <div className="sales-content">
        
@@ -32,7 +32,7 @@ console.log(recentSalesTransaction)
           <SalesGraphMonthly />
         </div>
         <div className="salesTable">
-          <h1 className="text-2xl font-bold">Recent Sales</h1>
+          <h1 className="text-[1.8rem] text-[#969696] font-bold">Recent Sales</h1>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ maxHeight: 440 }}>
               <Table stickyHeader>

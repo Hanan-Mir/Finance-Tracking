@@ -354,7 +354,7 @@ progress::-moz-progress-bar {
   #sales{
      @apply w-screen h-screen bg-[#FAFAFA] overflow-hidden;
       .sales-content{
-      @apply w-[100vw] h-screen mt-4 ml-4 grid grid-cols-8 grid-rows-8 gap-4
+      @apply w-screen h-screen mt-4 ml-4 grid grid-cols-8 grid-rows-8 gap-4
     }
      .card:first-of-type{
     @apply shadow-box row-start-1 row-end-3 col-start-1 col-end-3 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
@@ -378,4 +378,33 @@ progress::-moz-progress-bar {
   }
 
   }
+#dashboard{
+  @apply w-screen h-screen bg-[#FAFAFA] overflow-hidden;
+  .dashboard-content{
+    @apply w-screen h-screen mt-4 ml-4 grid grid-rows-10 grid-cols-10 gap-4;
+    .dashboard-card:first-of-type{
+      @apply row-start-1 row-span-2 col-start-1 col-span-2 bg-white rounded-2xl shadow-box
+    }
+    .dashboard-card:nth-of-type(2){
+      @apply row-start-1 row-span-2 col-start-3 col-span-2 bg-white rounded-2xl shadow-box
+    }
+    .dashboard-card:nth-of-type(3){
+      @apply row-start-1 row-span-2 col-start-5 col-span-2 bg-white rounded-2xl shadow-box
+    }
+    .dashboard-card:nth-of-type(4){
+      @apply row-start-1 row-span-2 col-start-7 col-span-2 bg-white rounded-2xl shadow-box
+    }
+    .revenueGraph{
+      @apply row-start-3 row-span-4 col-start-1 col-span-4 bg-white rounded-[10px] shadow-box
+    }
+
+.totalSummary{
+  @apply row-start-3 row-span-4 col-start-5 col-span-4 bg-white rounded-[10px] shadow-box
+}
+.recentTransactions{
+  @apply row-start-7 row-span-2 col-span-8
+}
+  }
+
+}
 }

@@ -11,7 +11,7 @@ function StockChart() {
         radialBar: {
             hollow: {
                 margin: 15,
-                size: "70%"
+                size: "60%"
             },
             dataLabels:{
             value:{
@@ -28,8 +28,7 @@ function StockChart() {
         <ReactApexChart 
       options={chartOptions} 
       series={chartOptions.series} 
-      type="radialBar" 
-      height={280} 
+      type="radialBar"  
     />
     )
 }
