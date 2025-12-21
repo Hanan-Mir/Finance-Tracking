@@ -1,62 +1,48 @@
 import { ResponsivePie } from "@nivo/pie";
+import { useLoaderData } from "react-router-dom";
 
 export default function DashboardPieChart() {
+  const {totalSales,totalRevenue,totalExpenses,totalSalesBalanceSum}=useLoaderData()
    const data= [
   {
-    "id": "erlang",
-    "label": "erlang",
-    "value": 21,
+    "id": "Sales",
+    "value": totalSales,
     "color": "hsl(306, 70%, 50%)"
   },
   {
-    "id": "ruby",
-    "label": "ruby",
-    "value": 124,
-    "color": "hsl(10, 70%, 50%)"
+    "id": "Expenses",
+    
+    "value": totalExpenses,
+    "color": "#05173d"
   },
   {
-    "id": "make",
-    "label": "make",
-    "value": 207,
+    "id": "Revenue",
+    "value":totalRevenue,
     "color": "hsl(86, 70%, 50%)"
   },
   {
-    "id": "php",
-    "label": "php",
-    "value": 68,
-    "color": "hsl(21, 70%, 50%)"
-  },
-  {
-    "id": "haskell",
-    "label": "haskell",
-    "value": 327,
-    "color": "hsl(123, 70%, 50%)"
+    "id":'Sales Balance',
+    'value':totalSalesBalanceSum,
+    "color":'#c0ff33'
   }
+ 
 ]
 return (
     <ResponsivePie /* or Pie for fixed dimensions */
         data={data}
-        margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+        colors={{datum:'data.color'}}
+        margin={{ top: 20, right: 80, bottom: 80, left: 80 }}
         innerRadius={0.5}
         padAngle={0.6}
         cornerRadius={2}
         activeOuterRadiusOffset={8}
         arcLinkLabelsSkipAngle={10}
-        arcLinkLabelsTextColor="#333333"
+        arcLinkLabelsTextColor="#201f1f"
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: 'color' }}
         arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
-        legends={[
-            {
-                anchor: 'bottom',
-                direction: 'row',
-                translateY: 56,
-                itemWidth: 100,
-                itemHeight: 18,
-                symbolShape: 'circle'
-            }
-        ]}
+        arcLabelsTextColor='#645b5b'
+       
     />
 )
 
