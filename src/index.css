@@ -286,13 +286,13 @@ progress::-moz-progress-bar {
     
   }
   .inventory{
-    @apply w-screen overflow-hidden bg-[#FAFAFA]  box-border h-screen ;
+    @apply w-screen overflow-hidden bg-[#FAFAFA]  box-border h-screen dark:bg-gray-900 ;
     .inventory-container{
     @apply w-full h-full mt-5 ml-3  grid grid-cols-8 grid-rows-8 container gap-5
 
     }
     .card{
-      @apply hover:cursor-pointer  w-full flex md:flex-col md:justify-between bg-white text-black 
+      @apply hover:cursor-pointer  w-full flex md:flex-col md:justify-between bg-white text-black dark:bg-gray-900 dark:text-gray-400   
     }
 
     .card:nth-of-type(1){
@@ -323,10 +323,10 @@ progress::-moz-progress-bar {
       }
     }
     .kpi{
-      @apply row-start-3 row-end-6 col-start-6 col-end-8 md:shadow-box overflow-hidden bg-white rounded-2xl
+      @apply row-start-3 row-end-6 col-start-6 col-end-8 md:shadow-box overflow-hidden bg-white rounded-2xl dark:bg-gray-900 
     }
-    .kpi ul{
-      @apply overflow-y-auto
+    .kpi ul,li{
+      @apply overflow-y-auto 
     }
     
    

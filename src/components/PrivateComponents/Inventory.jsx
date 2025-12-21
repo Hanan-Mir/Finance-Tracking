@@ -1,4 +1,5 @@
 import {
+  createTheme,
   Paper,
   Table,
   TableBody,
@@ -6,10 +7,12 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  ThemeProvider,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 
 import StockChart from "../Charts/StockChart";
+import { useDarkMode } from "../../context/DarkModeContext";
 
 function Inventory() {
   const {
@@ -19,7 +22,16 @@ function Inventory() {
     itemsWithLowStock,
     user_products: productData,
   } = useLoaderData();
-  console.log(productData);
+ const {isDarkMode}=useDarkMode();
+ 
+     const darkTheme=createTheme({
+       palette:{
+         mode:isDarkMode?'dark':'light',
+         background:{
+           TableContainer:'#1e1e1e'
+         }
+       }
+     })
 
   return (
     <section className="inventory ">
@@ -51,6 +63,7 @@ function Inventory() {
         <p className="text-[2rem] font-bold ">{profitPercentage}% </p>
       </div>
       <div className="table ">
+        <ThemeProvider theme={darkTheme}>
         <TableContainer component={Paper} sx={{ maxHeight: 530 }}>
           <Table stickyHeader>
             <TableHead>
@@ -85,6 +98,7 @@ function Inventory() {
             </TableBody>
           </Table>
         </TableContainer>
+        </ThemeProvider>
       </div>
 
       <div className="health">
@@ -94,13 +108,13 @@ function Inventory() {
       <div className="kpi relative overflow-y-auto">
         <div className="w-full h-full inset-2 absolute z-10">
           <div className="w-full flex justify-center">
-            <h1 className="text-[2rem] font-bold text-black">KPI</h1>
+            <h1 className="text-[2rem] font-bold text-black dark:text-gray-400">KPI</h1>
           </div>
           <div className="kpi-content ">
             <ul className="w-full">
               {itemsWithLowStock.map((item) => (
-                <li className="w-full flex md:justify-between px-5 py-2 mb-4 rounded-[10px] hover:bg-gray-200">
-                  <span className="text-black font-bold ">
+                <li className="w-full flex md:justify-between px-5 py-2 mb-4 rounded-[10px] ">
+                  <span className="text-black font-bold dark:text-gray-400 ">
                     {item.product_name.toUpperCase()}
                   </span>
                   <img src="/images/decrease.png" alt="" className="w-8 h-8" />
