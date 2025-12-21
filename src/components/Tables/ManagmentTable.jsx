@@ -3,7 +3,7 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 
 import { useManagmentContext } from "../../context/ManagmentContext"
 
-function ManagmentTable({productData,deleteAndRevalidate}) {
+function ManagmentTable({productData,deleteAndRevalidate,veiwConfirm,setCurId}) {
    const {handleEditForm}=useManagmentContext();
   
    
@@ -44,7 +44,10 @@ function ManagmentTable({productData,deleteAndRevalidate}) {
                   <TableCell>{row.unit}</TableCell>
                   <TableCell align='center' sx={{display:'flex',justifyContent:'justify-start'}}>
                   
-                    <img onClick={()=>{deleteAndRevalidate(row.id)}} src="/images/bin.png" alt="" className="w-10 px-2 py-2 hover:cursor-pointer hover:bg-gray-300" />
+                    <img onClick={()=>{
+                      veiwConfirm(cur=>!cur)
+                      setCurId(row.id)
+                      }} src="/images/bin.png" alt="" className="w-10 px-2 py-2 hover:cursor-pointer hover:bg-gray-300" />
             <img onClick={()=>handleEditForm(row.id)} src="/images/edit.png" alt="" className="w-10 px-2 py-2  hover:cursor-pointer hover:bg-gray-300 " />      
                   </TableCell>
                 </TableRow>

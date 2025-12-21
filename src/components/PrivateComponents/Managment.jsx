@@ -21,11 +21,15 @@ import EditForm from "../Forms/Edit";
 import ManagmentTable from "../Tables/ManagmentTable";
 
 import { useManagmentContext } from "../../context/ManagmentContext";
+import ConfirmDelete from "../Forms/ConfirmDelete";
 
 function Managment() {
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [confirmDelete,setConfirmDelete]=useState(false);
+  const [curId,setCurId]=useState();
   const actionData = useActionData();
   const revalidator=useRevalidator();
+  console.log(confirmDelete)
   const { setEnableEditForm, enableEditForm, curRowId, formData,handleAddProduct,handleDelete } =
     useManagmentContext();
      //this is to get the data from the supabase and i am using react router loader to get the data
@@ -78,7 +82,7 @@ function Managment() {
       <ToastContainer />
       {productData?.length > 0 && (
         <div className="w-full h-[95vh] flex md:flex-col gap-2">
-          <ManagmentTable productData={productData} deleteAndRevalidate={deleteAndRevalidate} />
+          <ManagmentTable productData={productData} setCurId={setCurId} deleteAndRevalidate={deleteAndRevalidate} veiwConfirm={setConfirmDelete} />
           <div className="flex justify-end">
             <button
               onClick={() => handleAddProduct(setIsFormVisible)}
@@ -90,6 +94,8 @@ function Managment() {
           
         </div>
       )}
+      {confirmDelete && <ConfirmDelete veiwConfirm={setConfirmDelete} id={curId} deleteAndRevalidate={deleteAndRevalidate} />}
+      
 
       {isFormVisible && <ManagmentForm formStatus={setIsFormVisible} />}
       {enableEditForm && (
