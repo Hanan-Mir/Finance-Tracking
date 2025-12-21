@@ -7,7 +7,7 @@ import { useDarkMode } from "../../context/DarkModeContext";
 function AsideBar() {
   const { session, signOut } = useAuth();
   const {isDarkMode,setDarkMode}=useDarkMode();
-  console.log(session)
+  
 
 
   return (

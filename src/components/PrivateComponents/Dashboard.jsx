@@ -1,4 +1,4 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { createTheme, CssBaseline, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from "@mui/material";
 import { useAuth } from "../../context/AuthContext"
 import DashboardCard from "../Cards/DashboardCard";
 import StockChart from "../Charts/StockChart";
@@ -9,10 +9,19 @@ import { formatDate } from "../../Helper-Functions/helperFunctions";
 
 function Dashboard() {
   
-    const {totalRevenue,averageSaleValue,transactionCount,growthPercentage,recentTransactions,data}=useLoaderData();
-    console.log(data)
+    const {totalRevenue,averageSaleValue,transactionCount,growthPercentage,recentTransactions}=useLoaderData();
+
+    const darkTheme=createTheme({
+      palette:{
+        mode:'dark',
+        background:{
+          TableContainer:'#1e1e1e'
+        }
+      }
+    })
+
     return (
-       <section id="dashboard">
+       <section id="dashboard" >
         <div className="dashboard-content">
             <DashboardCard name='Total Revenue' value={totalRevenue} showCurrencyCount={true} showPercentage={false} />
              <DashboardCard name='Avg Sales Value' value={averageSaleValue} showCurrencyCount={true} showPercentage={false}/>
@@ -31,6 +40,8 @@ function Dashboard() {
         </div>
         <div className="recentTransactions">
             <h1 className="text-[1.8rem] text-[#969696] font-bold mb-2 ml-2 mt-3">Recent Transactions</h1>
+            <ThemeProvider theme={darkTheme}>
+              
              <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ maxHeight: 440 }}>
               <Table stickyHeader>
@@ -75,6 +86,7 @@ function Dashboard() {
               </Table>
             </TableContainer>
           </Paper>
+          </ThemeProvider>
         </div>
            
         </div>

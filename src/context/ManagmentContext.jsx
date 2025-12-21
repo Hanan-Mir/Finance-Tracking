@@ -50,7 +50,16 @@ export function ManagmentContextProvider({ children }) {
         });
       }
     } catch (error) {
-      console.log(error);
+      return toast.error(error, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
     }
   };
   //function to check weather we are having data added to the supabase

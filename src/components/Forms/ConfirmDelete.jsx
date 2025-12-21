@@ -1,5 +1,5 @@
 function ConfirmDelete({ veiwConfirm, id, deleteAndRevalidate }) {
-  console.log(id);
+  
   return (
     <div className="h-full w-screen">
       <div className="absolute md:z-30 md:top-80 md:rounded-2xl md:left-60 border bg-[#FAFAFA] md:px-3 md:py-6">
