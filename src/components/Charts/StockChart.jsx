@@ -1,12 +1,14 @@
 import ReactApexChart from 'react-apexcharts';
 import Chart from 'react-apexcharts'
+import { useLoaderData } from 'react-router-dom';
 function StockChart() {
+  const {stockHealth}=useLoaderData()
     let chartOptions = {
     chart: {
       type: "radialBar",
       
     },
-    series: [79],
+    series: [stockHealth],
     plotOptions: {
         radialBar: {
             hollow: {

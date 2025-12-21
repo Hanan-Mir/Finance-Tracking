@@ -286,25 +286,29 @@ progress::-moz-progress-bar {
     
   }
   .inventory{
-    @apply max-w-screen ml-[1%] box-border h-[92vh] grid grid-cols-8 grid-rows-8 mt-7 container gap-5 overflow-y-hidden;
+    @apply w-screen overflow-hidden bg-[#FAFAFA]  box-border h-screen ;
+    .inventory-container{
+    @apply w-full h-full mt-5 ml-3  grid grid-cols-8 grid-rows-8 container gap-5
+
+    }
     .card{
-      @apply hover:scale-98 hover:cursor-pointer  w-full flex md:flex-col md:justify-between bg-[#7F52FA] hover:bg-[#1A8CD8]
+      @apply hover:cursor-pointer  w-full flex md:flex-col md:justify-between bg-white text-black 
     }
 
     .card:nth-of-type(1){
-      @apply border-l-2 border-l-blue-600 shadow-box row-start-1 row-end-3 col-start-1 col-end-4  px-2 py-2 rounded-xl;
+      @apply  shadow-box row-start-1 row-end-3 col-start-1 col-end-4  px-2 py-2 rounded-xl;
       h1{
         @apply font-bold text-2xl
       }
     }
     .card:nth-of-type(2){
-      @apply shadow-box border-l-2 border-l-blue-600  row-start-1 row-end-3 col-start-4 col-end-6  px-2 py-2 rounded-xl;
+      @apply shadow-box   row-start-1 row-end-3 col-start-4 col-end-6  px-2 py-2 rounded-xl;
       h1{
         @apply font-bold text-2xl
       }
     }
     .card:nth-of-type(3){
-      @apply shadow-box border-l-2 border-l-blue-600 row-start-1 row-end-3 col-start-6 col-end-8  px-2 py-2 rounded-xl;
+      @apply shadow-box   row-start-1 row-end-3 col-start-6 col-end-8  px-2 py-2 rounded-xl;
       h1{
         @apply font-bold text-2xl
       }
@@ -319,7 +323,7 @@ progress::-moz-progress-bar {
       }
     }
     .kpi{
-      @apply row-start-3 row-end-6 col-start-6 col-end-8 md:shadow-box overflow-hidden bg-[#7F52FA] rounded-2xl
+      @apply row-start-3 row-end-6 col-start-6 col-end-8 md:shadow-box overflow-hidden bg-white rounded-2xl
     }
     .kpi ul{
       @apply overflow-y-auto
