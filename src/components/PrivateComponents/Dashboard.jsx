@@ -6,14 +6,16 @@ import DashboardPieChart from "../Graphs/DashboardPieChart";
 import DashboardRevenueGraph from "../Graphs/DashboardRevenueGraph";
 import { useLoaderData } from "react-router-dom";
 import { formatDate } from "../../Helper-Functions/helperFunctions";
+import { useDarkMode } from "../../context/DarkModeContext";
 
 function Dashboard() {
   
     const {totalRevenue,averageSaleValue,transactionCount,growthPercentage,recentTransactions}=useLoaderData();
+    const {isDarkMode}=useDarkMode();
 
     const darkTheme=createTheme({
       palette:{
-        mode:'dark',
+        mode:isDarkMode?'dark':'light',
         background:{
           TableContainer:'#1e1e1e'
         }

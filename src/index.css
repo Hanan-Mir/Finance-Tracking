@@ -332,20 +332,20 @@ progress::-moz-progress-bar {
    
   }
   #transaction{
-    @apply w-screen h-screen bg-[#FAFAFA] overflow-hidden;
+    @apply w-screen h-screen bg-[#FAFAFA] overflow-hidden dark:bg-gray-900;
     .content{
       @apply w-[100vw] h-screen mt-4 ml-4 grid grid-cols-8 grid-rows-8 gap-4
     }
   .card:first-of-type{
-    @apply shadow-box row-start-1 row-end-3 col-start-1 col-end-3 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+    @apply shadow-box row-start-1 row-end-3 col-start-1 col-end-3 bg-white rounded-2xl flex md:flex-col md:justify-between px-3 dark:bg-gray-900 dark:text-gray-400
 
   }
   .card:nth-of-type(2){
-    @apply shadow-box row-start-1 row-end-3 col-start-3 col-end-5 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+    @apply shadow-box row-start-1 row-end-3 col-start-3 col-end-5 bg-white rounded-2xl flex md:flex-col md:justify-between px-3 dark:bg-gray-900 dark:text-gray-400
 
   }
   .summary{
-    @apply relative shadow-box w-full h-full row-start-1 row-end-3 col-start-5 col-end-7 rounded-2xl bg-white  
+    @apply relative shadow-box w-full h-full row-start-1 row-end-3 col-start-5 col-end-7 rounded-2xl bg-white dark:bg-gray-900 dark:text-gray-400 
 
   }
   .transaction-container{

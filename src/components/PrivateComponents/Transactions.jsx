@@ -1,4 +1,5 @@
 import {
+  createTheme,
   Paper,
   Table,
   TableBody,
@@ -7,6 +8,7 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  ThemeProvider,
 } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
 import TransactionForm from "../Forms/TransactionForm";
@@ -26,6 +28,7 @@ import { useReactToPrint } from "react-to-print";
 import Reciept from "../Reciepts/Reciept";
 import TransactionEdit from "../Forms/TransactionEdit";
 import TransactionCard from "../Cards/TransactionCard";
+import { useDarkMode } from "../../context/DarkModeContext";
 
 function Transactions() {
   const [formStatus, setFormStatus] = useState(false);
@@ -40,6 +43,15 @@ function Transactions() {
   const printRef=useRef();
   const [selectedTransaction,setSelectedTransaction]=useState()
   const [transactionEditView,setTransactionEditView]=useState(false)
+  const {isDarkMode}=useDarkMode();
+   const darkTheme=createTheme({
+        palette:{
+          mode:isDarkMode?'dark':'light',
+          background:{
+            TableContainer:'#1e1e1e'
+          }
+        }
+      })
   const filterOptions = [
     { label: "Sale", type: "transaction_type", value: "sale" },
     { label: "Expense", type: "transaction_type", value: "expense" },
@@ -188,13 +200,13 @@ handlePrint();
               type="search"
               name="q"
               id="q"
-              className="border rounded-md py-2 px-3"
+              className="border rounded-md py-2 px-3 dark:border-white dark:text-white"
               placeholder="Search by name"
               onChange={handleSearchTransaction}
             />
             </Form>
             <div className="flex md:items-center">
-              <div className="mt-0 bg-[#0252CF] relative">
+              <div className="mt-0 bg-[#0252CF] relative dark:bg-gray-800">
                 <div
                   onClick={() => handleDropDownView()}
                   className="px-4 py-2 flex gap-2 text-white rounded-2xl hover:cursor-pointer"
@@ -207,7 +219,7 @@ handlePrint();
                   )}
                 </div>
                 {dropDownView && (
-                  <ul className="text-white w-[150%] border px-2 py-4 absolute z-20 top-11 bg-[#0252CF] ">
+                  <ul className="text-white w-[150%] border px-2 py-4 absolute z-20 top-11 bg-[#0252CF] dark:bg-gray-800 ">
                     {filterOptions.map((filterEl) => (
                       <li
                         onClick={() =>
@@ -238,7 +250,7 @@ handlePrint();
                       transactionData
                     )
                   }
-                  className="border px-2 py-2 bg-[#1A87D0] text-white font-bold hover:cursor-pointer flex md:items-center gap-2"
+                  className="ml-2 mr-2 px-2 py-2 bg-[#1A87D0] text-white font-bold hover:cursor-pointer flex md:items-center gap-2 dark:bg-gray-800"
                 >
                   <img src="/images/csv.png" alt="" className="w-5 h-5" />
                   <span>Export CSV</span>
@@ -246,7 +258,7 @@ handlePrint();
                 <button
                   onClick={() => handleTransactionForm()}
                   disabled={getManagmentData()?.length===0}
-                  className="border px-2 py-2 bg-[#0252CF] text-white font-bold hover:cursor-pointer"
+                  className=" px-2 py-2 bg-[#0252CF] text-white font-bold hover:cursor-pointer dark:bg-gray-800"
                 >
                   Add Transaction
                 </button>
@@ -254,6 +266,7 @@ handlePrint();
             </div>
           </div>
           <div className="mt-3">
+            <ThemeProvider theme={darkTheme}>
             <Paper sx={{ width: "100%", overflow: "hidden" }}>
               <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader>
@@ -350,6 +363,7 @@ handlePrint();
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
             </Paper>
+            </ThemeProvider>
           </div>
         </div>
       </div>

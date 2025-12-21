@@ -37,11 +37,11 @@ return (
         cornerRadius={2}
         activeOuterRadiusOffset={8}
         arcLinkLabelsSkipAngle={10}
-        arcLinkLabelsTextColor="#201f1f"
+        arcLinkLabelsTextColor="#804a4a"
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: 'color' }}
         arcLabelsSkipAngle={10}
-        arcLabelsTextColor='#645b5b'
+        arcLabelsTextColor='#cea2a2'
        
     />
 )
