@@ -1,4 +1,5 @@
 import {
+  createTheme,
   Paper,
   Table,
   TableBody,
@@ -6,6 +7,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  ThemeProvider,
 } from "@mui/material";
 import ManagmentForm from "../Forms/ManagmentForm";
 import { useEffect, useState } from "react";
@@ -22,6 +24,7 @@ import ManagmentTable from "../Tables/ManagmentTable";
 
 import { useManagmentContext } from "../../context/ManagmentContext";
 import ConfirmDelete from "../Forms/ConfirmDelete";
+import { useDarkMode } from "../../context/DarkModeContext";
 
 function Managment() {
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -29,7 +32,17 @@ function Managment() {
   const [curId,setCurId]=useState();
   const actionData = useActionData();
   const revalidator=useRevalidator();
-  console.log(confirmDelete)
+  const {isDarkMode}=useDarkMode();
+  const darkTheme=createTheme({
+        palette:{
+          mode:isDarkMode?'dark':'light',
+          background:{
+            TableContainer:'#1e1e1e'
+          }
+        }
+      })
+
+ 
   const { setEnableEditForm, enableEditForm, curRowId, formData,handleAddProduct,handleDelete } =
     useManagmentContext();
      //this is to get the data from the supabase and i am using react router loader to get the data
@@ -82,11 +95,13 @@ function Managment() {
       <ToastContainer />
       {productData?.length > 0 && (
         <div className="w-full h-[95vh] flex md:flex-col gap-2">
+          <ThemeProvider theme={darkTheme}>
           <ManagmentTable productData={productData} setCurId={setCurId} deleteAndRevalidate={deleteAndRevalidate} veiwConfirm={setConfirmDelete} />
+          </ThemeProvider>
           <div className="flex justify-end">
             <button
               onClick={() => handleAddProduct(setIsFormVisible)}
-              className="mr-2 shadow-box hover:cursor-pointer rounded-xl md:py-2 md:px-10 text-[1.2rem] bg-[#6F4FED] text-white hover:text-[#6F4FED] hover:bg-gray-100 transition-all ease-in duration-100"
+              className="mr-2 shadow-box hover:cursor-pointer rounded-xl md:py-2 md:px-10 text-[1.2rem] bg-[#6F4FED] text-white hover:text-[#6F4FED] hover:bg-gray-100 transition-all ease-in duration-100 "
             >
               Add Product
             </button>
@@ -108,7 +123,7 @@ function Managment() {
       {productData?.length == 0 && (
         <div className="w-full h-full flex justify-center" >
           <div className="w-[50%] h-full flex md:flex-col md:justify-center md:items-center gap-5">
-            <h1 className="text-[2.5rem] font-bold text-[#565758] ">
+            <h1 className="text-[2.5rem] font-bold text-[#565758] dark:text-gray-400 ">
               Manage your business here.
             </h1>
             <button

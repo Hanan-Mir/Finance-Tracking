@@ -11,7 +11,7 @@ function AsideBar() {
 
 
   return (
-    <aside className="fixed shadow-box w-60 h-screen flex md:flex-col items-center dark:bg-slate-300 ">
+    <aside className="fixed shadow-box w-62 h-screen flex md:flex-col items-center dark:bg-slate-800 ">
       <div className="h-full flex md:flex-col md:justify-between md:gap-5 relative">
         <div className="absolute md:-right-8">
          <img
@@ -24,7 +24,7 @@ function AsideBar() {
         <div className="flex md:flex-col md:items-center gap-2 mt-6">
           <img src="/images/user.png" alt="" className="w-25" />
           <div className="flex w-full md:flex-col md:items-center gap-5">
-            <h1 className="text-[1rem] font-bold">
+            <h1 className="text-[1rem] font-bold dark:text-gray-400">
           Welcome, {session.user.user_metadata?.name?.toUpperCase() || session.user.user_metadata.email.slice(0,session.user.user_metadata.email.indexOf('@'))}
             </h1>
             
@@ -45,7 +45,7 @@ function AsideBar() {
                 className="w-12 h-12 p-2  "
                 
               />
-              <span className="text-[1.2rem]">Signout</span>
+              <span className="text-[1.2rem] dark:text-gray-400">Signout</span>
 
         </p>
 

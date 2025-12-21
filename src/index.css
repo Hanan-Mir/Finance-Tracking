@@ -282,7 +282,7 @@ progress::-moz-progress-bar {
     background-color: #E7E7E8;
   }
   .managment{
-    @apply w-full h-screen relative;
+    @apply w-full h-screen relative dark:bg-gray-900;
     
   }
   .inventory{
@@ -326,7 +326,7 @@ progress::-moz-progress-bar {
       @apply row-start-3 row-end-6 col-start-6 col-end-8 md:shadow-box overflow-hidden bg-white rounded-2xl dark:bg-gray-900 
     }
     .kpi ul,li{
-      @apply overflow-y-auto 
+      @apply overflow-y-auto dark:text-gray-400 
     }
     
    
@@ -356,29 +356,27 @@ progress::-moz-progress-bar {
   }      
   }
   #sales{
-     @apply w-screen h-screen bg-[#FAFAFA] overflow-hidden;
+     @apply w-screen h-screen bg-[#FAFAFA] overflow-hidden dark:bg-gray-900 ;
       .sales-content{
-      @apply w-screen h-screen mt-4 ml-4 grid grid-cols-8 grid-rows-8 gap-4
+      @apply w-screen h-screen mt-4 ml-4 grid grid-cols-8 grid-rows-12 gap-4
     }
      .card:first-of-type{
-    @apply shadow-box row-start-1 row-end-3 col-start-1 col-end-3 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+    @apply shadow-box row-start-1 row-span-3 col-start-1 col-end-3 bg-white rounded-2xl flex md:flex-col md:justify-between px-3 dark:bg-gray-900 dark:text-gray-400;
 
   }
   .card:nth-of-type(2){
-    @apply shadow-box row-start-1 row-end-3 col-start-3 col-end-5 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
+    @apply shadow-box row-start-1 row-span-3 col-start-3 col-end-5 bg-white rounded-2xl flex md:flex-col md:justify-between px-3 dark:bg-gray-900 dark:text-gray-400;
 
   }
-  .card:nth-of-type(3){
-     @apply shadow-box row-start-1 row-end-3 col-start-5 col-end-7 bg-white rounded-2xl flex md:flex-col md:justify-between px-3
-  }
+  
   .graph{
-    @apply row-start-3 row-end-5 col-start-1 col-end-4
+    @apply row-start-4 row-span-6 col-start-1 col-end-4 
   }
   .salesMonthly{
-    @apply row-start-3 row-end-5 col-start-4 col-end-7
+    @apply row-start-4 row-span-4 col-start-4 col-end-7
   }
   .salesTable{
-    @apply row-start-6 row-end-8 col-start-1 col-end-7 mt-15
+    @apply row-start-8 row-span-1 col-start-1 col-end-7 mt-18
   }
 
   }

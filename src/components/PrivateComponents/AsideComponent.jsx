@@ -15,7 +15,7 @@ function AsideComponent({ linkTo, imgAddress, linkLabel }) {
                     }`}
       >
         <img src={imgAddress} alt="" className="w-10" />
-        <span className="text-[1.2rem]">{linkLabel}</span>
+        <span className="text-[1.2rem] dark:text-gray-400">{linkLabel}</span>
       </NavLink>
     </div>
   );
