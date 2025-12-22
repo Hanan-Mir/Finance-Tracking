@@ -19,10 +19,8 @@ import AccountBalanceGraph from "./Graphs/AccountBalanceGraph";
 import { SplitText } from "gsap/all";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
+
 import gsap from "gsap";
-import { animationsOnArrowKeys, enableKeyboardScrollSupport } from "../../HelperFunctions/gsapAnimations";
 
 function LandingPage() {
   

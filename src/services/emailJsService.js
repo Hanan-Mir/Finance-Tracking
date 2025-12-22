@@ -14,6 +14,7 @@ async function handleEmailService({request}){
       user_id:'C_iC9AuA3ceX34D4E',
       template_params:templateParams
   }
+ 
   try{
     const response=await fetch('https://api.emailjs.com/api/v1.0/email/send',{
       method:'POST',

@@ -15,4 +15,3 @@ function Highlights({imgPath,heading,description}) {
 }
 
 export default Highlights
-{}

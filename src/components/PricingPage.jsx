@@ -5,10 +5,12 @@ import PricingSection from "./Sections/PricingSection"
 import { enableKeyboardScrollSupport } from "../../HelperFunctions/gsapAnimations"
 import gsap from "gsap"
 import { SplitText } from "gsap/SplitText"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 function PricingPage() {
     useGSAP(()=>{
-        gsap.registerPlugin(SplitText);
+        gsap.registerPlugin(SplitText,ScrollTrigger);
+        
         const headingSplit=new SplitText('.heading-content > h1',{type:'words'});
 
       
@@ -53,7 +55,7 @@ function PricingPage() {
         gsap.from(".privacy-card", {
       opacity: 0,
       yPercent: -100,
-      duration: 0.5,
+      duration: 0.2,
       ease: "power1.inOut",
       scrollTrigger:{
         trigger:'.privacy-card',

@@ -29,7 +29,7 @@ theme: "dark",
   }
   const result=await signUpNewUser({email,password});
   if(result.success){
-  navigate('/confirm-email')
+  navigate('/confirm-email',{state:{loggedInForm:'signupform'}})
   }
 }catch(error){
     console.log(error)
@@ -40,7 +40,7 @@ theme: "dark",
         <section id="signup">
             <div className="signupform text-[#324F65]">
               <ToastContainer />
-             <Link href="/">   <img src="/images/logo.png" alt="" className="w-40 ml-[25%]" /> </Link>
+             <Link to="/">   <img src="/images/logo.png" alt="" className="w-40 ml-[25%]" /> </Link>
                 <h1 className="text-[2.5rem]"><span className="font-bold">Sign up</span>  to FinTrack</h1>
                 <p className="ml-10 text-xl">Have an account? <a href="/login" className="text-[#9AEEAF]">Login here!</a></p>
                 <div className="form">
@@ -89,7 +89,7 @@ theme: "dark",
             </div>
              <div className="flex md:justify-center md:mt-4">
               {" "}
-              <button className="bg-[#E5EBEE] md:px-20 md:py-2 text-[#7BA2CA]">SignUp to FinTrack</button>
+              <button className="bg-[#E5EBEE] md:px-20 md:py-2 text-[#7BA2CA] hover:cursor-pointer">SignUp to FinTrack</button>
             </div>
                     </form>
 

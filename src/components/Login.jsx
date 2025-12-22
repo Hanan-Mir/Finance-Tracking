@@ -19,7 +19,7 @@ function Login() {
     try{
       e.preventDefault();
     const result=await signIn({email,password});
-    console.log(result)
+    
     if(result.success){
     navigate('/dashboard')
     }
@@ -59,7 +59,7 @@ theme: "dark",
   return (
     <section id="login">
       <ToastContainer />
-        <Link href="/">  <img src="/images/logo.png" alt="" className="w-40" /> </Link>
+        <Link to="/">  <img src="/images/logo.png" alt="" className="w-40" /> </Link>
       <div className="form-element shadow-box">
         <div className="heading">
           

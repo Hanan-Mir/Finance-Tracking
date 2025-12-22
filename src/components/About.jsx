@@ -147,26 +147,26 @@ function About() {
   useEffect(()=>{
 if(actionData?.success ){
  toast.success(`${actionData.message}`, {
-position: "top-center",
+position: "bottom-right",
 autoClose: 2000,
 hideProgressBar: true,
 closeOnClick: false,
 pauseOnHover: true,
 draggable: true,
 progress: undefined,
-theme: "colored",
+theme: "dark",
 });
 setFormData({user_email:'',user_name:'',user_message:""})
 }else if(actionData?.success===false){
  toast.error(`${actionData.message}`, {
-position: "top-center",
+position: "bottom-right",
 autoClose: 2000,
 hideProgressBar: true,
 closeOnClick: false,
 pauseOnHover: true,
 draggable: true,
 progress: undefined,
-theme: "colored",
+theme: "dark",
 });
 }
   },[actionData])

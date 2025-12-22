@@ -23,7 +23,7 @@ body {
   background-color: white;
   color: black;
   scroll-behavior: smooth;
-  /* overflow-x: hidden; */
+  overflow-x: clip;
 
  
 }
@@ -81,7 +81,7 @@ progress::-moz-progress-bar {
 
 @layer components {
   main {
-    @apply w-full ;
+    @apply w-screen ;
   }
   nav {
     @apply w-full h-[10vh] mt-0 fixed z-30;
@@ -105,7 +105,7 @@ progress::-moz-progress-bar {
     }
   }
   #Hero {
-    @apply w-full min-h-dvh z-20 relative container mx-auto px-10;
+    @apply w-full min-h-dvh z-20 relative  mx-auto px-10;
     .body {
       @apply md:h-full md:w-full flex md:flex-row md:justify-between md:items-center md:absolute md:top-20 md:left-5;
     }
@@ -162,7 +162,7 @@ progress::-moz-progress-bar {
     }
   }
   #pricing {
-    @apply w-full min-h-dvh z-20 relative container mx-auto px-10;
+    @apply w-full min-h-dvh z-20 relative mx-auto px-10  ;
     .info-section {
       @apply h-full w-full md:absolute md:top-20 flex md:flex-row md:justify-between md:items-center;
     }
@@ -179,10 +179,10 @@ progress::-moz-progress-bar {
       }
     }
     .left-img {
-      @apply absolute md:-left-120 md:-bottom-40 md:w-[60%];
+      @apply absolute md:-left-110 md:-bottom-40 md:w-[60%];
     }
     .right-img {
-      @apply absolute md:-right-60;
+      @apply absolute md:-right-20;
     }
     .plan-section {
       @apply md:mt-20 w-full flex md:flex-col md:items-center;
