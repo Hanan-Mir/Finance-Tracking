@@ -370,10 +370,10 @@ progress::-moz-progress-bar {
   }
   
   .graph{
-    @apply row-start-4 row-span-6 col-start-1 col-end-4 
+    @apply row-start-4 row-span-5 col-start-1 col-end-4 bg-white shadow-box rounded-2xl dark:bg-gray-900 dark:text-gray-400
   }
   .salesMonthly{
-    @apply row-start-4 row-span-4 col-start-4 col-end-7
+    @apply row-start-4 row-span-5 col-start-4 col-end-7 bg-white shadow-box rounded-2xl dark:bg-gray-900 dark:text-gray-400
   }
   .salesTable{
     @apply row-start-8 row-span-1 col-start-1 col-end-7 mt-18

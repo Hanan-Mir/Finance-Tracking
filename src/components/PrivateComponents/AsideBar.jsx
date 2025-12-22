@@ -13,7 +13,7 @@ function AsideBar() {
   return (
     <aside className="fixed shadow-box w-62 h-screen flex md:flex-col items-center dark:bg-slate-800 ">
       <div className="h-full flex md:flex-col md:justify-between md:gap-5 relative">
-        <div className="absolute md:-right-8">
+        <div className="absolute md:-right-6">
          <img
                 src={isDarkMode?'/images/lightMode.png':'/images/moon.png'}
                 alt=""

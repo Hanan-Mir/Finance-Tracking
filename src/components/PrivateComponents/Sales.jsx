@@ -1,13 +1,24 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { createTheme, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from "@mui/material";
 import TransactionCard from "../Cards/TransactionCard";
 import SalesGraph from "../Graphs/SalesGraph";
 import SalesGraphMonthly from "../Graphs/SalesGraphMonthly";
 import { useLoaderData } from "react-router-dom";
 import { compare } from "../../Helper-Functions/utilityFunctions";
 import { formatDate } from "../../Helper-Functions/helperFunctions";
+import { useDarkMode } from "../../context/DarkModeContext";
 
 function Sales() {
   const {curMonthSales,curMonthlySalesBalance,prevMonthSales,prevMonthSalesBalance,recentSalesTransaction}=useLoaderData();
+  const {isDarkMode}=useDarkMode()
+  const darkTheme=createTheme({
+        palette:{
+          mode:isDarkMode?'dark':'light',
+          background:{
+            TableContainer:'#1e1e1e'
+          }
+        }
+      })
+  
   return (
     <section id="sales">
 
@@ -25,14 +36,15 @@ function Sales() {
           comparePercentage={compare(curMonthlySalesBalance,prevMonthSalesBalance)}
         />
         
-        <div className="graph">
+        <div className="graph px-2 py-2">
           <SalesGraph />
         </div>
-        <div className="salesMonthly">
+        <div className="salesMonthly px-2 py-2">
           <SalesGraphMonthly />
         </div>
         <div className="salesTable">
           <h1 className="text-[1.8rem] text-[#969696] font-bold">Recent Sales</h1>
+          <ThemeProvider theme={darkTheme}>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ maxHeight: 440 }}>
               <Table stickyHeader>
@@ -76,6 +88,7 @@ function Sales() {
               </Table>
             </TableContainer>
           </Paper>
+          </ThemeProvider>
         </div>
       </div>
     </section>
