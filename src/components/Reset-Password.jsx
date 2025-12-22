@@ -59,7 +59,7 @@ export default function ResetPassword() {
           </div>
           <div className="flex md:justify-center md:mt-4">
             {" "}
-            <button className="bg-[#E5EBEE] md:px-20 md:py-2 text-[#7BA2CA]">
+            <button className="bg-[#E5EBEE] md:px-20 md:py-2 text-[#7BA2CA]  hover:cursor-pointer hover:bg-gray-500 hover:text-white transition-all duration-100 ease-in-out">
               Reset password
             </button>
           </div>

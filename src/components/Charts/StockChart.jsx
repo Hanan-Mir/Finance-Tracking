@@ -3,12 +3,19 @@ import Chart from 'react-apexcharts'
 import { useLoaderData } from 'react-router-dom';
 function StockChart() {
   const {stockHealth}=useLoaderData()
+  let health;
+  if(!stockHealth){
+    health=0
+
+  }else{
+    health=stockHealth
+  }
     let chartOptions = {
     chart: {
       type: "radialBar",
       
     },
-    series: [stockHealth],
+    series: [health],
     plotOptions: {
         radialBar: {
             hollow: {

@@ -22,6 +22,7 @@ function Inventory() {
     itemsWithLowStock,
     user_products: productData,
   } = useLoaderData();
+  let profit;
  const {isDarkMode}=useDarkMode();
  
      const darkTheme=createTheme({
@@ -32,6 +33,11 @@ function Inventory() {
          }
        }
      })
+  if(!profitPercentage)  {
+    profit=0
+  } else{
+    profit=profitPercentage
+  }
 
   return (
     <section className="inventory ">
@@ -60,7 +66,7 @@ function Inventory() {
           <img src="/images/profitPer.png" alt="" className="w-10 h-10" />
           <h1 >Profit Percentage</h1>
         </div>
-        <p className="text-[2rem] font-bold ">{profitPercentage}% </p>
+        <p className="text-[2rem] font-bold ">{profit}% </p>
       </div>
       <div className="table ">
         <ThemeProvider theme={darkTheme}>

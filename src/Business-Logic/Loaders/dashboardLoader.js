@@ -20,7 +20,6 @@ export async function dashboardLoader() {
     (acc, curEl) => acc + curEl.balance,
     0
   );
-  console.log(totalSalesBalanceSum);
   //get the expenses data from the transaction table
   let { data: expenses_data, error: expensesError } = await supabase
     .from("transactions_table")

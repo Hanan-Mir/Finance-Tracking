@@ -12,6 +12,7 @@ function Dashboard() {
   
     const {totalRevenue,averageSaleValue,transactionCount,growthPercentage,recentTransactions}=useLoaderData();
     const {isDarkMode}=useDarkMode();
+    let averageSales;
 
     const darkTheme=createTheme({
       palette:{
@@ -21,16 +22,20 @@ function Dashboard() {
         }
       }
     })
-
+if(!averageSaleValue){
+  averageSales=0
+}else{
+  averageSales=averageSaleValue
+}
     return (
        <section id="dashboard" >
         <div className="dashboard-content">
             <DashboardCard name='Total Revenue' value={totalRevenue} showCurrencyCount={true} showPercentage={false} />
-             <DashboardCard name='Avg Sales Value' value={averageSaleValue} showCurrencyCount={true} showPercentage={false}/>
+             <DashboardCard name='Avg Sales Value' value={averageSales} showCurrencyCount={true} showPercentage={false}/>
             <DashboardCard name='Transaction Count' value={transactionCount
 
             } showCurrencyCount={false} showPercentage={false} />
-            <DashboardCard name='Growth Percentage' value={growthPercentage} showCurrencyCount={false} showPercentage={true}/>
+            <DashboardCard name='Growth Percentage' value={typeof growthPercentage == 'string'?growthPercentage:0} showCurrencyCount={false} showPercentage={true}/>
          <div className="revenueGraph">
            <h1 className="text-[1.8rem] text-[#969696] font-bold mb-2 ml-2">Weekly Revenue</h1>
 
